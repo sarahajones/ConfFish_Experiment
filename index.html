@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ConfFish-Experiment</title>
+</head>
+<body class="main">
+<div id="save-error">
+    <h1>Error</h1>
+    <p>There was an error testing whether data from the experiment could be saved to the server.
+        If you would still like to participate, please contact the study lead on Prolific and we will try to figure out the issue for you. </p>
+</div>
+<script>
+
+    /* EXPERIMENT INFORMATION */
+    var CUREC_studyName = 'An investigation into decision confidence and category choices';
+    var CUREC_ID = 'R68879/RE001';
+    var PIS_version = '1.0';
+    var PIS_date = 'September 2020';
+    var consent_version = '1.0';
+    var consent_date = 'September 2020';
+
+    /* PreLOAD IMAGES FOR SPEED */
+    var images = [
+        'images/oxford-logo.jpg' +
+        'images/checkmark-black.svg' +
+        'images/checkmark-white.svg'
+    ];
+
+
+    /* EXPERIMENT VARIABLES */
+    //splash loading screen
+    var splash_1 = {
+        type: "jspsych-splashmessage",
+        trial_type: 'Loading',
+        trial_duration: 3750,
+    };
+
+    // PIS
+    var PIS = {
+        type: 'jspsych-PIS',
+        studyName: CUREC_studyName,
+        CUREC_ID: CUREC_ID,
+        version: PIS_version,
+        date: PIS_date
+    };
+    // CONSENT
+    var consent = {
+        type: 'jspsych-consent',
+        studyName: CUREC_studyName,
+        CUREC_ID: CUREC_ID,
+        version: consent_version,
+        date: consent_date
+    };
+
+    //DEMOGRAPHICS
+    var demographics = {
+        type: 'jspsych-demographics'
+    };
+
+    /* TRAINING AND INSTRUCTION*/
+    var tutorial_1 = {
+        type: "jspsych-tutorial",
+        isFirstTime: true
+    };
+
+    var tutorial_2 = {
+        type: "jspsych-tutorial",
+        isSecondTime: true
+    };
+
+    var tutorial_3 = {
+        type: "jspsych-tutorial",
+        isThirdTime: true
+    };
+
+
+    /* EXPERIMENT TIMELINE*/
+    const intro_timeline = [
+        //splash_1, //happy
+        PIS, //saving?
+        consent, //saving?
+        splash_1, //happy
+        demographics, //saving?
+        tutorial_1, //happy
+        tutorial_2, //happy
+        tutorial_3, //happy
+        splash_1, //happy
+    ];
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* Set up timeline and launch experiment*/
+
+    const timeline = [
+        ...intro_timeline,
+    ];
+
+    test_save()
+        .then(()=>{
+            /* start the experiment */
+            jsPsych.init({
+                timeline: timeline,
+                on_trial_finish: save_csv,
+                on_finish: save_csv
+            });
+        });
+
+    /**
+     * Save the jsPsych CSV output to the server
+     */
+    function save_csv() {
+        if(!window.experiment_metadata) {
+            // Get a user ID
+            let id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+            if(typeof id !== "string")
+                id = "ID" + (10 + Math.floor(Math.random() * 89)) +
+                    "T" + Math.floor(performance.timeOrigin);
+
+            jsPsych.data.addProperties({user_id: id});
+
+            // Fetch all the experiment data and send it to the server
+            window.experiment_metadata = {
+                user_id: id,
+                experiment: 'zapBox',
+                version: [0, 1, 0]
+            };
+        }
+
+        const data = {
+            ...window.experiment_metadata,
+            csv: jsPsych.data.get().csv()
+        };
+
+        fetch(
+            "savecsv.php",
+            {
+                method: "POST",
+                body: JSON.stringify(data),
+                type: 'application/json'
+            }
+        )
+            .then(r => r.text())
+            .then(b => console.log(b));
+    }
+
+    /**
+     * Test the ability to save files on the server
+     */
+    function test_save() {
+        return fetch(
+            "savecsv.php",
+            {
+                method: "POST",
+                body: JSON.stringify({user_id: "test_id"}),
+                type: 'application/json'
+            }
+        )
+            .then(r => {
+                if (r.status !== 200) {
+                    document.getElementById('save-error').classList.add('show');
+                    throw new Error('Problem saving data');
+                }
+                else
+                    console.log('Save data test okay!');
+            });
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,557 @@
+/*Color Theme for CatConf Info*/
+
+/* Text color throughout
+.My-Color-Theme-2-1-hex { color: #1F1E1E; }
+.My-Color-Theme-2-1-rgba { color: rgba(31, 30, 30, 1); }
+.My-Color-Theme-2-1-hsla { color: hsla(0, 1, 11, 1); }
+*/
+
+
+/* Color Theme Swatches in RGBA
+.My-Color-Theme-1-rgba { color: rgba(17, 75, 95, 1); } deep blue
+.My-Color-Theme-2-rgba { color: rgba(1, 128, 144, 1); } aqua
+.My-Color-Theme-3-rgba { color: rgba(228, 253,225, 1); } light green
+.My-Color-Theme-4-rgba { color: rgba(69, 105, 144, 1); } dusty blue
+.My-Color-Theme-5-rgba { color: rgba(244, 91, 105); } coral pink
+*/
+
+.main  {
+    background: rgba(17,75,95,1);
+
+    color: whitesmoke;
+    font-family:  europa, Arial, Helvetica, sans-serif;;
+}
+
+#h1.h1{
+    font-size: 1em
+}
+
+.h4 {
+    font-weight: bolder;
+}
+
+.a {
+    text-decoration: underline;
+}
+/*------------------------ PIS FORM -----------------------
+---------------------------------------------------------------- */
+#PIS-intro {
+    text-align: center;
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: 150px;
+    margin-left: 150px;
+    margin-block-start: 100px;
+    margin-block-end: 50px;
+    line-height: 75px;
+}
+
+/*------------------------ CONSENT FORM -----------------------
+---------------------------------------------------------------- */
+#consent-intro {
+    text-align: center;
+    display: block;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-right: 175px;
+    margin-left: 175px;
+    margin-block-start: 100px;
+    margin-block-end: 50px;
+    line-height: 75px;
+}
+
+
+/*------------------------ DEMOGRAPHICS FORM -----------------------
+---------------------------------------------------------------- */
+.question {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    margin: auto;
+    color: white;
+    font-size: 2vmax;
+    text-align: center;
+}
+
+.question.demographics-question {
+    margin-block-start: 7.5em;
+    margin-block-end: 5em;
+    width: 70vw;
+}
+
+.question.demographics-question#demographics-question1 {
+    margin-block-start: 7.5em;
+    margin-block-end: 5em;
+    width: 70vw;
+}
+
+
+.question#feedback-title {
+    margin: 5vh auto;
+}
+
+.question.feedback-text {
+    width: 50vw;
+    margin: 1vh auto;
+    font-size: 1.5vmax;
+    text-align: left;
+}
+
+.question.feedback-text-small {
+    width: 50vw;
+    margin: 1vh auto;
+    font-size: 1.8vmin;
+    text-align: center;
+}
+
+.question.textarea {
+    display: flex;
+    width: 49vw;
+    height: 20vh;
+    margin: 0 auto 5vh;
+    padding: 0.5vmax;
+    border: 1px solid #323232;
+    background-color: black;
+    color: white;
+    font-family: europa, Arial, Helvetica, sans-serif;
+    font-size: 1.2vmax;
+    text-align: left;
+}
+
+.question input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8vmax;
+    height: 5vmax;
+    margin: 2vh auto 0vh;
+    background: repeating-linear-gradient(to bottom, #0f0a1e, #0f0a1e 2px, #140e29 2px, #140e29 4px);
+    color: white;
+    font-family: europa, Arial, Helvetica, sans-serif;
+    font-weight: 900;
+    font-size: 3vmax;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.question input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 70vw;
+    margin: 2vh auto;
+    opacity: 0.8;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+}
+
+.question input[type=range]:hover {
+    opacity: 1;
+}
+
+.question input[type=range]::-webkit-slider-runnable-track {
+    width: 45vw;
+    background: #aaaaaa;
+    border: none;
+    border-radius: 1vmin;
+}
+
+.question input[type=range]::-moz-range-track {
+    width: 45vw;
+    background: #aaaaaa;
+    border: none;
+    border-radius: 1vmin;
+}
+
+.question input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 3vmin;
+    height: 3vmin;
+    border: none;
+    border-radius: 100%;
+    background: #0dff92;
+}
+
+.question input[type=range]::-moz-range-thumb {
+    -moz-apperance: none;
+    appearance: none;
+    width: 3vmin;
+    height: 3vmin;
+    border: none;
+    border-radius: 100%;
+    background: #0dff92;
+}
+
+.question input[type=text] {
+    width: 20vw;
+    font-size: 3vh;
+}
+
+.question input[type=number] {
+    appearance: textfield;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.question input[type=number]:hover {
+    border: 1px solid lightgray;
+}
+
+.question input[type=number]::-webkit-inner-spin-button, .question input[type=number]::-webkit-outer-spin-button {
+    margin: 0;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.question input[disabled] {
+    color: gray !important;
+}
+
+.question select {
+    width: 35vw;
+    height: 7vh;
+    margin: 0vh auto 0vh;
+    background-color: gray;
+    border: 0vmin solid black;
+    color: white;
+    font-family: europa, Arial, Helvetica, sans-serif;
+    font-size: 3vh;
+    text-align: center;
+    text-align-last: center;
+    cursor: pointer;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+.question select::-ms-expand {
+    display: none;
+}
+
+/*------------------------ DEMO AND TUTORIALS -----------------------
+---------------------------------------------------------------- */
+#tutorial-intro {
+    text-align: center;
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    margin-right: 150px;
+    margin-left: 150px;
+    margin-block-start: 100px;
+    margin-block-end: 50px;
+    line-height: 100px;
+}
+
+#demo_instruction {
+    width: 25vmax;
+    height: 25vmax;
+    margin: auto;
+    background: url("../images/green_spaceship.png"); /* swap this out for a gif of the experiment*/
+    background-size: 20vmax 20vmax;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+#demo_instruction2 {
+    width: 25vmax;
+    height: 25vmax;
+    margin: auto;
+    background: url("../images/coins.png"); /* swap this out for a gif of the experiment*/
+    background-size: 20vmax 20vmax;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#demo_instruction3 {
+    width: 25vmax;
+    height: 25vmax;
+    margin: auto;
+    background: url("../images/package_image.png"); /* swap this out for a gif of the experiment*/
+    background-size: 20vmax 20vmax;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#demo_instruction4 {
+    width: 60vmax;
+    height: 35vmax;
+    margin: auto;
+    background: url("../images/quickfire_gif.gif"); /* swap this out for a gif of the experiment*/
+    background-size: 55vmax 30vmax;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#demo_instruction5 {
+    width: 60vmax;
+    height: 40vmax;
+    margin: auto;
+    background: url("../images/cloudy_gif.gif"); /* swap this out for a gif of the experiment*/
+    background-size: 55vmax 35vmax;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#tutorial-form{
+    background: repeating-linear-gradient(to bottom, #0f0a1e, #0f0a1e 2px, #140e29 2px, #140e29 4px);
+    color: whitesmoke;
+    font-family:  europa, Arial, Helvetica, sans-serif;;
+}
+
+#jspsych-content {
+    position: relative;
+}
+
+/*------------------------ QUICKFIRE ROUND-----------------------
+---------------------------------------------------------------- */
+.jspsych-quickfire-stimulus{
+    width: 25vmax;
+    height: 20vmax;
+    margin: auto;
+    background-size: 15vmax 15vmax;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.jspsych-same-different-stimulus{
+    width: 25vmax;
+    height: 20vmax;
+    margin: auto;
+    background-size: 15vmax 15vmax;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+/*------------------------ GENERAL FORM BUILDER-----------------------
+---------------------------------------------------------------- */
+.document-in-document {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 80vw;
+    height: auto;
+    margin: auto;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    text-align: justify;
+}
+
+.document-in-document .document-header {
+    flex-direction: row;
+    width: 40vw;
+    margin: 0 auto;
+    padding: 10vh 0vh 3vh;
+}
+
+.document-in-document .document-header .header-info {
+    text-align: center;
+}
+
+.document-in-document .document-header .header-info p {
+    font-size: 1.5vmax;
+}
+
+.document-in-document .document-title {
+    width: 50vw;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.document-in-document .document-text {
+    width: 60vw;
+    margin: 5vh auto 0;
+}
+
+.document-in-document .document-text textarea {
+    width: 60vw;
+    height: 20vh;
+    margin: auto;
+    color: black;
+    font-family: europa, Arial, Helvetica, sans-serif;
+    font-size: 1.5vmax;
+}
+
+.document-in-document .document-text .document-form-row {
+    display: flex;
+    flex-direction: row !important;
+}
+
+.document-in-document .document-text .document-form-question {
+    width: 43vw;
+}
+
+.document-in-document .document-text .document-form-answer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10vw;
+}
+
+.document-in-document .document-text .document-form-answer input[type=checkbox] {
+    display: none;
+}
+
+.document-in-document .document-text .document-form-answer .custom-checkbox {
+    z-index: 5;
+    width: 25px;
+    height: 25px;
+    background: url("../images/checkmark-white.svg");
+    background-size: 22px 22px;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 3px solid #aaaaaa;
+    transition: border 0.25s linear;
+    -webkit-transition: border 0.25s linear;
+}
+
+.document-in-document .document-text .document-form-answer .custom-checkbox:hover {
+    background-color: #aaaaaa;
+}
+
+.document-in-document .document-footer {
+    height: 10vh;
+}
+/*------------------------ INSTRUCTIONS PAGES -----------------------
+---------------------------------------------------------------- */
+
+#demo_instruction{
+    float: left;
+    margin: 20px;
+    margin-right: 100px;
+}
+
+#tutorial-header{
+    width: 60vw;
+    margin: 0 auto;
+    padding: 5vh 0vh 3vh;
+}
+
+#tutorial-text{
+    text-align: justify;
+    font-size: 1.5em;
+    line-height: 1.25em;
+    margin: 3vh auto 0;
+}
+#tutorial-text p{
+    margin-block-start: .5em;
+}
+/*------------------------ BUTTONS & ICONS -----------------------
+---------------------------------------------------------------- */
+button, .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border: 0;
+    border-radius: 20px;
+    padding: 1.5vmax;
+    font-family: europa, Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-weight: bolder;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    animation: glowy-box 0.5s infinite alternate;
+}
+
+button.large-button, .button.large-button {
+    width: 30vmax;
+    margin: 5vh auto;
+    background-color: rgba(155, 242, 236, 1);
+    color: black;
+    font-size: 1.5vmax;
+    animation: glowy-box 0.5s infinite alternate
+}
+
+button.large-button:hover, .button.large-button:hover {
+    background-color:rgba(155, 242, 236, .7);
+    animation: glowy-box 0.5s infinite alternate;
+}
+
+button.small-button, .button.small-button {
+    width: 8vmax;
+    margin: 5vh auto;
+    margin-left: 3vmax;
+    margin-right: 3vmax;
+    padding: 1vmax;
+    background-color:rgba(155, 242, 236, 1);
+    color: black;
+    font-size: 1.5vmax;
+    animation: glowy-box 0.5s infinite alternate
+}
+button.small-button:hover, .button.small-button:hover {
+    background-color:rgba(155, 242, 236, .7);
+    animation: glowy-box 0.5s infinite alternate;
+}
+
+#Oxford-logo {
+    width: 25vmax;
+    height: 20vmax;
+    margin: auto;
+    background: url("../images/oxford-logo.jpg");
+    background-size: 15vmax 15vmax;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.fixation-cross {
+    z-index: 100;
+    width: 70vw;
+    margin: -13vh auto 0vmin;
+    text-align: center;
+    font-size: 5vmin;
+    color: white !important;
+}
+
+/* -------------------------------------------------------------
+-------------------------- GAME CANVAS ---------------------------
+---------------------------------------------------------------- */
+canvas.gameboard_canvas{
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 80vw;
+    height: 60vh;
+    margin: auto;
+    background-color: rgba(185, 181, 179, 1);
+    border: 4px solid black;
+    color: black;
+    font-size: 20px;
+    text-align: justify;
+}
+
+
+canvas.footer{
+    height: 10vh;
+    background-color: rgba(59, 173, 165, 1);
+    color: black;
+    font-size: 20px;
+    text-align: justify;
+}
+
+/* -------------------------------------------------------------
+-------------------------- SAVE ERROR --------------------------
+---------------------------------------------------------------- */
+#save-error {
+    display: none;
+    width: calc(100vw - 2 * 8px);
+    height: calc(100vh - 2 * 8px);
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+#save-error.show {
+    display: flex;
+}
