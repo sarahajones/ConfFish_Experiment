@@ -90,7 +90,7 @@ jsPsych.plugins["jspsych-PIS"] = (function() {
             'div',
             'titlepage document-intro',
             'PIS-intro',
-            '<h2>Please read and acknowledge the following information about our research.</h2>'
+            '<h1>Please read and acknowledge the following information.</h1>'
         );
 
 
@@ -168,7 +168,7 @@ jsPsych.plugins["jspsych-PIS"] = (function() {
             'button',
             'large-button',
             'PIS-submit',
-            '<div>I acknowledge that I have read and understood this Participant Information Sheet</div>'
+            '<div>I have read and understood this Participant Information Sheet</div>'
         );
 
 

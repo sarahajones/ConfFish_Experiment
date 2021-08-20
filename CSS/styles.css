@@ -23,7 +23,7 @@
 }
 
 #h1.h1{
-    font-size: 1em
+    font-size: 2em
 }
 
 .h4 {
@@ -251,7 +251,7 @@
     width: 25vmax;
     height: 25vmax;
     margin: auto;
-    background: url("../images/green_spaceship.png"); /* swap this out for a gif of the experiment*/
+    background: url("../images/circle-blues.png"); /* swap this out for a gif of the experiment*/
     background-size: 20vmax 20vmax;
     background-position: center;
     background-repeat: no-repeat;
@@ -262,7 +262,7 @@
     width: 25vmax;
     height: 25vmax;
     margin: auto;
-    background: url("../images/coins.png"); /* swap this out for a gif of the experiment*/
+    background: url("../images/circle-blues.png"); /* swap this out for a gif of the experiment*/
     background-size: 20vmax 20vmax;
     background-position: center;
     background-repeat: no-repeat;
@@ -272,7 +272,7 @@
     width: 25vmax;
     height: 25vmax;
     margin: auto;
-    background: url("../images/package_image.png"); /* swap this out for a gif of the experiment*/
+    background: url("../images/circle-blues.png"); /* swap this out for a gif of the experiment*/
     background-size: 20vmax 20vmax;
     background-position: center;
     background-repeat: no-repeat;
@@ -282,7 +282,7 @@
     width: 60vmax;
     height: 35vmax;
     margin: auto;
-    background: url("../images/quickfire_gif.gif"); /* swap this out for a gif of the experiment*/
+    background: url("../images/circle-blues.png"); /* swap this out for a gif of the experiment*/
     background-size: 55vmax 30vmax;
     background-position: center;
     background-repeat: no-repeat;
@@ -292,7 +292,7 @@
     width: 60vmax;
     height: 40vmax;
     margin: auto;
-    background: url("../images/cloudy_gif.gif"); /* swap this out for a gif of the experiment*/
+    background: url("../images/circle-blues.png"); /* swap this out for a gif of the experiment*/
     background-size: 55vmax 35vmax;
     background-position: center;
     background-repeat: no-repeat;
@@ -461,21 +461,21 @@ button, .button {
     -ms-user-select: none;
     -webkit-user-drag: none;
     -webkit-user-select: none;
-    animation: glowy-box 0.5s infinite alternate;
+    animation: glowy-box 1.5s infinite alternate;
 }
 
 button.large-button, .button.large-button {
     width: 30vmax;
     margin: 5vh auto;
-    background-color: rgba(155, 242, 236, 1);
+    background-color: rgba(69, 105, 144, 1);
     color: black;
     font-size: 1.5vmax;
-    animation: glowy-box 0.5s infinite alternate
+    animation: glowy-box 1.5s infinite alternate
 }
 
 button.large-button:hover, .button.large-button:hover {
-    background-color:rgba(155, 242, 236, .7);
-    animation: glowy-box 0.5s infinite alternate;
+    background-color:rgba(69, 105, 144, .7);
+    animation: glowy-box 1.5s infinite alternate;
 }
 
 button.small-button, .button.small-button {
@@ -484,14 +484,14 @@ button.small-button, .button.small-button {
     margin-left: 3vmax;
     margin-right: 3vmax;
     padding: 1vmax;
-    background-color:rgba(155, 242, 236, 1);
+    background-color:rgba(69, 105, 144, 1);
     color: black;
     font-size: 1.5vmax;
-    animation: glowy-box 0.5s infinite alternate
+    animation: glowy-box 1.5s infinite alternate
 }
 button.small-button:hover, .button.small-button:hover {
-    background-color:rgba(155, 242, 236, .7);
-    animation: glowy-box 0.5s infinite alternate;
+    background-color:rgba(69, 105, 144, .7);
+    animation: glowy-box 1.5s infinite alternate;
 }
 
 #Oxford-logo {

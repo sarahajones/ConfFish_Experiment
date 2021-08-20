@@ -3,6 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>ConfFish-Experiment</title>
+
+    <!--jsPsych-->
+    <script src="jspsych-6.1.0/jspsych.js"></script>
+    <script src="jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6.1.0/plugins/jspsych-image-button-response.js"></script>
+    <script src="jspsych-6.1.0/plugins/jspsych-same-different-image.js"></script>
+    <script src="jspsych-6.1.0/plugins/jspsych-image-slider-response.js"></script>
+    <link href="jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css">
+
+    <!--jQuery and jQuery plugins -->
+    <script src="scripts/external/jquery-3.4.1.min.js"></script>
+    <script src="scripts/external/jquery-3.4.1.js"></script>
+    <script src="scripts/external/jquery.mousewheel.min.js"></script>
+    <script src="scripts/external/jquery.scrollify.js"></script>
+
+
+    <!--custom JS: trials-->
+    <script src="scripts/jspsych-PIS.js"></script>
+    <script src="scripts/jspsych-consent.js"></script>
+    <script src="scripts/jspsych-tutorial.js"></script>
+    <script src="scripts/jspsych-splashmessage.js"></script>
+
+    <script src="scripts/jspsych-experimentscreen.js"></script>
+    <script src="scripts/jspsych-demographics.js"></script>
+
+
+    <!--custom JS: helpers-->
+    <script src="scripts/helper-functions.js"></script>
+    <script src="scripts/box-muller.js"></script>
+    <script src="scripts/gaussian.js"></script>
+
+
+    <!--custom CSS-->
+    <link href="CSS/styles.css" rel="stylesheet" type="text/css">
+    <link href="CSS/experimentscreen.css" rel="stylesheet" type="text/css">
+
+
 </head>
 <body class="main">
 <div id="save-error">
@@ -77,7 +114,7 @@
 
     /* EXPERIMENT TIMELINE*/
     const intro_timeline = [
-        //splash_1, //happy
+        splash_1, //happy
         PIS, //saving?
         consent, //saving?
         splash_1, //happy
