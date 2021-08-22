@@ -126,7 +126,7 @@
     width: 8vmax;
     height: 5vmax;
     margin: 2vh auto 0vh;
-    background: repeating-linear-gradient(to bottom, #0f0a1e, #0f0a1e 2px, #140e29 2px, #140e29 4px);
+    background: rgba(17,75,95,1) ;
     color: white;
     font-family: europa, Arial, Helvetica, sans-serif;
     font-weight: 900;
@@ -173,7 +173,7 @@
     height: 3vmin;
     border: none;
     border-radius: 100%;
-    background: #0dff92;
+    background: rgba(244, 91, 105);
 }
 
 .question input[type=range]::-moz-range-thumb {
@@ -183,7 +183,7 @@
     height: 3vmin;
     border: none;
     border-radius: 100%;
-    background: #0dff92;
+    background: rgba(244, 91, 105);
 }
 
 .question input[type=text] {
@@ -298,7 +298,7 @@
     background-repeat: no-repeat;
 }
 #tutorial-form{
-    background: repeating-linear-gradient(to bottom, #0f0a1e, #0f0a1e 2px, #140e29 2px, #140e29 4px);
+    background: rgba(17,75,95,1);
     color: whitesmoke;
     font-family:  europa, Arial, Helvetica, sans-serif;;
 }
