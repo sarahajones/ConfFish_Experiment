@@ -1,0 +1,376 @@
+
+body {
+    background-color: skyblue;
+    background-image: linear-gradient(#2db3ea, #012d01);
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+.boat {
+    position: relative;
+    top: 13vw;
+    z-index: -1;
+    animation: boat 4s linear infinite;
+    margin-left: 40%;
+__body {
+        width: 30vw;
+        height: 7vw;
+        background-color: #ce7575;
+    // position: relative;
+    // overflow: hidden;
+        clip-path: polygon(0 0, 25% 100%, 75% 100%, 100% 0);
+::before,
+::after {
+ // content: "";
+     display: inline-block;
+     width: 50%;
+     height: 100%;
+     top: 12%;
+     position: absolute;
+     border: none;
+ }
+::before {
+     background-color: lightblue;
+     right: 75%;
+
+     transform: rotate(45deg);
+ }
+::after {
+     background-color: lightblue;
+     left: 75%;
+     transform: rotate(-45deg);
+ }
+}
+}
+.waves {
+    position: fixed;
+    top: -10%;
+    left: 0;
+    right: 0;
+    width: 100%;
+// height: 30%;
+    background-color: lightblue;
+.wave {
+    content: "";
+    height: 25vw;
+    width: 25vw;
+    animation: wave 5s linear infinite;
+    position: absolute;
+    border-radius: 45%;
+    top: -50%;
+    background-color: lightblue;
+    z-index: -2;
+:nth-child(1) {
+     left: -10vw;
+     width: 28vw;
+ }
+:nth-child(2) {
+     left: -3vw;
+     animation-delay: 1s;
+ }
+:nth-child(3) {
+     left: 4vw;
+     animation-delay: 2s;
+ }
+:nth-child(4) {
+     left: 11vw;
+     animation-delay: 1s;
+ // width: 28vw;
+ }
+:nth-child(5) {
+     left: 18vw;
+     animation-delay: 0s;
+ }
+&:nth-child(6) {
+     left: 25vw;
+     animation-delay: 1s;
+     width: 28vw;
+ }
+&:nth-child(7) {
+     left: 32vw;
+     animation-delay: 2s;
+ }
+&:nth-child(8) {
+     left: 39vw;
+     animation-delay: 3s;
+ }
+&:nth-child(9) {
+     left: 46vw;
+     animation-delay: 1s;
+ // width: 30vw;
+ }
+&:nth-child(10) {
+     left: 53vw;
+     animation-delay: 2s;
+ }
+&:nth-child(11) {
+     left: 60vw;
+     animation-delay: 1s;
+ }
+&:nth-child(12) {
+     left: 67vw;
+     animation-delay: 1s;
+ }
+&:nth-child(13) {
+     left: 74vw;
+     animation-delay: 3s;
+     width: 28vw;
+ }
+&:nth-child(14) {
+     left: 81vw;
+     animation-delay: 1s;
+ }
+&:nth-child(15) {
+     left: 88vw;
+     animation-delay: 2s;
+ }
+}
+}
+
+.fish {
+    width: 8vw;
+    height: 4vw;
+    background-color: orange;
+    position: absolute;
+    border-radius: 44%;
+
+.tail {
+    position: absolute;
+    left: 100%;
+    display: inline-block;
+    width: 4vw;
+    height: 2vw;
+&::before,
+&::after {
+     content: "";
+     width: 100%;
+     height: 100%;
+     position: absolute;
+     display: inline-block;
+     background-color: orange;
+     border-radius: 50%;
+     top: 50%;
+     transform-origin: left;
+ }
+&::before {
+     transform: rotate(-25deg) translatex(-12px);
+ }
+&::after {
+     transform: rotate(25deg) translatex(-12px);
+ }
+}
+&::before {
+     content: "";
+     background-color: #212121;
+     border-radius: 100%;
+     width: 4px;
+     height: 4px;
+     position: absolute;
+     top: 35%;
+     left: 10%;
+     box-shadow: 0 1px 0px 1px #ffffffb3;
+ }
+.bubble {
+    width: 4px;
+    height: 4px;
+    display: inline-block;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 100%;
+    animation: bubble 10s linear infinite;
+}
+}
+.bigfish {
+    bottom: 18vh;
+    animation: toAndFro 10s infinite;
+&::before {
+     width: 8px;
+     height: 8px;
+ }
+}
+.shoal {
+    position: absolute;
+    bottom: 12vh;
+    animation: leftToRight linear 10s infinite;
+.fish {
+    position: absolute;
+}
+.fish:nth-child(1) {
+    transform: rotatey(180deg) translate(0, -35px);
+}
+.fish:nth-child(2) {
+    transform: rotatey(180deg) translate(40px, 0);
+}
+.fish:nth-child(3) {
+    transform: rotatey(180deg) translate(-25px, 15px);
+}
+}
+.smallfish {
+    width: 4vw;
+    min-width: 4vw;
+    height: 2vw;
+    min-height: 2vw;
+    transform: rotatey(180deg);
+.tail {
+    width: 2.25vw;
+    min-width: 2.25vw;
+    height: 1vw;
+    min-height: 1vw;
+}
+}
+.fish1 {
+    bottom: 6vh;
+    transform: none;
+    animation: rightToLeft 7s linear infinite;
+}
+.blue-fish {
+    background-color: lightslategrey;
+.tail::before,
+.tail::after {
+    background-color: lightslategrey;
+}
+}
+.fish2 {
+    bottom: 9vh;
+    animation: uturn 6s linear infinite;
+}
+.fish3 {
+    bottom: 1vh;
+    left: 60%;
+    animation: moveLeftTurn 6s linear infinite;
+}
+.fish4 {
+    animation: upAndDown 8s linear infinite;
+// transform: rotate(0);
+}
+// .dolphin {
+//   &__stomach {
+      //     width: 8vw;
+      //     height: 3vw;
+      //     background-color: #eee;
+      //   }
+// }
+
+@keyframes wave {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes rightToLeft {
+    0% {
+        margin-left: 100%;
+    }
+    50% {
+        margin-left: 50%;
+    }
+    100% {
+        margin-left: 0%;
+    }
+}
+@keyframes leftToRight {
+    0% {
+        margin-left: 0%;
+    }
+    50% {
+        margin-left: 50%;
+    }
+    100% {
+        margin-left: 100%;
+    }
+}
+@keyframes toAndFro {
+    0% {
+        margin-left: 100%;
+        transform: none;
+    }
+    50% {
+        margin-left: 0%;
+        transform: none;
+    }
+    51% {
+        transform: rotatey(180deg);
+    }
+    100% {
+        margin-left: 100%;
+        transform: rotatey(180deg);
+    }
+}
+@keyframes uturn {
+    50% {
+        transform: rotatey(180deg);
+        margin-left: 50%;
+    }
+    51% {
+        transform: rotatey(360deg);
+    }
+    75% {
+        transform: rotatey(360deg);
+        margin-left: 25%;
+    }
+    100% {
+        transform: rotatey(360deg);
+        margin-left: 0%;
+    }
+}
+@keyframes moveLeftTurn {
+    50% {
+        transform: translatex(-200px);
+    }
+    51% {
+        transform: translatex(-200px) rotatey(180deg);
+    }
+    100% {
+        transform: translatex(0) rotatey(180deg);
+    }
+}
+
+@keyframes upAndDown {
+    0% {
+        margin: 30% 0 0 0;
+    }
+    49% {
+        transform: rotatez(-25deg) rotatey(180deg);
+    }
+    50% {
+        margin: 20% 0 0 50%;
+        transform: rotatez(25deg) rotatey(180deg);
+    }
+    100% {
+        margin: 40% 0 0 100%;
+    }
+}
+
+@keyframes bubble {
+    20% {
+        transform: translatey(-40px);
+    }
+    21% {
+        border-color: transparent;
+    }
+    100% {
+        transform: translatey(40px);
+        border-color: transparent;
+    }
+}
+
+@keyframes boat {
+    0% {
+        transform: rotate(1deg);
+    }
+    50% {
+        transform: rotate(-1deg);
+    }
+    100% {
+        transform: rotate(1deg);
+    }
+}
+View Compiled
+
+
+Resources1× 0.5× 0.25×Rerun

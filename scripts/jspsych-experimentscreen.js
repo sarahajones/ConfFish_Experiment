@@ -1,4 +1,3 @@
-//this relies on css animation
 
 jsPsych.plugins['jspsych-experimentscreen'] = function () {
 
@@ -22,50 +21,19 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 default: undefined,
                 description: 'How long the parcel rests on the ground for'
             },
-            choices: {
+
+            fish_class: {
                 type: jsPsych.plugins.parameterType.STRING,
-                pretty_name: 'Choices',
+                pretty_name: 'color of fish',
                 default: undefined,
-                array: true,
-                description: 'The labels for the buttons.'
-            },
-            location: {
-                type: jsPsych.plugins.parameterType.FLOAT,
-                pretty_name: 'position of the dropped parcel',
-                default: undefined,
-                description: 'horizontal position of the dropped parcel'
-            },
-            spaceship_class: {
-                type: jsPsych.plugins.parameterType.STRING,
-                pretty_name: 'color of spaceship',
-                default: undefined,
-                description: 'color of spaceship that links to d'
+                description: 'color of fish that links to d'
             },
 
             trial_type: {
                 type: jsPsych.plugins.parameterType.STRING,
                 pretty_name: 'type of trial',
                 default: undefined,
-                description: 'trial type, clear-training or cloudy-testing'
-            },
-            distribution_name: {
-                type: jsPsych.plugins.parameterType.STRING,
-                pretty_name: 'distribution from which location was drawn',
-                default: undefined,
-                description: 'names the distribution from which drop locations are drawn'
-            },
-            distribution_info: {
-                type: jsPsych.plugins.parameterType.STRING,
-                pretty_name: 'info of distribution from which location was drawn',
-                default: undefined,
-                description: 'info of the distribution from which drop locations are drawn'
-            },
-            banner_text: {
-                type: jsPsych.plugins.parameterType.STRING,
-                pretty_name: 'Banner text',
-                default: null,
-                array: true,
-                description: 'if banner text is specified it overrides the buttons to be displayed.'
+                description: 'trial type, training or testing'
             },
 
             confidence_trial: {
@@ -82,78 +50,29 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 description: 'The block number'
             },
 
-            boundary: {
-                type: jsPsych.plugins.parameterType.INT,
-                pretty_name: 'Midline boundary',
-                default: undefined,
-                description: 'The midline boundary between the two distributions'
-            },
         }
     };
-
 
     plugin.trial = function (display_element, trial) {
         display_element.innerHTML = '';
 
         const response = {
-            stimulus: trial.spaceship_class,
-            trial_type: trial.trial_type,
-            distribution_mean: trial.distribution_info.mean,
-            distribution_variance: trial.distribution_info.variance,
-            distribution_std: trial.distribution_info.standardDeviation,
-            distribution_name: trial.distribution_name,
-            spaceship_class: trial.spaceship_class,
-            drop_location: trial.location,
-            boundary: trial.boundary,
-            distance_to_bound: null,
-            start_time: performance.now(),
-            response_time: null,
-            confidence_response_time: null,
-            end_time: null,
-            delta_response_time: null,
-            delta_confidence_response_time: null,
-            button: null,
-            button_label: trial.choices,
-            confidence: null,
-            correct: null,
-            incorrect: null,
-            block: trial.block,
-            coins: null
         };
 
 
 
         //draw "canvas" to screen
-        var canvasDiv = document.createElement("div");
-        canvasDiv.id = "jspsych-experimentscreen";
-        canvasDiv.classList.add('gameboard');
-        display_element.appendChild(canvasDiv);
+        var canvas = document.createElement("div");
+        canvas.id = "jspsych-experimentscreen";
+        canvas.classList.add('gameboard');
+        display_element.appendChild(canvas);
 
-        var grassbank = document.createElement("div");
-        grassbank.id = "grassbank";
-        grassbank.classList.add('grassbank');
-        canvasDiv.appendChild(grassbank)
+        /*var cloud = document.createElement("div");
+        cloud.id = "cloud";
+        cloud.classList.add('cloud');
+        canvas.appendChild(cloud)*/
 
-        if (trial.trial_type !== 'clear') {
-            var cloudbank = document.createElement('div');
-            cloudbank.classList.add('cloudbank');
-            display_element.appendChild(cloudbank);
-        }
 
-        //package
-        var package = document.createElement("div");
-        package.classList.add('package');
-        package.style.left = `${trial.location}px`;
-        canvasDiv.appendChild(package);
-        //drop package
-
-        //spaceship
-        var spaceship = document.createElement("div");
-        spaceship.classList.add('spaceship', trial.spaceship_class);
-        spaceship.style.left = `${trial.location}px`;
-        canvasDiv.appendChild(spaceship);
-        //drop spaceship at specific x position
-        //overlay with image of spaceship
 
         //draw buttons to screen
         var buttons = document.createElement("div")

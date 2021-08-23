@@ -1,16 +1,58 @@
 
 .gameboard {
-    width: 800px;
-    height: 600px;
-    margin-block-start: 30px;
-    background-color: lightskyblue;
     position: relative;
-    animation: glowy-box 1s infinite alternate;
+    background-color: skyblue;
+    background-image: linear-gradient(#2db3ea, #012d01);
+    width: 80%;
+    height: 100vh;
+    overflow: hidden;
 }
 
-.gameboard.footer{
-    height: 100px;
-    background-color: #555555;
+.cloud {
+    width: 25vmin;
+    height: 9vmin;
+    background-color: white;
+    border-radius: 4rem;
+    margin-top: 3%;
+    margin-left: -10%;
+    position: absolute;
+    z-index: 2;
+    box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.18);
+}
+/*
+::before,
+::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    background-color: inherit;
+    border-radius: 50%;
+}
+::before {
+    top: -40%;
+    left: 15%;
+    width: 8vmin;
+    height: 8vmin;
+    transform: rotate(-45deg);
+}
+::after {
+    bottom: 30%;
+    right: 15%;
+    width: 13vmin;
+    height: 13vmin;
+    transform: rotate(-45deg);
+}
+*/
+
+.cloud0 {
+    animation: leftToRight 40s linear infinite;
+}
+.cloud1 {
+    margin-top: 5%;
+    animation: leftToRight 40s 8s linear infinite;
+}
+.cloud2 {
+    animation: leftToRight 30s 15s linear infinite;
 }
 
 .package {

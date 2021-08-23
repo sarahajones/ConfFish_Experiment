@@ -24,7 +24,6 @@
     <script src="scripts/jspsych-consent.js"></script>
     <script src="scripts/jspsych-tutorial.js"></script>
     <script src="scripts/jspsych-splashmessage.js"></script>
-
     <script src="scripts/jspsych-experimentscreen.js"></script>
     <script src="scripts/jspsych-demographics.js"></script>
 
@@ -64,8 +63,16 @@
         'images/checkmark-white.svg'
     ];
 
-
     /* EXPERIMENT VARIABLES */
+    const trial_number = 20 ; //20 training trials
+
+    const distribution1_1 = [
+        {name: 'narrow', value: gaussian(222, 6400), color: 'blue1'}, //SD 80, var 6400
+        {name: 'wide', value: gaussian(522, 19600), color: 'orange1'} //SD 140, var 19600
+    ];
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* EXPERIMENTAL PAGES */
     //splash loading screen
     var splash_1 = {
         type: "jspsych-splashmessage",
@@ -91,8 +98,6 @@
     };
 
 
-    
-
     //DEMOGRAPHICS
     var demographics = {
         type: 'jspsych-demographics'
@@ -104,15 +109,6 @@
         isFirstTime: true
     };
 
-    var tutorial_2 = {
-        type: "jspsych-tutorial",
-        isSecondTime: true
-    };
-
-    var tutorial_3 = {
-        type: "jspsych-tutorial",
-        isThirdTime: true
-    };
 
 
     /* EXPERIMENT TIMELINE*/
@@ -122,18 +118,74 @@
         //consent, //saving?
         //splash_1, //happy
        // demographics, //saving?
-        tutorial_1, //happy
-        tutorial_2, //happy
-        tutorial_3, //happy
+        //tutorial_1, //change
         splash_1, //happy
     ];
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /*/!*1st block training - TRIAL NUMBER 20*!/
+    const train1_timeline = [];
 
+    let trial_contents = quickfire_stimuli.map(
+        s => {
+            const outcome_chance = 1;
+            const good = 'images/coins.png';
+            const bad = 'images/bomb.png';
+            let r;
+
+            if (/orange/i.test(s)) {
+                r = Math.random() < outcome_chance ? good : bad;
+            } else if (/blue/i.test(s)) {
+                r = Math.random() > outcome_chance ? good : bad;
+            } else {
+                console.warn(`Unrecognised spaceship colour in ${s}.`);
+                return;
+            }
+            return {
+                stimulus: s,
+                result: r
+            }
+        });
+
+    for (let i = 1; i <= trial_number; i++) {
+        const trial_details = trial_contents.pop();
+        train1_timeline.push({
+            type: 'jspsych-quickfire',
+            stimuli: [trial_details.stimulus, 'images/package_image.png'],
+            feedback: trial_details.result,
+            trial_number: i,
+            choices: ['Retrieve', 'Zap'],
+            stimulus1_duration: 1500,
+            gap_duration: 0,
+            stimulus2_duration: 1500,
+            trial_duration: 10000,
+            feedback_duration: 2000,
+            response_ends_trial: false,
+            Zap1: 'images/zap1.png',
+            Zap2: 'images/zap2.png',
+        });
+    }*/
+ //////////////////////////////////////////////////////////////////////////////
+
+
+
+    var fastdrop = {
+            type: "jspsych-experimentscreen",
+            trial_duration: 1500,
+            stimulus_duration: 1000,
+            confidence_trial: false,
+
+        }
+
+    const fastdrop_timeline = [
+        fastdrop
+    ];
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Set up timeline and launch experiment*/
 
     const timeline = [
         ...intro_timeline,
+        fastdrop_timeline,
     ];
 
     test_save()
