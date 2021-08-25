@@ -40,14 +40,6 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                 description: 'The html of the button.'
             },
 
-            banner_text: {
-                type: jsPsych.plugins.parameterType.STRING,
-                pretty_name: 'Banner text',
-                default: null,
-                array: true,
-                description: 'if banner text is specified it overrides the buttons to be displayed.'
-            },
-
             stimulus_duration: {
                 type: jsPsych.plugins.parameterType.INT,
                 pretty_name: 'Stimulus1 duration',

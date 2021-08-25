@@ -65,19 +65,20 @@
         'images/oxford-logo.jpg' +
         'images/checkmark-black.svg' +
         'images/checkmark-white.svg' +
-        'images/training_fish_wild.png' +
-        'images/training_fish_farmed.png'
+        'images/training_fish_native.png' +
+        'images/training_fish_invasive.png'
     ];
 
     /* EXPERIMENT VARIABLES */
-    const train_trial_number = 4 ; //20 training trials
+    const train_trial_number = 4 ; //4 training trials
 
     train1_stimuli = [
-        'images/training_fish_wild.png',
-        'images/training_fish_farmed.png'
+        'images/training_fish_native.png',
+        'images/training_fish_invasive.png'
     ];
     const deck_count = train_trial_number / train1_stimuli.length;
     train1_stimuli = shuffle_shoe(train1_stimuli, deck_count); //shuffle deck
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* EXPERIMENTAL PAGES */
     //splash loading screen
@@ -113,10 +114,16 @@
     /* TRAINING AND INSTRUCTION*/
     var tutorial_1 = {
         type: "jspsych-tutorial",
-        isFirstTime: true
+        tutorial_count: 1
     };
-
-
+    var tutorial_2 = {
+        type: "jspsych-tutorial",
+        tutorial_count: 2
+    };
+    var tutorial_3 = {
+        type: "jspsych-tutorial",
+        tutorial_count: 3
+    };
 
     /* EXPERIMENT TIMELINE*/
     const intro_timeline = [
@@ -125,19 +132,29 @@
         //consent, //saving?
         //splash_1, //happy
        //demographics, //saving?
-        //tutorial_1, //change
+        splash_1, //happy
+        tutorial_1, //change
+        tutorial_2,
+        tutorial_3,
         splash_1, //happy
     ];
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //!*1st block training - TRIAL NUMBER 20*!//
     const train1_timeline = [];
 
+    let trial_contents = train1_stimuli.map(
+        s => {
+            return {
+                stimulus: s,
+            }
+        });
+
     for (let i = 1; i <= train_trial_number; i++) {
-        const trial_details = train1_stimuli.pop();
+        const trial_details = trial_contents.pop();
         train1_timeline.push({
             type: 'jspsych-quickfire',
             stimuli: [trial_details.stimulus],
-            banner_text: [trial_details.label] ,
             trial_number: i,
             choices: ['Catch', 'Return'],
             stimulus_duration: 1500,
@@ -145,9 +162,8 @@
             response_ends_trial: true,
         });
     }
- //////////////////////////////////////////////////////////////////////////////
 
-
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     var fastdrop = {
             type: "jspsych-experimentscreen",
