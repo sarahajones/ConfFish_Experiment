@@ -22,10 +22,14 @@
     <!--custom JS: trials-->
     <script src="scripts/jspsych-PIS.js"></script>
     <script src="scripts/jspsych-consent.js"></script>
+    <script src="scripts/jspsych-demographics.js"></script>
+
     <script src="scripts/jspsych-tutorial.js"></script>
     <script src="scripts/jspsych-splashmessage.js"></script>
+
+    <script src="scripts/jspsych-quickfire"></script>
     <script src="scripts/jspsych-experimentscreen.js"></script>
-    <script src="scripts/jspsych-demographics.js"></script>
+
 
 
     <!--custom JS: helpers-->
@@ -60,17 +64,18 @@
     var images = [
         'images/oxford-logo.jpg' +
         'images/checkmark-black.svg' +
-        'images/checkmark-white.svg'
+        'images/checkmark-white.svg' +
+        'training_fish.png'
     ];
 
     /* EXPERIMENT VARIABLES */
-    const trial_number = 20 ; //20 training trials
+    const train_trial_number = 2 ; //20 training trials
 
-    const distribution1_1 = [
-        {name: 'narrow', value: gaussian(222, 6400), color: 'blue1'}, //SD 80, var 6400
-        {name: 'wide', value: gaussian(522, 19600), color: 'orange1'} //SD 140, var 19600
+    train1_stimuli = [
+        'training_fish'
     ];
-
+    const deck_count = train_trial_number / train1_stimuli.length;
+    train1_stimuli = shuffle_shoe(train1_stimuli, deck_count); //shuffle deck
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* EXPERIMENTAL PAGES */
     //splash loading screen
@@ -114,56 +119,45 @@
     /* EXPERIMENT TIMELINE*/
     const intro_timeline = [
        // splash_1, //happy
-        //PIS, //saving?
+        PIS, //saving?
         //consent, //saving?
         //splash_1, //happy
-       // demographics, //saving?
+       //demographics, //saving?
         //tutorial_1, //change
         splash_1, //happy
     ];
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /*/!*1st block training - TRIAL NUMBER 20*!/
+    //!*1st block training - TRIAL NUMBER 20*!//
     const train1_timeline = [];
 
-    let trial_contents = quickfire_stimuli.map(
+    let trial_contents = train1_stimuli.map(
         s => {
-            const outcome_chance = 1;
-            const good = 'images/coins.png';
-            const bad = 'images/bomb.png';
-            let r;
+            let l;
+            const outcome_chance = 0.5;
+            const wild = 'Wild';
+            const farm = 'Farmed';
 
-            if (/orange/i.test(s)) {
-                r = Math.random() < outcome_chance ? good : bad;
-            } else if (/blue/i.test(s)) {
-                r = Math.random() > outcome_chance ? good : bad;
-            } else {
-                console.warn(`Unrecognised spaceship colour in ${s}.`);
-                return;
-            }
+            l = Math.random() > outcome_chance ? wild : farm;
+
             return {
                 stimulus: s,
-                result: r
+                label: l
             }
         });
 
-    for (let i = 1; i <= trial_number; i++) {
+    for (let i = 1; i <= train_trial_number; i++) {
         const trial_details = trial_contents.pop();
         train1_timeline.push({
             type: 'jspsych-quickfire',
-            stimuli: [trial_details.stimulus, 'images/package_image.png'],
-            feedback: trial_details.result,
+            stimuli: [trial_details.stimulus],
+            label: [trial_details.label] ,
             trial_number: i,
-            choices: ['Retrieve', 'Zap'],
-            stimulus1_duration: 1500,
-            gap_duration: 0,
-            stimulus2_duration: 1500,
-            trial_duration: 10000,
-            feedback_duration: 2000,
-            response_ends_trial: false,
-            Zap1: 'images/zap1.png',
-            Zap2: 'images/zap2.png',
+            choices: ['Catch', 'Return'],
+            stimulus_duration: 1500,
+            trial_duration: 5000,
+            response_ends_trial: true,
         });
-    }*/
+    }
  //////////////////////////////////////////////////////////////////////////////
 
 
@@ -173,6 +167,7 @@
             trial_duration: 1500,
             stimulus_duration: 1000,
             confidence_trial: false,
+            choices: ['Retrieve', 'Zap'],
 
         }
 
@@ -185,7 +180,8 @@
 
     const timeline = [
         ...intro_timeline,
-        fastdrop_timeline,
+        ...train1_timeline,
+        ...fastdrop_timeline,
     ];
 
     test_save()

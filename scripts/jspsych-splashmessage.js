@@ -33,9 +33,6 @@ jsPsych.plugins['jspsych-splashmessage'] = (function () {
         function showBlankScreen(duration, callback) {
             // Blank out the screen
             display_element.innerHTML = '';
-            // Callback after delay
-            if(typeof callback === 'function')
-                setTimeout(callback, duration);
         }
 
         // clear display element and apply default page styles

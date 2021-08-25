@@ -49,6 +49,13 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 default: undefined,
                 description: 'The block number'
             },
+            choices: {
+                type: jsPsych.plugins.parameterType.STRING,
+                pretty_name: 'Choices',
+                default: undefined,
+                array: true,
+                description: 'The labels for the buttons.'
+            }
 
         }
     };
