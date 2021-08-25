@@ -24,16 +24,9 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
 
             fish_class: {
                 type: jsPsych.plugins.parameterType.STRING,
-                pretty_name: 'color of fish',
+                pretty_name: 'type of fish',
                 default: undefined,
-                description: 'color of fish that links to d'
-            },
-
-            trial_type: {
-                type: jsPsych.plugins.parameterType.STRING,
-                pretty_name: 'type of trial',
-                default: undefined,
-                description: 'trial type, training or testing'
+                description: 'fish as being native or invasive'
             },
 
             banner_text: {
@@ -74,18 +67,28 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         const response = {
         };
 
-
-
         //draw "canvas" to screen
         var canvas = document.createElement("div");
         canvas.id = "jspsych-experimentscreen";
         canvas.classList.add('gameboard');
         display_element.appendChild(canvas);
 
-        /*var cloud = document.createElement("div");
-        cloud.id = "cloud";
-        cloud.classList.add('cloud');
-        canvas.appendChild(cloud)*/
+        var fish = document.createElement("div");
+        fish.id = "fish";
+        fish.classList.add('fish');
+        canvas.appendChild(fish);
+
+        var eye = document.createElement("div");
+        eye.id = "eye";
+        eye.classList.add('eye');
+        fish.appendChild(eye);
+
+        var fin = document.createElement("div");
+        fin.id = "fin";
+        fin.classList.add('fin');
+        fish.appendChild(fin);
+
+
 
 
 

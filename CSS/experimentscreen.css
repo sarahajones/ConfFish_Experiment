@@ -4,82 +4,50 @@
     background-color: skyblue;
     background-image: linear-gradient(#2db3ea, #012d01);
     width: 100%;
-    height: 80vh;
+    height: 70vh;
     overflow: hidden;
 }
 
-.cloud {
-    width: 25vmin;
-    height: 9vmin;
-    background-color: white;
-    border-radius: 4rem;
-    margin-top: 3%;
-    margin-left: -10%;
-    position: absolute;
-    z-index: 2;
-    box-shadow: 1px 2px 2px 0px rgba(0, 0, 0, 0.18);
-}
-/*
-::before,
-::after {
-    content: "";
-    display: inline-block;
-    position: absolute;
-    background-color: inherit;
+.fish{
+    position: relative;
+    background-color:  rgba(244, 91, 105,1);
+    background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+    height: 200px;
+    width: 250px;
     border-radius: 50%;
 }
-::before {
-    top: -40%;
-    left: 15%;
-    width: 8vmin;
-    height: 8vmin;
-    transform: rotate(-45deg);
-}
-::after {
-    bottom: 30%;
-    right: 15%;
-    width: 13vmin;
-    height: 13vmin;
-    transform: rotate(-45deg);
-}
-*/
 
-.cloud0 {
-    animation: leftToRight 40s linear infinite;
-}
-.cloud1 {
-    margin-top: 5%;
-    animation: leftToRight 40s 8s linear infinite;
-}
-.cloud2 {
-    animation: leftToRight 30s 15s linear infinite;
+.fish .eye{
+    position: relative;
+    top: 40%;
+    left: 20%;
+    width: 6%;
+    height: 10%;
+    background: white;
+    border-top-left-radius: 40%;
+    border-bottom-left-radius: 40%;
+
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+
+    transform: rotate(35deg);
 }
 
-.package {
-    --spaceshipsize: 30px;
-    height: var(--spaceshipsize);
-    width: var(--spaceshipsize);
-    background-color: saddlebrown;
-    border-radius: 3px;
-    visibility: visible;
+.fin{
     position: absolute;
-    animation:
-            flying 1s ease-in forwards,
-            hides 1s ease-in-out 1.2s forwards;
+    top: 48%;
+    left: 35%;
+    width: 43%;
+    height: 26%;
+    background:rgba(244, 91, 105,1);
+    border-top-left-radius: 40%;
+    border-bottom-left-radius: 40%;
+
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    z-index:1;
+    transform: rotate(0deg);
 }
-
-.spaceship {
-    --spaceshipsize: 30px;
-    height: var(--spaceshipsize);
-    width: var(--spaceshipsize);
-    visibility: visible;
-    position: absolute;
-    animation:
-            float 1s ease-in forwards,
-            hides 1s ease-in-out .1s forwards;
-}
-
-
 
 
 #jspsych-quickfire-btngroup{

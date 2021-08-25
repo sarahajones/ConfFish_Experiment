@@ -76,6 +76,7 @@
         'images/training_fish_native.png',
         'images/training_fish_invasive.png'
     ];
+
     const deck_count = train_trial_number / train1_stimuli.length;
     train1_stimuli = shuffle_shoe(train1_stimuli, deck_count); //shuffle deck
 
@@ -127,11 +128,11 @@
 
     /* EXPERIMENT TIMELINE*/
     const intro_timeline = [
-       // splash_1, //happy
-        //PIS, //saving?
-        //consent, //saving?
-        //splash_1, //happy
-       //demographics, //saving?
+        splash_1, //happy
+        PIS, //saving?
+        consent, //saving?
+        splash_1, //happy
+        demographics, //saving?
         splash_1, //happy
         tutorial_1, //change
         tutorial_2,
@@ -163,28 +164,31 @@
         });
     }
 
+    //make it so that if they fail the training they get cycled back to the tutorials
+    // and they let them get one more shot before getting kicked out.
+
  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    var fastdrop = {
+    var block1 = {
             type: "jspsych-experimentscreen",
-            trial_duration: 1500,
-            stimulus_duration: 1000,
+            trial_duration: 15000000,
+            stimulus_duration: 1000000,
             confidence_trial: false,
             choices: ['Retrieve', 'Zap'],
 
         }
 
-    const fastdrop_timeline = [
-        fastdrop
+    const block1_timeline = [
+        block1
     ];
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Set up timeline and launch experiment*/
 
     const timeline = [
-        ...intro_timeline,
-        ...train1_timeline,
-        ...fastdrop_timeline,
+        //...intro_timeline,
+        //...train1_timeline,
+        ...block1_timeline,
     ];
 
     test_save()

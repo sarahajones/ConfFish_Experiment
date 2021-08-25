@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="386839c7-c65c-4402-89cc-95dba29bfd1a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/experimentscreen.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/experimentscreen.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/ocean.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/jspsych-quickfire.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-quickfire.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/jspsych-experimentscreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-experimentscreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/jspsych-tutorial.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-tutorial.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

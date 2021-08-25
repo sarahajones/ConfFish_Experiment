@@ -46,13 +46,10 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
         } else if(trial.tutorial_count === 3)
         {var tutorial_text =
             '<p> Okay, let\'s start check that you have the basics. ' +
-            'You will see an image of a fish pop on screen labeled as either . ' +
-            'Press "retrieve" to collect the package -  "zap" the package to destroy the package. Remember, packages could contain coins or may hold bombs. </p>' +
-            '<p> In this round you will get feedback on what the package held after each selection to help you learn what packages you should "retrieve" and what packages you should "zap". You are trying to collect coins and avoid bombs - good luck!</p>';
+            'You will see an image of a fish appear on screen labeled as either "native" or "invasive". </p>' +
+            '<p> Press "catch" to catch the fish - press "return" the fish to return it to the water instead. </p>';
             var header_text =
                 '<h1>Let\'s get started!</h1>';
-
-
 
         } else if(trial.tutorial_count === 4)
         { var tutorial_text =
@@ -135,14 +132,7 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
             'tutorial-text',
             tutorial_text
         );
-        var footer = createGeneral(
-            footer,
-            ethicsForm,
-            'div',
-            'document-footer',
-            'tutorial-footer',
-            ''
-        );
+
         var instructAcknowledge = createGeneral(
             instructAcknowledge,
             display_element,

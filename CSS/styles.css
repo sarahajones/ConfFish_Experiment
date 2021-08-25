@@ -173,7 +173,7 @@
     height: 3vmin;
     border: none;
     border-radius: 100%;
-    background: rgba(244, 91, 105);
+    background: rgba(244, 91, 105,1);
 }
 
 .question input[type=range]::-moz-range-thumb {
@@ -183,7 +183,7 @@
     height: 3vmin;
     border: none;
     border-radius: 100%;
-    background: rgba(244, 91, 105);
+    background: rgba(244, 91, 105,1);
 }
 
 .question input[type=text] {
@@ -242,7 +242,7 @@
     font-weight: bold;
     margin-right: 150px;
     margin-left: 150px;
-    margin-block-start: 100px;
+    margin-block-start: 50px;
     margin-block-end: 50px;
     line-height: 100px;
 }
@@ -430,7 +430,7 @@
 #tutorial-header{
     width: 60vw;
     margin: 0 auto;
-    padding: 5vh 0vh 3vh;
+    padding: 3vh 0vh 3vh;
 }
 
 #tutorial-text{
