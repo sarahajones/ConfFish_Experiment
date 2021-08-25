@@ -311,8 +311,8 @@
 ---------------------------------------------------------------- */
 .jspsych-quickfire-stimulus{
     width: 25vmax;
-    height: 20vmax;
-    margin: auto;
+    height: 25vmax;
+    margin: 7.5em;
     background-size: 15vmax 15vmax;
     background-position: center;
     background-repeat: no-repeat;

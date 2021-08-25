@@ -16,14 +16,6 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                 description: 'The images to be displayed.'
             },
 
-            label: {
-                type: jsPsych.plugins.parameterType.IMAGE,
-                pretty_name: 'Trial label',
-                default: undefined,
-                array: true,
-                description: 'Trial by trial label for the stimuli.'
-            },
-
             trial_number: {
                 type: jsPsych.plugins.parameterType.STRING,
                 pretty_name: 'Trial Number',
@@ -48,7 +40,15 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                 description: 'The html of the button.'
             },
 
-            stimulus1_duration: {
+            banner_text: {
+                type: jsPsych.plugins.parameterType.STRING,
+                pretty_name: 'Banner text',
+                default: null,
+                array: true,
+                description: 'if banner text is specified it overrides the buttons to be displayed.'
+            },
+
+            stimulus_duration: {
                 type: jsPsych.plugins.parameterType.INT,
                 pretty_name: 'Stimulus1 duration',
                 default: null,
@@ -69,17 +69,19 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                 description: 'If true, then trial will end when user responds.'
             },
 
+
+
         }
     };
 
-    /* ----- Start trial then showing stimulus 1, gap, 2 -----*/
+    /* ----- Start trial then showing stimulus  -----*/
     plugin.trial = function (display_element, trial) {
 
         display_element.innerHTML = '';
 
         const response = {
             stimulus: trial.stimuli,
-            label: trial.label,
+            label: trial.banner_text,
             number: trial.trial_number,
             start_time: performance.now(),
             response_time: null,
@@ -89,7 +91,7 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             button_label: trial.choices,
         };
 
-        showStimulus(trial.stimuli[0], trial.stimulus_duration, showISI);
+        showStimulus(trial.stimuli[0], trial.stimulus_duration);
 
         // Functions
 
@@ -101,6 +103,13 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             img.style = display_element;
             if(typeof callback === 'function')
                 setTimeout(callback, duration);
+
+            if (trial.banner_text !== null) {
+                var banner = document.createElement("div");
+                banner.classList.add('banner')
+                banner.innerHTML = trial.banner_text;
+                img.appendChild(banner);
+            }
         }
 
         //SHOW BLANK SCREEN
@@ -121,7 +130,7 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             //display buttons
             var buttons = [];
             if (Array.isArray(trial.button_html)) {
-                if (trial.button_html.length == trial.choices.length) {
+                if (trial.button_html.length === trial.choices.length) {
                     buttons = trial.button_html;
                 } else {
                     console.error('Error in image-button-response plugin. The length of the button_html array does not equal the length of the choices array');

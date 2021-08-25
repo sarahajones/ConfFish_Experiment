@@ -36,6 +36,14 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 description: 'trial type, training or testing'
             },
 
+            banner_text: {
+                type: jsPsych.plugins.parameterType.STRING,
+                pretty_name: 'Banner text',
+                default: null,
+                array: true,
+                description: 'if banner text is specified it overrides the buttons to be displayed.'
+            },
+
             confidence_trial: {
                 type: jsPsych.plugins.parameterType.BOOL,
                 pretty_name: 'confidence trial',

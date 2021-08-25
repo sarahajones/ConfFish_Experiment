@@ -27,7 +27,7 @@
     <script src="scripts/jspsych-tutorial.js"></script>
     <script src="scripts/jspsych-splashmessage.js"></script>
 
-    <script src="scripts/jspsych-quickfire"></script>
+    <script src="scripts/jspsych-quickfire.js"></script>
     <script src="scripts/jspsych-experimentscreen.js"></script>
 
 
@@ -65,14 +65,16 @@
         'images/oxford-logo.jpg' +
         'images/checkmark-black.svg' +
         'images/checkmark-white.svg' +
-        'training_fish.png'
+        'images/training_fish_wild.png' +
+        'images/training_fish_farmed.png'
     ];
 
     /* EXPERIMENT VARIABLES */
-    const train_trial_number = 2 ; //20 training trials
+    const train_trial_number = 4 ; //20 training trials
 
     train1_stimuli = [
-        'training_fish'
+        'images/training_fish_wild.png',
+        'images/training_fish_farmed.png'
     ];
     const deck_count = train_trial_number / train1_stimuli.length;
     train1_stimuli = shuffle_shoe(train1_stimuli, deck_count); //shuffle deck
@@ -119,7 +121,7 @@
     /* EXPERIMENT TIMELINE*/
     const intro_timeline = [
        // splash_1, //happy
-        PIS, //saving?
+        //PIS, //saving?
         //consent, //saving?
         //splash_1, //happy
        //demographics, //saving?
@@ -130,31 +132,16 @@
     //!*1st block training - TRIAL NUMBER 20*!//
     const train1_timeline = [];
 
-    let trial_contents = train1_stimuli.map(
-        s => {
-            let l;
-            const outcome_chance = 0.5;
-            const wild = 'Wild';
-            const farm = 'Farmed';
-
-            l = Math.random() > outcome_chance ? wild : farm;
-
-            return {
-                stimulus: s,
-                label: l
-            }
-        });
-
     for (let i = 1; i <= train_trial_number; i++) {
-        const trial_details = trial_contents.pop();
+        const trial_details = train1_stimuli.pop();
         train1_timeline.push({
             type: 'jspsych-quickfire',
             stimuli: [trial_details.stimulus],
-            label: [trial_details.label] ,
+            banner_text: [trial_details.label] ,
             trial_number: i,
             choices: ['Catch', 'Return'],
             stimulus_duration: 1500,
-            trial_duration: 5000,
+            trial_duration: 50000,
             response_ends_trial: true,
         });
     }
