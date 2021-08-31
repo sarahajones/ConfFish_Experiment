@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="386839c7-c65c-4402-89cc-95dba29bfd1a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSS/experimentscreen.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/experimentscreen.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSS/ocean.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSS/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/jspsych-experimentscreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-experimentscreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/jspsych-tutorial.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-tutorial.js" afterDir="false" />
-    </list>
+    <list default="true" id="386839c7-c65c-4402-89cc-95dba29bfd1a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,7 +29,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/scripts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CatConf_Experiment" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -48,10 +40,6 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\saraha\Desktop\ConfFish" />
-      <recent name="C:\Users\saraha\Desktop\ConfFish\images" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\A-J\Documents\GitHub\ConfFish_Experiment\scripts" />
       <recent name="C:\Users\saraha\Documents\GitHub\ConfFish_Experiment\ConfFish_Experiment\scripts" />
@@ -59,8 +47,12 @@
       <recent name="C:\Users\saraha\Desktop\ConfFish\images" />
       <recent name="C:\Users\saraha\Desktop\ConfFish\CSS" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\saraha\Desktop\ConfFish" />
+      <recent name="C:\Users\saraha\Desktop\ConfFish\images" />
+    </key>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -74,17 +66,11 @@
       <workItem from="1629384250516" duration="367000" />
       <workItem from="1629384678132" duration="4497000" />
       <workItem from="1629469028300" duration="4503000" />
-      <workItem from="1629627844205" duration="8055000" />
+      <workItem from="1629627844205" duration="14459000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="1067" y="462" key="FileChooserDialogImpl" timestamp="1629384273094">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1067" y="462" key="FileChooserDialogImpl/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1629384273094" />
   </component>
 </project>

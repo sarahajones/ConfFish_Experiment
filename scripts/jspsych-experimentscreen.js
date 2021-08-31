@@ -88,7 +88,10 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         fin.classList.add('fin');
         fish.appendChild(fin);
 
-
+        var tail = document.createElement("div");
+        tail.id = "tail";
+        tail.classList.add('tail');
+        fish.appendChild(tail);
 
 
 
