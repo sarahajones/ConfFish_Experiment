@@ -28,6 +28,8 @@
     <script src="scripts/jspsych-splashmessage.js"></script>
 
     <script src="scripts/jspsych-quickfire.js"></script>
+    <script src="scripts/jspsych-attention.js"></script>
+
     <script src="scripts/jspsych-experimentscreen.js"></script>
 
 
@@ -70,8 +72,32 @@
     ];
 
     /* EXPERIMENT VARIABLES */
-    const train_trial_number = 4 ; //4 training trials
+    const train_trial_number = 4 ; //4 training trials, 2 of each native and invasive
+    const catch_number = 6; //60//amount of catches in test blocks
 
+    //setting up distributions, mid-line always 500px (half screen), SDs = 100 and 140, balance across 4 blocks.
+    const distribution1_1 = [
+        {name: 'native_narrow', value: gaussian(325, 10000)}, //left native narrow
+        {name: 'invasive_wide', value: gaussian(725, 19600)} //right invasive wide
+    ];
+    const distribution2_1 = [
+        {name: 'native_narrow', value: gaussian(675, 10000)}, // right native narrow
+        {name: 'invasive_wide', value: gaussian(275, 19600)} // left invasive wide
+    ];
+    const distribution3_1 = [
+        {name: 'native_wide', value: gaussian(275, 19600)}, //left native wide
+        {name: 'invasive_narrow', value: gaussian(675, 10000)} //right invasive narrow
+    ];
+    const distribution4_1 = [
+        {name: 'native_wide', value: gaussian(725, 19600)}, //right native wide
+        {name: 'invasive_narrow', value: gaussian(325, 10000)} //left invasive narrow
+    ];
+
+    distributions = [distribution1_1, distribution2_1, distribution3_1, distribution4_1];
+    indices = [0, 1, 2, 3];
+    index = shuffle(indices);
+
+    //PRE-TRAINING BLOCK
     train1_stimuli = [
         'images/training_fish_native.png',
         'images/training_fish_invasive.png'
@@ -79,6 +105,28 @@
 
     const deck_count = train_trial_number / train1_stimuli.length;
     train1_stimuli = shuffle_shoe(train1_stimuli, deck_count); //shuffle deck
+
+
+    //GAME BLOCK 1
+    const distribution1 = distributions[index[0]];
+    const means1 = [distribution1[0].value.mean , distribution1[1].value.mean];
+    const stds1 = [distribution1[0].value.standardDeviation, distribution1[1].value.standardDeviation];
+    const lowMean1 = Math.min(means1[0], means1[1]);
+    const highMean1 = Math.max(means1[0], means1[1]);
+    const narrowIndex = stds1.indexOf(Math.min(...stds1));
+    const wideIndex = stds1.indexOf(Math.max(...stds1));
+
+
+    //FASTDROP 1 TRIALS
+   // const fastdrop_deck_count = fastdrop_number / distribution1.length; // create deck count for spaceship drops
+    //const fastdrop_stimuli = shuffle_shoe(distribution1, fastdrop_deck_count); // shuffle deck
+
+
+    //BLOCK 1 TEST TRIALS
+    const fish_deck_count1 = catch_number / distribution1.length; // create deck count for fish catches
+    const fish_stimuli1 = shuffle_shoe(distribution1, fish_deck_count1); // shuffle deck
+
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* EXPERIMENTAL PAGES */
@@ -128,14 +176,14 @@
 
     /* EXPERIMENT TIMELINE*/
     const intro_timeline = [
-        splash_1, //happy
-        PIS, //saving?
-        consent, //saving?
-        splash_1, //happy
-        demographics, //saving?
-        splash_1, //happy
-        tutorial_1, //change
-        tutorial_2,
+        //splash_1, //happy
+        //PIS, //saving?
+        //consent, //saving?
+        //splash_1, //happy
+        //demographics, //saving?
+        //splash_1, //happy
+        //tutorial_1, //change
+        //tutorial_2,
         tutorial_3,
         splash_1, //happy
     ];
@@ -167,20 +215,40 @@
     //make it so that if they fail the training they get cycled back to the tutorials
     // and they let them get one more shot before getting kicked out.
 
- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* block feedback */
+    var feedback_timeline = [];
 
-    var block1 = {
-            type: "jspsych-experimentscreen",
-            trial_duration: 15000000,
-            stimulus_duration: 10000,
-            confidence_trial: false,
-            choices: ['Catch', 'Return'],
+    var feedback = {
+        type: "jspsych-attention",
+        filter_fun: (x) =>
+            x.trial_type === "jspsych-quickfire"
+    };
 
-        }
-
-    const block1_timeline = [
-        block1
+    feedback_timeline = [
+        feedback
     ];
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ /*const block1_timeline = [];
+
+    fish_stimuli1.forEach(s => {})
+
+        block1_timeline.push({
+            type: "jspsych-experimentscreen",
+            trial_duration: 15000,
+            stimulus_duration: 10000,
+            choices: ['Catch', 'Return'],
+                   size: s.size,
+            fish_class: s.class,
+            fish_color: s.color,
+            confidence_trial: true,
+            block: 1
+        });*/
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Set up timeline and launch experiment*/
@@ -188,7 +256,8 @@
     const timeline = [
         ...intro_timeline,
         ...train1_timeline,
-        ...block1_timeline,
+        ...feedback_timeline,
+        //...block1_timeline,
     ];
 
     test_save()

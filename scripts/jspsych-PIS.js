@@ -140,7 +140,7 @@ jsPsych.plugins["jspsych-PIS"] = (function() {
             'div',
             'document-title',
             'PIS-title',
-            '<h1 #PISH1 > ELECTRONIC PARTICIPANT INFORMATION SHEET</h1>' +
+            '<h1> ELECTRONIC PARTICIPANT INFORMATION SHEET</h1>' +
             '<h3>V' + PIS_version + ' (revised: ' + PIS_date + ')</h3>' +
             '<h3>Central University Research Ethics Committee (CUREC) Approval Reference: '+ CUREC_ID +'</h3>' + '<br>' +
             '<h2>"' + CUREC_studyName + '"</h2>'

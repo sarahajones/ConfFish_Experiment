@@ -29,6 +29,21 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 description: 'fish as being native or invasive'
             },
 
+            fish_color: {
+                type: jsPsych.plugins.parameterType.STRING,
+                pretty_name: 'color of fish',
+                default: undefined,
+                description: 'color of fish, set per block'
+            },
+
+            size: {
+                type: jsPsych.plugins.parameterType.INT,
+                pretty_name: 'Fish size',
+                default: undefined,
+                array: true,
+                description: 'The size of the fish (width) stimulus.'
+            },
+
             banner_text: {
                 type: jsPsych.plugins.parameterType.STRING,
                 pretty_name: 'Banner text',
@@ -57,14 +72,35 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 array: true,
                 description: 'The labels for the buttons.'
             }
-
         }
     };
 
     plugin.trial = function (display_element, trial) {
         display_element.innerHTML = '';
 
+        //update the response variables
         const response = {
+            stimulus: trial.fish_class,
+            trial_type: trial.trial_type,
+            distribution_mean: trial.distribution_info.mean,
+            distribution_variance: trial.distribution_info.variance,
+            distribution_std: trial.distribution_info.standardDeviation,
+            distribution_name: trial.distribution_name,
+            fish_color: trial.fish_color,
+            distance_to_bound: null,
+            start_time: performance.now(),
+            response_time: null,
+            confidence_response_time: null,
+            end_time: null,
+            delta_response_time: null,
+            delta_confidence_response_time: null,
+            button: null,
+            button_label: trial.choices,
+            confidence: null,
+            correct: null,
+            incorrect: null,
+            block: trial.block,
+            coins: null
         };
 
         //draw "canvas" to screen
@@ -73,9 +109,11 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         canvas.classList.add('gameboard');
         display_element.appendChild(canvas);
 
+        //add fish and fish elements
         var fish = document.createElement("div");
         fish.id = "fish";
         fish.classList.add('fish');
+        fish.style.width = `${trial.size}px`; //this is the key experimental variable
         canvas.appendChild(fish);
 
         var eye = document.createElement("div");
@@ -88,11 +126,11 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         fin.classList.add('fin');
         fish.appendChild(fin);
 
+        var tailsize = trial.size/10;
         var tail = document.createElement("div");
         tail.id = "tail";
         tail.classList.add('tail');
         fish.appendChild(tail);
-
 
 
         //draw buttons to screen

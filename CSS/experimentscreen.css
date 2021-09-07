@@ -3,7 +3,7 @@
     position: relative;
     background-color: skyblue;
     background-image: linear-gradient(#2db3ea, #012d01);
-    width: 100%;
+    width: 1000px;
     height: 70vh;
     overflow: hidden;
 }
@@ -14,8 +14,8 @@
     left:100%;
     background-color:  rgba(244, 91, 105,1);
     background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
-    height: 40%;
-    width: 60%;
+    height: 200px;
+    width: 40%;
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 30%;
@@ -29,8 +29,8 @@
     position: absolute;
     top: 40%;
     left: 20%;
-    width: 6%;
-    height: 10%;
+    width: 10px;
+    height: 15px;
     background: white;
     border-top-left-radius: 40%;
     border-bottom-left-radius: 40%;
@@ -58,14 +58,15 @@
 }
 
 .fish .tail {
+    --tailsize: 50px;
     width: 0;
     height: 0;
     position: absolute;
-    top: 23%;
-    left: 90%;
-    border-top: 50px solid transparent;
-    border-bottom: 50px solid transparent;
-    border-right: 50px rgba(244, 91, 105, 1) solid;
+    top: 20%;
+    left: 95%;
+    border-top: var(--tailsize) solid transparent;
+    border-bottom: var(--tailsize) solid transparent;
+    border-right: var(--tailsize) rgba(244, 91, 105, 1) solid;
     z-index: 1;
 }
 
@@ -263,5 +264,5 @@
 /* Swim Animation */
 @keyframes swim {
     0%{left: 100%}
-    100%{left: 10%}
+    100%{left: 0%}
 }

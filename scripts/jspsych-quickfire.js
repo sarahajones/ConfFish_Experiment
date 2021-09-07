@@ -160,6 +160,7 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                     var choice = e.currentTarget.getAttribute('data-choice');
                     afterResponse(choice);
                 });
+
             }
             // end trial if time limit is set
             if (trial.trial_duration !== null) {
@@ -178,7 +179,6 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             response.delta_response_time = response.response_time - response.start_time;
             response.button = choice;
             response.button_label = trial.choices[choice];
-            console.log(response);
 
             // disable all the buttons after a response
             var btns = document.querySelectorAll('#jspsych-quickfire-button-');
@@ -187,42 +187,34 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             }
             jsPsych.pluginAPI.clearAllTimeouts();
 
-            // Feedback
-            showBlankScreen(10, showFeedback)
-
-            function showFeedback() {
-                if (response.button_label === 'Retrieve') {
-                    displayImage(trial.feedback, trial.feedback_duration, end_trial)
-                    if(trial.feedback === 'images/coins.png'){
-                        response. correct = 1;
-                        response.incorrect = 0;
-                    } else{
-                        response.incorrect = 1;
-                        response.correct = 0;
-                    }
-                } else if (response.button_label ==='Zap'){
-                    if(trial.feedback === 'images/coins.png'){
-                        displayImage(trial.Zap2, trial.feedback_duration, end_trial);
-                        response.correct = 0;
-                        response.incorrect = 1;
-                    } else
-                        displayImage(trial.Zap1, trial.feedback_duration, end_trial);
+            // calculate score
+            console.log(trial.stimuli[0])
+            if (trial.stimuli[0] === 'images/training_fish_invasive.png') {
+                if (response.button_label == 'Catch') {
                     response.correct = 1;
                     response.incorrect = 0;
+                } else {
+                    response.correct = 0;
+                    response.incorrect = 1;
                 }
-                else {
-                    end_trial();
+            }  else if (trial.stimuli[0] === 'images/training_fish_native') {
+                if (response.button_label === 'Return') {
+                    response.correct = 1;
+                    response.incorrect = 0;
+                } else {
+                    response.correct = 0;
+                    response.incorrect = 1;
                 }
             }
+                // end trial if time limit is set
+                if (trial.trial_duration !== null) {
+                    jsPsych.pluginAPI.setTimeout(function () {
+                        end_trial();
+                    }, trial.trial_duration);
+                }
 
-            // end trial if time limit is set
-            if (trial.trial_duration !== null) {
-                jsPsych.pluginAPI.setTimeout(function () {
-                    end_trial();
-                }, trial.trial_duration);
-            }
+            end_trial();
         }
-
 
 
         //END TRIAL
