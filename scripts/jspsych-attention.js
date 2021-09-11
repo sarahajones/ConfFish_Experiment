@@ -19,9 +19,13 @@ jsPsych.plugins['jspsych-attention'] = (function () {
         // clear display element and apply default page styles
         display_element.innerHTML = '';
 
+        const response = {
+            repeat_required: false
+    };
+
         const data = JSON.parse(jsPsych.data.get().json())
             .filter(trial.filter_fun);
-console.log(data)
+        console.log(data)
         let correct = 0;
         let incorrect = 0;
 
@@ -123,9 +127,16 @@ console.log(data)
             } else if (element.msRequestFullscreen) {
                 element.msRequestFullscreen();
             }
+
+
+
+            if (incorrect != 0){
+                response.repeat_required = true
+            }
+
             // save the data to data object
-            jsPsych.finishTrial();
-            return;
+            jsPsych.finishTrial(response);
+
 
         });
 

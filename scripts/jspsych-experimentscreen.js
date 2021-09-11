@@ -44,6 +44,13 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 description: 'The size of the fish (width) stimulus.'
             },
 
+            distribution_info: {
+                type: jsPsych.plugins.parameterType.STRING,
+                pretty_name: 'info of distribution from which location was drawn',
+                default: undefined,
+                description: 'info of the distribution from which drop locations are drawn'
+            },
+
             banner_text: {
                 type: jsPsych.plugins.parameterType.STRING,
                 pretty_name: 'Banner text',
@@ -82,9 +89,9 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         const response = {
             stimulus: trial.fish_class,
             trial_type: trial.trial_type,
-            distribution_mean: trial.distribution_info.mean,
-            distribution_variance: trial.distribution_info.variance,
-            distribution_std: trial.distribution_info.standardDeviation,
+            //distribution_mean: trial.distribution_info.mean,
+            //distribution_variance: trial.distribution_info.variance,
+            //distribution_std: trial.distribution_info.standardDeviation,
             distribution_name: trial.distribution_name,
             fish_color: trial.fish_color,
             distance_to_bound: null,
@@ -103,17 +110,23 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
             coins: null
         };
 
+        var experiment_screen = document.createElement("div");
+        experiment_screen.id = "jspsych-experimentscreen";
+        experiment_screen.classList.add('screen');
+        display_element.appendChild(experiment_screen);
+
         //draw "canvas" to screen
         var canvas = document.createElement("div");
-        canvas.id = "jspsych-experimentscreen";
+        canvas.id = "jspsych-gameboard";
         canvas.classList.add('gameboard');
-        display_element.appendChild(canvas);
+        experiment_screen.appendChild(canvas);
 
         //add fish and fish elements
         var fish = document.createElement("div");
         fish.id = "fish";
         fish.classList.add('fish');
         fish.style.width = `${trial.size}px`; //this is the key experimental variable
+        fish.style.backgroundColor = `${trial.fish_color}`;//this is a blockwise color change to make the blocks more distinct.
         canvas.appendChild(fish);
 
         var eye = document.createElement("div");
@@ -150,7 +163,7 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
             );
         });
 
-        display_element.appendChild(buttons);
+        experiment_screen.appendChild(buttons);
 
         // if fast learning trial display banner underneath screen.
         if (trial.banner_text !== null) {

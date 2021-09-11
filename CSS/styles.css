@@ -540,7 +540,7 @@ canvas.gameboard_canvas{
 
 canvas.footer{
     height: 10vh;
-    background-color: rgba(59, 173, 165, 1);
+    background-color: background-color:rgba(228, 253,225, 1);;
     color: black;
     font-size: 20px;
     text-align: justify;

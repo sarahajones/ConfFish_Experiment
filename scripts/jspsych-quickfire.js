@@ -190,14 +190,14 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             // calculate score
             console.log(trial.stimuli[0])
             if (trial.stimuli[0] === 'images/training_fish_invasive.png') {
-                if (response.button_label == 'Catch') {
+                if (response.button_label === 'Catch') {
                     response.correct = 1;
                     response.incorrect = 0;
                 } else {
                     response.correct = 0;
                     response.incorrect = 1;
                 }
-            }  else if (trial.stimuli[0] === 'images/training_fish_native') {
+            } else if (trial.stimuli[0] === 'images/training_fish_native.png') {
                 if (response.button_label === 'Return') {
                     response.correct = 1;
                     response.incorrect = 0;

@@ -1,19 +1,28 @@
+.screen {
+    position: relative;
+    width: 100vh;
+    height: 100vh;
+    overflow: hidden;
+}
+
 
 .gameboard {
     position: relative;
     background-color: skyblue;
     background-image: linear-gradient(#2db3ea, #012d01);
-    width: 1000px;
-    height: 70vh;
+    width: 100vh;
+    height: 60vh;
+    align-content: center;
+    margin-top: 10vh;
     overflow: hidden;
 }
 
 .fish{
+    --backgroundColor: background-color;
     position: relative;
-    top: 5%;
+    top: -20%;
     left:100%;
-    background-color:  rgba(244, 91, 105,1);
-    background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+    background-image: linear-gradient(to right, var(--backgroundColor) 0%, whitesmoke 100%);
     height: 200px;
     width: 40%;
     margin-left: 10%;
@@ -27,7 +36,7 @@
 
 .fish .eye{
     position: absolute;
-    top: 40%;
+    top: 30%;
     left: 20%;
     width: 10px;
     height: 15px;
@@ -43,11 +52,11 @@
 
 .fish .fin{
     position: absolute;
-    top: 35%;
+    top: 25%;
     left: 35%;
     width: 43%;
     height: 26%;
-    background:rgba(244, 91, 105,1);
+    background: dimgrey;
     border-top-left-radius: 40%;
     border-bottom-left-radius: 40%;
 
@@ -62,11 +71,11 @@
     width: 0;
     height: 0;
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 95%;
     border-top: var(--tailsize) solid transparent;
     border-bottom: var(--tailsize) solid transparent;
-    border-right: var(--tailsize) rgba(244, 91, 105, 1) solid;
+    border-right: var(--tailsize) dimgrey solid;
     z-index: 1;
 }
 
