@@ -162,7 +162,7 @@ jsPsych.plugins['image-slider-response'] = (function() {
         }
 
         // add submit button
-        html += '<button id="jspsych-image-slider-response-next" class="jspsych-btn" '+ (trial.require_movement ? "disabled" : "") + '>'+trial.button_label+'</button>';
+        html += '<button id="jspsych-image-slider-response-next" class="experiment-btn" '+ (trial.require_movement ? "disabled" : "") + '>'+trial.button_label+'</button>';
 
         display_element.innerHTML = html;
 

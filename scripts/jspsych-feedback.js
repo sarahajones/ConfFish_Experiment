@@ -50,10 +50,10 @@ jsPsych.plugins['jspsych-feedback'] = (function () {
         let tutorial_text = `
         <p>Well done on completing this round.
             In total you got <strong>${correct}</strong> right and <strong>${incorrect}</strong> wrong.
-            In total you collected <strong>${coins}</strong> coins this round! Keep trying to improve your score each round!
+            You collected <strong>${coins}</strong> coins this round! Keep trying to improve your score each round!
         </p>
-        <p>Remember, a correct response  is either when you retrieved coins (which gains you 3 coins) or correctly zapped a bomb (which does not affect your coins). 
-        An incorrect response could be a zapped coin package (which does not affect your coins) or a retrieved bomb (which will lose you 3 coins). </p>
+        <p>Remember, a correct response  is either when you return a native fish (which gains you 3 coins) or correctly catch an invasive fish (which does not affect your coins). 
+        An incorrect response could be a caught native fish (which does not affect your coins) or a return invasive fish (which will lose you 3 coins). </p>
         `;
 
 
@@ -62,18 +62,18 @@ jsPsych.plugins['jspsych-feedback'] = (function () {
 
         if (trial.trial_type === 'first') {
             var header_text =
-                '<h1>Round 1 complete - take a short break. </h1>'
+                '<h1>Round 1 of 4 complete - take a short break. </h1>'
 
 
             var imageID = 'demo_instruction';
         } else if(trial.trial_type ==='second')
         {var header_text =
-                '<h1>Round 2 complete - take a short break.</h1>'
+                '<h1>Round 2 of 4 complete - take a short break.</h1>'
 
         }
         else if(trial.trial_type === 'third')
         {var header_text =
-                '<h1>Round 3 complete - take a short break.</h1>'
+                '<h1>Round 3 of 4 complete - take a short break.</h1>'
 
         }
         else if(trial.trial_type === 'last')

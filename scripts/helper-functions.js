@@ -20,7 +20,7 @@ function generateTestLocations(min, max, nTrials) {
     return list;
 }
 
-function generateTrainingLocations(dist_mean,dist_sd,train_trials) {
+function generateTrainingSizes(dist_mean,dist_sd,train_trials) {
     function randomList(n, a, b) {
         // create a list of n numbers between a and b
         var list = [],

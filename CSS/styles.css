@@ -448,6 +448,10 @@ h1 {
 #tutorial-text p{
     margin-block-start: .5em;
 }
+
+#tutorial-footer {
+height: 1vh;
+}
 /*------------------------ BUTTONS & ICONS -----------------------
 ---------------------------------------------------------------- */
 button, .button {

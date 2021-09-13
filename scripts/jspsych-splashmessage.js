@@ -43,7 +43,7 @@ jsPsych.plugins['jspsych-splashmessage'] = (function () {
                 '<p> LoAding ... pLEASE WaIT </p>'
         } else if (trial.trial_type === 'Next') {
             var splash_text =
-                '<p> LOADING NEXT ROUND... </p>'
+                '<p> L0Ading NEXT ROUND... </p>'
         } else if (trial.trial_type === "Last") {
             var splash_text =
                 '<p> FINISHING UP THE STUDY... </p>'

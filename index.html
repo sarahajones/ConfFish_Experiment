@@ -32,6 +32,7 @@
 
     <script src="scripts/jspsych-experimentscreen.js"></script>
     <script src="scripts/jspsych-confidence.js"></script>
+    <script src="scripts/jspsych-feedback.js"></script>
 
 
     <!--custom JS: helpers-->
@@ -72,25 +73,27 @@
     ];
 
     /* EXPERIMENT VARIABLES */
-    const train_trial_number = 4 ; //4 training trials, 2 of each native and invasive
-    const catch_number = 6; //60//amount of catches in test blocks
+    const train_trial_number = 4 ; //amount of attention check trials, 2 of each native and invasive
+    const train_number = 10; //amount of training trials before each test block
+    const catch_number = 10; //60//amount of catches in test blocks
+
 
     //setting up distributions, mid-line always 500px (half screen), SDs = 100 and 140, balance across 4 blocks.
     const distribution1_1 = [
-        {name: 'native_narrow', value: gaussian(325, 10000)}, //left native narrow
-        {name: 'invasive_wide', value: gaussian(725, 19600)} //right invasive wide
+        {name: 'NATIVE', value: gaussian(325, 10000), type: 'narrow'}, //left native narrow
+        {name: 'INVASIVE', value: gaussian(725, 19600), type: 'wide'} //right invasive wide
     ];
     const distribution2_1 = [
-        {name: 'native_narrow', value: gaussian(675, 10000)}, // right native narrow
-        {name: 'invasive_wide', value: gaussian(275, 19600)} // left invasive wide
+        {name: 'NATIVE', value: gaussian(675, 10000), type: 'narrow'}, // right native narrow
+        {name: 'INVASIVE', value: gaussian(275, 19600), type: 'wide'} // left invasive wide
     ];
     const distribution3_1 = [
-        {name: 'native_wide', value: gaussian(275, 19600)}, //left native wide
-        {name: 'invasive_narrow', value: gaussian(675, 10000)} //right invasive narrow
+        {name: 'NATIVE', value: gaussian(275, 19600), type: 'wide'}, //left native wide
+        {name: 'INVASIVE', value: gaussian(675, 10000), type: 'narrow'} //right invasive narrow
     ];
     const distribution4_1 = [
-        {name: 'native_wide', value: gaussian(725, 19600)}, //right native wide
-        {name: 'invasive_narrow', value: gaussian(325, 10000)} //left invasive narrow
+        {name: 'NATIVE', value: gaussian(725, 19600), type: 'wide'}, //right native wide
+        {name: 'INVASIVE', value: gaussian(325, 10000), type: 'narrow'} //left invasive narrow
     ];
     distributions = [distribution1_1, distribution2_1, distribution3_1, distribution4_1];
 
@@ -120,6 +123,9 @@
     const stds1 = [distribution1[0].value.standardDeviation, distribution1[1].value.standardDeviation];
     const narrowIndex1 = stds1.indexOf(Math.min(...stds1));
     const wideIndex1 = stds1.indexOf(Math.max(...stds1));
+    //BLOCK 1 TRAINING TRIALS
+    const fish_train_count1 = catch_number / distribution1.length; // create deck count for fish catches
+    const fish_train_stimuli1 = shuffle_shoe(distribution1, fish_train_count1); // shuffle deck
     //BLOCK 1 TEST TRIALS
     const fish_deck_count1 = catch_number / distribution1.length; // create deck count for fish catches
     const fish_stimuli1 = shuffle_shoe(distribution1, fish_deck_count1); // shuffle deck
@@ -174,21 +180,21 @@
 
     /* EXPERIMENT TIMELINE*/
     const intro_timeline = [
-        //splash_1, //happy
-        //PIS, //saving?
-        //consent, //saving?
-        //splash_1, //happy
-        //demographics, //saving?
-        //splash_1, //happy
-        //tutorial_1, //change
-        //tutorial_2,
+        splash_1, //happy
+        PIS, //saving?
+        consent, //saving?
+        splash_1, //happy
+        demographics, //saving?
+        splash_1, //happy
+        tutorial_1, //change
+        tutorial_2,
         tutorial_3,
         splash_1, //happy
     ];
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //!*1st block training - TRIAL NUMBER 20*!//
-    const train1_timeline = [];
+    //!*PRE TRAINING*!//
+    const pretrain_timeline = [];
 
     let trial_contents = train1_stimuli.map(
         s => {
@@ -199,21 +205,19 @@
 
     for (let i = 1; i <= train_trial_number; i++) {
         const trial_details = trial_contents.pop();
-        train1_timeline.push({
+        pretrain_timeline.push({
             type: 'jspsych-quickfire',
             stimuli: [trial_details.stimulus],
             trial_number: i,
             choices: ['Catch', 'Return'],
             stimulus_duration: 1500,
-            trial_duration: 5000,
+            trial_duration: 4000,
             response_ends_trial: true,
         });
     }
 
-
-
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* block feedback */
+    /* attention check using pre training */
     var attention_timeline = [];
 
     var attention= {
@@ -222,28 +226,94 @@
             x.trial_type === "jspsych-quickfire"
     };
 
+    var tutorial_4 = {
+        type: "jspsych-tutorial",
+        tutorial_count: 4
+    };
+
     attention_timeline = [
         attention,
+        tutorial_4,
         splash_1
     ];
 
 
     //make it so that if they fail the training they get cycled back to the tutorials
-    // and they let them get one more shot before getting kicked out.//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // and they let them get one more shot before getting kicked out.
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //need some quick training trials here to teach pp about type of species in this block
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // TRAINING BLOCK 1 //
+    const block1_train_timeline = [];
+
+    narrow_train_1 = generateTrainingSizes(distribution1[narrowIndex1].value.mean, distribution1[narrowIndex1].value.standardDeviation, train_number/2);
+    wide_train_1 = generateTrainingSizes(distribution1[wideIndex1].value.mean, distribution1[wideIndex1].value.standardDeviation, train_number/2);
+
+    let fish_train1 = fish_train_stimuli1.map(s => {
+        let l;
+        if (/wide/i.test(s.type)) {
+            l= wide_train_1.pop();
+        } else {
+            l = narrow_train_1.pop();
+        }
+        return{
+            stimulus: s,
+            size:l
+        }
+    });
+    console.log(fish_train1)
+    fish_train1.forEach(s => {
+        block1_train_timeline.push({
+            type: "jspsych-experimentscreen",
+            trial_duration: 1500,
+            stimulus_duration: 1500,
+            choices: ['Catch', 'Return'],
+            size: s.size,
+            fish_class: s.stimulus.name,
+            fish_color: color1,
+            confidence_trial: false,
+            block: 0,
+            banner_text: s.stimulus.name
+        })
+    });
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // INTERIM 1 //
+
+    /*Next set of instructions and splash message while loading screen*/
+    var tutorial_5 = {
+        type: "jspsych-tutorial",
+        tutorial_count: 5
+    };
+
+    var tutorial_6 = {
+        type: "jspsych-tutorial",
+        tutorial_count: 6
+    };
+
+    var splash_2 = {
+        type: "jspsych-splashmessage",
+        trial_type: 'Next',
+        trial_duration: 3750,
+    };
+
+    const interim1_timeline = [
+        splash_1,
+        tutorial_5,
+        tutorial_6,
+        splash_2
+    ];
+
+
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //BLOCK1 TEST TRIALS//
     const block1_timeline = [];
 
-    narrow_fish_1 = generateTrainingLocations(distribution1[narrowIndex1].value.mean, distribution1[narrowIndex1].value.standardDeviation, catch_number/2);
-    wide_fish_1 = generateTrainingLocations(distribution1[wideIndex1].value.mean, distribution1[wideIndex1].value.standardDeviation, catch_number/2);
+    narrow_fish_1 = generateTrainingSizes(distribution1[narrowIndex1].value.mean, distribution1[narrowIndex1].value.standardDeviation, catch_number/2);
+    wide_fish_1 = generateTrainingSizes(distribution1[wideIndex1].value.mean, distribution1[wideIndex1].value.standardDeviation, catch_number/2);
 
     let fish1 = fish_stimuli1.map(s => {
         let l
-        if (/wide/i.test(s.name)) {
+        if (/wide/i.test(s.type)) {
             l= wide_fish_1.pop();
         } else {
             l = narrow_fish_1.pop();
@@ -264,19 +334,35 @@
             fish_class: s.stimulus.name,
             fish_color: color1,
             confidence_trial: true,
-            block: 1
+            block: 1,
+            banner_text: null
         })
     });
 
+    //BLOCK 1 FEEDBACK//
+    let feedback1_timeline = [];
+    var feedback1 = {
+        type: "jspsych-feedback",
+        trial_type: 'first',
+        filter_fun: (x) =>
+            x.trial_type === "jspsych-experimentscreen" && x.block === 1
+    };
+
+    feedback1_timeline = [
+        feedback1
+    ];
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Set up timeline and launch experiment*/
 
     const timeline = [
-        //...intro_timeline,
-        //...train1_timeline,
-        //...attention_timeline,
+        ...intro_timeline,
+        ...pretrain_timeline,
+        ...attention_timeline,
+        ...block1_train_timeline,
+        ...interim1_timeline,
         ...block1_timeline,
+        ...feedback1_timeline
     ];
 
     test_save()

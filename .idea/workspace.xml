@@ -6,9 +6,12 @@
       <change beforePath="$PROJECT_DIR$/CSS/experimentscreen.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/experimentscreen.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSS/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/jspsych-attention.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-attention.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/helper-functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/helper-functions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/jspsych-confidence.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-confidence.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/jspsych-experimentscreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-experimentscreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/jspsych-quickfire.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-quickfire.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/jspsych-feedback.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-feedback.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/jspsych-splashmessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-splashmessage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/jspsych-tutorial.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-tutorial.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +79,7 @@
       <workItem from="1629384678132" duration="4497000" />
       <workItem from="1629469028300" duration="4503000" />
       <workItem from="1629627844205" duration="14459000" />
-      <workItem from="1630940001430" duration="17570000" />
+      <workItem from="1630940001430" duration="31784000" />
     </task>
     <servers />
   </component>

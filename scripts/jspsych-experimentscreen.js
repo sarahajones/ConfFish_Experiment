@@ -139,7 +139,6 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         fin.classList.add('fin');
         fish.appendChild(fin);
 
-        var tailsize = trial.size/10;
         var tail = document.createElement("div");
         tail.id = "tail";
         tail.classList.add('tail');
@@ -147,31 +146,36 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
 
 
         //draw buttons to screen
-        var buttons = document.createElement("div")
-        buttons.id = 'jspsych-quickfire-btngroup';
+        if (trial.banner_text === null) {
+            var buttons = document.createElement("div")
+            buttons.id = 'jspsych-quickfire-btngroup';
 
-        trial.choices.forEach((c, i) => {
-            var button = document.createElement('div');
-            button.id = `experiment-btn-${i}`;
-            button.classList.add('experiment-btn');
-            button.innerHTML = c;
-            button.dataset.choice = i;
-            buttons.appendChild(button);
-            button.addEventListener(
-                'click',
-                (e) => afterResponse(parseInt(i))
-            );
-        });
-
-        experiment_screen.appendChild(buttons);
-
-        // if fast learning trial display banner underneath screen.
-        if (trial.banner_text !== null) {
+            trial.choices.forEach((c, i) => {
+                var button = document.createElement('div');
+                button.id = `experiment-btn-${i}`;
+                button.classList.add('experiment-btn');
+                button.innerHTML = c;
+                button.dataset.choice = i;
+                buttons.appendChild(button);
+                button.addEventListener(
+                    'click',
+                    (e) => afterResponse(parseInt(i))
+                );
+            });
+            experiment_screen.appendChild(buttons);
+        }// if fast learning trial display banner underneath screen.
+        else {
             var banner = document.createElement("div");
             banner.classList.add('banner')
             banner.innerHTML = trial.banner_text;
-            buttons.appendChild(banner);
+            experiment_screen.appendChild(banner);
+
+            fish.style.animationName = `stay`;
+
+            fish.style.left = `0`;
+
         }
+
         // timeout: end trial if time limit is set
         if (trial.trial_duration !== null) {
             response.coins = 0;
@@ -206,18 +210,18 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
             response.button_label = trial.choices[choice];
 
             //figure out scoring
-            if (/blue/i.test(trial.spaceship_class)){
-                if (response.button_label === 'Zap'){
+            if (/NATIVE/i.test(trial.fish_class)){
+                if (response.button_label === 'Return'){
                     response.correct = 1;
                     response.incorrect = 0;
                     response.coins = 0;
                 } else {
                     response.correct = 0;
                     response.incorrect = 1;
-                    response.coins = -3;
+                    response.coins = 0;
                 }
-            } else if(/orange/i.test(trial.spaceship_class)){
-                if (response.button_label === 'Zap'){
+            } else if(/INVASIVE/i.test(trial.fish_class)){
+                if (response.button_label === 'Catch'){
                     response.correct = 0;
                     response.incorrect = 1;
                     response.coins = 0;
@@ -225,7 +229,7 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 } else {
                     response.correct = 1;
                     response.incorrect = 0;
-                    response.coins = 3;
+                    response.coins = -3;
                 }
             }
 
@@ -234,6 +238,8 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
             for (var i = 0; i < btns.length; i++) {
                 btns[i].setAttribute('disabled', 'disabled');
             }
+
+            display_element.canvas = ''
 
             jsPsych.pluginAPI.clearAllTimeouts();
 
@@ -275,8 +281,8 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
             confidenceSlider.addEventListener("change", ()=>document.getElementById('experiment-btn').dataset.disabled='0')
 
             var confirm = document.getElementById('experiment-btn');
-            confirm.style.backgroundColor= 'rgba(155, 242, 236, .7)'
-            confidenceSlider.addEventListener('change',()=>document.getElementById('experiment-btn').style.backgroundColor = 'rgba(155, 242, 236, 1)')
+            confirm.style.backgroundColor= 'rgba(228, 253,225, .7)'
+            confidenceSlider.addEventListener('change',()=>document.getElementById('experiment-btn').style.backgroundColor = 'rgba(228, 253,225, 1)')
 
             confirm.addEventListener('click',(e)=> {
                 var element = document.documentElement;

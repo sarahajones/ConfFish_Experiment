@@ -24,9 +24,9 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
                 'The invasive species are taking over the lakes - they need to be caught and removed.' +
                 'Your goal is to find fish and check if they are from a native species or an invasive species. </p>' +
                 '<p> The native species should be returned to the water, the invasive species should be caught and removed. ' +
-                'These species will be slightly different in each lake, you will learn about the species of fish in each lake as you arrive.' +
-                'You will gain points be correctly identifying the fish and responding appropriately</p>' +
-                '<p>You are aiming to catch the invasive fish and return the native fish.</p>';
+                'These species will be slightly different in each lake, you will learn about the species of fish in each lake as you arrive. ' +
+                'You will gain points be correctly identifying the fish and responding appropriately.</p>' +
+                '<p> You are aiming to catch the invasive fish and return the native fish.</p>';
             var header_text =
                 '<h2>The following pages will help guide you through the upcoming study, please read them carefully. </h2>'
 
@@ -35,8 +35,8 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
                 '<p> Throughout the game you must decide whether to "catch" the fish you have found, or to "return" it to the water.  </p>' +
                 '<p> The scoring system works as follows: </p>' +
                 '<p> 1. If you correctly "return" a native fish, you will earn 3 points. </p>' +
-                '<p> 2. If you incorrectly "catch" a native fish, you will not get those points.</p>' +
-                '<p> 3. If you correctly "catch" an invasive fish you points will not change.</p>' +
+                '<p> 2. If you incorrectly "catch" a native fish, you will not get those points. </p>' +
+                '<p> 3. If you correctly "catch" an invasive fish you points will not change. </p>' +
                 '<p> 4. If you incorrectly "return" an invasive fish you will lose 3 points.  </p>' +
                 '<p> If you have no points to lose your points will stay at zero. ' +
                 'Your score will reset at each lake.</p>';
@@ -53,21 +53,22 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
 
         } else if(trial.tutorial_count === 4)
         { var tutorial_text =
-            '<p> Well done - please keep in mind what you have learned about the spaceships so far, it will be important soon. ' +
-            'Now it is time to see the two spaceships you have just been learning about in action. ' +
-            'Please watch the next screen closely to see <strong>where</strong>, each spaceship is dropping their packages to earth. ' +
+            '<p> Well done - please keep in mind what you have learned so far, it will be important soon. </p>' +
+            '<p> Now it is time to head to our first lake and get to work. ' +
+            'Please watch the next screen closely to see <strong>what each type of fish looks like in this lake</strong>. ' +
+            'The types of fish may sometimes look quite similar so watch carefully.'
             'You will not have to press any buttons, or respond in any way. </p>' +
-            '<p>This information, combined with what you have just learned about each spaceship and their packages, will help you in the upcoming game!</p>';
+            '<p> This information, combined with what you have just learned about native and invasive fish, will help you in the upcoming game!</p>';
             var header_text =
                 '<h1>Time for the next stage... </h1>'
         }
         else if(trial.tutorial_count === 5)
         { var tutorial_text =
-            '<p> Now that you\'ve seen the spaceships dropping their packages to earth - it is time bring together everything you have learned so far. ' +
-            'In the next rounds you will see the packages dropping from a cloudy sky, the spaceships themselves will be hidden from view. ' +
-            'You will have to decide whether to retrieve the packages or not based on their drop location alone.' +
-            'You will now only receive feedback on your choices at the end of the this round (not after each decision).  </p>' +
-            '<p>Remember - you are trying to retrieve coins and zap the bombs to earn as many coins as possible!</p>';
+            '<p> Now that you\'ve seen what native and invasive fish look like in <strong>this</strong> lake  - it is time bring together. ' +
+            'In the next set of trials, you will see fish swim into view one by one.' +
+            'You will have to decide whether to catch or return each fish based on what they look like alone.' +
+            'You will receive feedback on your choices at the end of the this round (not after each decision).  </p>' +
+            '<p>Remember - you are trying to catch the invasive fish and return the native fish to earn as many coins as possible!</p>';
             var header_text =
                 '<h2>Read the following instructions to learn more about the next stage of the game.</h2>'
 
@@ -77,9 +78,9 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
         { var tutorial_text =
             '<p> After each choice you make, you will be asked to rate your confidence on a sliding scale from "totally unsure" to "sure correct". ' +
             'Move the slider to the position that reflects your confidence in the choice that you made in that trial only. </p> ' +
-            '<p>When making this rating, think about how sure you are that you made the right decision on that choice. ' +
+            '<p> When making this rating, think about how sure you are that you made the right decision on that choice. ' +
             'Submit your confidence rating by pressing the confirm button on screen to move onto the next trial. </p>' +
-            '<p>Good luck!</p>'
+            '<p> Good luck!</p>'
             var header_text =
                 '<h2>Read the following instructions to learn more about the next stage of the game.</h2>'
         }

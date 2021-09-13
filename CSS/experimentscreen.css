@@ -10,8 +10,8 @@
     position: relative;
     background-color: skyblue;
     background-image: linear-gradient(#2db3ea, #012d01);
-    width: 100vh;
-    height: 60vh;
+    width: 1200px;
+    height: 600px;
     align-content: center;
     margin-top: 10vh;
     overflow: hidden;
@@ -87,6 +87,11 @@
 #confidence{
     height: 265px;
 }
+
+#experiment_btn {
+    background-color:rgba(228, 253,225, 1);
+}
+
 .experiment-btn {
     display: inline-flex;
     justify-content: center;
@@ -149,10 +154,9 @@
 .banner {
     padding: 20px;
     font-family: fishFont;
-    font-size: 60px;
+    font-size: 80px;
     line-height: 40px;
     letter-spacing: 5px;
-    text-shadow: -2px 0 0 #fdff2a, -4px 0 0 #df4a42, 2px 0 0 #91fcfe, 4px 0 0 #4405fc;
 }
 
 .splashbanner {
@@ -261,6 +265,15 @@
 
 @keyframes color_change {
     to { background-color: saddlebrown; }
+}
+
+@keyframes stay {
+
+}
+
+@keyframes swimThrough {
+    0%{left: 100%}
+    100%{left: 0%}
 }
 
 @keyframes hides {
