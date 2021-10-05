@@ -74,8 +74,8 @@
 
     /* EXPERIMENT VARIABLES */
     const train_trial_number = 4 ; //amount of attention check trials, 2 of each native and invasive
-    const train_number = 10; //amount of training trials before each test block
-    const catch_number = 10; //60//amount of catches in test blocks
+    const train_number = 4; //amount of training trials before each test block
+    const catch_number = 4; //60//amount of catches in test blocks
 
 
     //setting up distributions, mid-line always 500px (half screen), SDs = 100 and 140, balance across 4 blocks.
@@ -100,6 +100,9 @@
     //setting up color options
     color_options = [ 'darkred', 'steelblue', 'darkseagreen', 'darkorange'];
 
+    //set the midline for the experiment
+    const midline = 500;
+
     // get the shuffle ready
     indices = [0, 1, 2, 3];
     index = shuffle(indices);
@@ -117,9 +120,6 @@
     //GAME BLOCK 1
     const distribution1 = distributions[index[0]]; // value of size variable IV
     const color1 = color_options[index[0]]; //color of fish for that block
-    const means1 = [distribution1[0].value.mean , distribution1[1].value.mean];
-    const lowMean1 = Math.min(means1[0], means1[1]);
-    const highMean1 = Math.max(means1[0], means1[1]);
     const stds1 = [distribution1[0].value.standardDeviation, distribution1[1].value.standardDeviation];
     const narrowIndex1 = stds1.indexOf(Math.min(...stds1));
     const wideIndex1 = stds1.indexOf(Math.max(...stds1));
@@ -129,6 +129,45 @@
     //BLOCK 1 TEST TRIALS
     const fish_deck_count1 = catch_number / distribution1.length; // create deck count for fish catches
     const fish_stimuli1 = shuffle_shoe(distribution1, fish_deck_count1); // shuffle deck
+
+    //GAME BLOCK 2
+    const distribution2 = distributions[index[1]]; // value of size variable IV
+    const color2 = color_options[index[1]]; //color of fish for that block
+    const stds2 = [distribution2[0].value.standardDeviation, distribution2[1].value.standardDeviation];
+    const narrowIndex2 = stds2.indexOf(Math.min(...stds2));
+    const wideIndex2 = stds2.indexOf(Math.max(...stds2));
+    //BLOCK 1 TRAINING TRIALS
+    const fish_train_count2 = catch_number / distribution2.length; // create deck count for fish catches
+    const fish_train_stimuli2 = shuffle_shoe(distribution2, fish_train_count2); // shuffle deck
+    //BLOCK 1 TEST TRIALS
+    const fish_deck_count2 = catch_number / distribution2.length; // create deck count for fish catches
+    const fish_stimuli2 = shuffle_shoe(distribution2, fish_deck_count2); // shuffle deck
+
+    //GAME BLOCK 3
+    const distribution3 = distributions[index[2]]; // value of size variable IV
+    const color3 = color_options[index[2]]; //color of fish for that block
+    const stds3 = [distribution3[0].value.standardDeviation, distribution3[1].value.standardDeviation];
+    const narrowIndex3 = stds3.indexOf(Math.min(...stds3));
+    const wideIndex3 = stds3.indexOf(Math.max(...stds3));
+    //BLOCK 1 TRAINING TRIALS
+    const fish_train_count3 = catch_number / distribution3.length; // create deck count for fish catches
+    const fish_train_stimuli3 = shuffle_shoe(distribution3, fish_train_count3); // shuffle deck
+    //BLOCK 1 TEST TRIALS
+    const fish_deck_count3 = catch_number / distribution3.length; // create deck count for fish catches
+    const fish_stimuli3 = shuffle_shoe(distribution3, fish_deck_count3); // shuffle deck
+
+    //GAME BLOCK 4
+    const distribution4 = distributions[index[3]]; // value of size variable IV
+    const color4 = color_options[index[3]]; //color of fish for that block
+    const stds4 = [distribution4[0].value.standardDeviation, distribution4[1].value.standardDeviation];
+    const narrowIndex4 = stds4.indexOf(Math.min(...stds4));
+    const wideIndex4 = stds4.indexOf(Math.max(...stds4));
+    //BLOCK 1 TRAINING TRIALS
+    const fish_train_count4 = catch_number / distribution4.length; // create deck count for fish catches
+    const fish_train_stimuli4 = shuffle_shoe(distribution4, fish_train_count4); // shuffle deck
+    //BLOCK 1 TEST TRIALS
+    const fish_deck_count4 = catch_number / distribution4.length; // create deck count for fish catches
+    const fish_stimuli4 = shuffle_shoe(distribution4, fish_deck_count4); // shuffle deck
 
 
 
@@ -275,9 +314,9 @@
             banner_text: s.stimulus.name
         })
     });
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // INTERIM 1 //
-
     /*Next set of instructions and splash message while loading screen*/
     var tutorial_5 = {
         type: "jspsych-tutorial",
@@ -302,21 +341,41 @@
         splash_2
     ];
 
-
-
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //BLOCK1 TEST TRIALS//
     const block1_timeline = [];
 
-    narrow_fish_1 = generateTrainingSizes(distribution1[narrowIndex1].value.mean, distribution1[narrowIndex1].value.standardDeviation, catch_number/2);
-    wide_fish_1 = generateTrainingSizes(distribution1[wideIndex1].value.mean, distribution1[wideIndex1].value.standardDeviation, catch_number/2);
+    //small_size fish
+    let smallbin1_1 = generateTestSizes(midline - 20, midline + 20, (fish_stimuli1.length / 10) * .5); // mid-bracket - 330-370 10% 5
+    let smallbin1_2 = generateTestSizes(midline - 60, midline - 20, (fish_stimuli1.length / 10)); // one left - 290-330 10% 3
+    let smallbin1_3 = generateTestSizes(midline - 100, midline - 60, (fish_stimuli1.length / 10)); // two left - 250-290 10% 1
+    let smallbin1_4 = generateTestSizes(midline - 140, midline - 100, (fish_stimuli1.length / 10)); // three left - 210-290 10% 1
+    let smallbin1_5 = generateTestSizes(midline - 180, midline - 140, (fish_stimuli1.length / 10)); // four left - 170-210 10% 0
+    let smallbin1_6 = generateTestSizes(midline - 340, midline - 180, (fish_stimuli1.length / 20)); // more left - 10-170 5% 0
+    let small_test_fish1 = smallbin1_1.concat(smallbin1_2, smallbin1_3, smallbin1_4, smallbin1_5, smallbin1_6);
+    //big_size fish
+    let bigbin1_1 = generateTestSizes(midline - 20, midline + 20, (fish_stimuli1.length / 10) * .5); // mid-bracket - 330-370 10% 5
+    let bigbin1_7 = generateTestSizes(midline + 20, midline + 60, (fish_stimuli1.length / 10) ); // one right - 370 -410 10% 8
+    let bigbin1_8 = generateTestSizes(midline + 60, midline + 100, (fish_stimuli1.length / 10) ); // two left - 410-450 10% 9
+    let bigbin1_9 = generateTestSizes(midline + 100, midline + 140, (fish_stimuli1.length / 10) ); // three left = 450-490 10% 10
+    let bigbin1_10 = generateTestSizes(midline + 140, midline + 180, (fish_stimuli1.length / 10) ); // four left 490-530 10% 10
+    let bigbin1_11 = generateTestSizes(midline + 180, midline + 340, (fish_stimuli1.length / 20) ); // more right  530-790 5% 5
+    let big_test_fish1 = bigbin1_1.concat(bigbin1_7, bigbin1_8, bigbin1_9, bigbin1_10, bigbin1_11);
+
+    if(distribution1[narrowIndex1].value.name === "NATIVE"){
+        var invasive_fish_1 = shuffle(big_test_fish1);
+        var native_fish_1= shuffle(small_test_fish1);
+    } else {
+        var invasive_fish_1 = shuffle(small_test_fish1);
+        var native_fish_1= shuffle(big_test_fish1);
+    }
 
     let fish1 = fish_stimuli1.map(s => {
         let l
-        if (/wide/i.test(s.type)) {
-            l= wide_fish_1.pop();
+        if (/native/i.test(s.name)) {
+            l= native_fish_1.pop();
         } else {
-            l = narrow_fish_1.pop();
+            l = invasive_fish_1.pop();
         }
         return{
             stimulus: s,
@@ -351,7 +410,403 @@
     feedback1_timeline = [
         feedback1
     ];
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //INTERIM
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // TRAINING BLOCK 2 //
+    const block2_train_timeline = [];
 
+    narrow_train_2 = generateTrainingSizes(distribution2[narrowIndex2].value.mean, distribution2[narrowIndex2].value.standardDeviation, train_number/2);
+    wide_train_2 = generateTrainingSizes(distribution2[wideIndex2].value.mean, distribution2[wideIndex2].value.standardDeviation, train_number/2);
+
+    let fish_train2 = fish_train_stimuli2.map(s => {
+        let l;
+        if (/wide/i.test(s.type)) {
+            l= wide_train_2.pop();
+        } else {
+            l = narrow_train_2.pop();
+        }
+        return{
+            stimulus: s,
+            size:l
+        }
+    });
+
+    fish_train2.forEach(s => {
+        block2_train_timeline.push({
+            type: "jspsych-experimentscreen",
+            trial_duration: 1500,
+            stimulus_duration: 1500,
+            choices: ['Catch', 'Return'],
+            size: s.size,
+            fish_class: s.stimulus.name,
+            fish_color: color2,
+            confidence_trial: false,
+            block: -1,
+            banner_text: s.stimulus.name
+        })
+    });
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // INTERIM 2 //
+    /*Next set of instructions and splash message while loading screen*/
+    var tutorial_5 = {
+        type: "jspsych-tutorial",
+        tutorial_count: 5
+    };
+
+    var tutorial_6 = {
+        type: "jspsych-tutorial",
+        tutorial_count: 6
+    };
+
+    var splash_2 = {
+        type: "jspsych-splashmessage",
+        trial_type: 'Next',
+        trial_duration: 3750,
+    };
+
+    const interim2_timeline = [
+        splash_1,
+        tutorial_5,
+        tutorial_6,
+        splash_2
+    ];
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //BLOCK2 TEST TRIALS//
+    const block2_timeline = [];
+
+    //small_size fish
+    let smallbin2_1 = generateTestSizes(midline - 20, midline + 20, (fish_stimuli1.length / 10) * .5); // mid-bracket - 330-370 10% 5
+    let smallbin2_2 = generateTestSizes(midline - 60, midline - 20, (fish_stimuli1.length / 10)); // one left - 290-330 10% 3
+    let smallbin2_3 = generateTestSizes(midline - 100, midline - 60, (fish_stimuli1.length / 10)); // two left - 250-290 10% 1
+    let smallbin2_4 = generateTestSizes(midline - 140, midline - 100, (fish_stimuli1.length / 10)); // three left - 210-290 10% 1
+    let smallbin2_5 = generateTestSizes(midline - 180, midline - 140, (fish_stimuli1.length / 10)); // four left - 170-210 10% 0
+    let smallbin2_6 = generateTestSizes(midline - 340, midline - 180, (fish_stimuli1.length / 20)); // more left - 10-170 5% 0
+    let small_test_fish2 = smallbin2_1.concat(smallbin2_2, smallbin2_3, smallbin2_4, smallbin2_5, smallbin2_6);
+    //big_size fish
+    let bigbin2_1 = generateTestSizes(midline - 20, midline + 20, (fish_stimuli1.length / 10) * .5); // mid-bracket - 330-370 10% 5
+    let bigbin2_7 = generateTestSizes(midline + 20, midline + 60, (fish_stimuli1.length / 10) ); // one right - 370 -410 10% 8
+    let bigbin2_8 = generateTestSizes(midline + 60, midline + 100, (fish_stimuli1.length / 10) ); // two left - 410-450 10% 9
+    let bigbin2_9 = generateTestSizes(midline + 100, midline + 140, (fish_stimuli1.length / 10) ); // three left = 450-490 10% 10
+    let bigbin2_10 = generateTestSizes(midline + 140, midline + 180, (fish_stimuli1.length / 10) ); // four left 490-530 10% 10
+    let bigbin2_11 = generateTestSizes(midline + 180, midline + 340, (fish_stimuli1.length / 20) ); // more right  530-790 5% 5
+    let big_test_fish2 = bigbin2_1.concat(bigbin2_7, bigbin2_8, bigbin2_9, bigbin2_10, bigbin2_11);
+
+    if(distribution2[narrowIndex2].value.name === "NATIVE"){
+        var invasive_fish_2 = shuffle(big_test_fish2);
+        var native_fish_2= shuffle(small_test_fish2);
+    } else {
+        var invasive_fish_2 = shuffle(small_test_fish2);
+        var native_fish_2= shuffle(big_test_fish2);
+    }
+
+    let fish2 = fish_stimuli2.map(s => {
+        let l
+        if (/native/i.test(s.name)) {
+            l= native_fish_2.pop();
+        } else {
+            l = invasive_fish_2.pop();
+        }
+        return{
+            stimulus: s,
+            size:l
+        }
+    });
+
+    fish2.forEach(s => {
+        block2_timeline.push({
+            type: "jspsych-experimentscreen",
+            trial_duration: 15000,
+            stimulus_duration: 10000,
+            choices: ['Catch', 'Return'],
+            size: s.size,
+            fish_class: s.stimulus.name,
+            fish_color: color2,
+            confidence_trial: true,
+            block: 2,
+            banner_text: null
+        })
+    });
+
+    //BLOCK 2 FEEDBACK//
+    let feedback2_timeline = [];
+    var feedback2 = {
+        type: "jspsych-feedback",
+        trial_type: 'second',
+        filter_fun: (x) =>
+            x.trial_type === "jspsych-experimentscreen" && x.block === 2
+    };
+
+    feedback2_timeline = [
+        feedback2
+    ];
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //INTERIM
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // TRAINING BLOCK 3 //
+    const block3_train_timeline = [];
+
+    narrow_train_3 = generateTrainingSizes(distribution3[narrowIndex3].value.mean, distribution3[narrowIndex3].value.standardDeviation, train_number/2);
+    wide_train_3 = generateTrainingSizes(distribution3[wideIndex3].value.mean, distribution3[wideIndex3].value.standardDeviation, train_number/2);
+
+    let fish_train3 = fish_train_stimuli3.map(s => {
+        let l;
+        if (/wide/i.test(s.type)) {
+            l= wide_train_3.pop();
+        } else {
+            l = narrow_train_3.pop();
+        }
+        return{
+            stimulus: s,
+            size:l
+        }
+    });
+
+    fish_train3.forEach(s => {
+        block3_train_timeline.push({
+            type: "jspsych-experimentscreen",
+            trial_duration: 1500,
+            stimulus_duration: 1500,
+            choices: ['Catch', 'Return'],
+            size: s.size,
+            fish_class: s.stimulus.name,
+            fish_color: color3,
+            confidence_trial: false,
+            block: -2,
+            banner_text: s.stimulus.name
+        })
+    });
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // INTERIM 3 //
+
+    /*Next set of instructions and splash message while loading screen*/
+    var tutorial_5 = {
+        type: "jspsych-tutorial",
+        tutorial_count: 5
+    };
+
+    var tutorial_6 = {
+        type: "jspsych-tutorial",
+        tutorial_count: 6
+    };
+
+    var splash_2 = {
+        type: "jspsych-splashmessage",
+        trial_type: 'Next',
+        trial_duration: 3750,
+    };
+
+    const interim3_timeline = [
+        splash_1,
+        tutorial_5,
+        tutorial_6,
+        splash_2
+    ];
+
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //BLOCK3 TEST TRIALS//
+    const block3_timeline = [];
+
+    //small_size fish
+    let smallbin3_1 = generateTestSizes(midline - 20, midline + 20, (fish_stimuli1.length / 10) * .5); // mid-bracket - 330-370 10% 5
+    let smallbin3_2 = generateTestSizes(midline - 60, midline - 20, (fish_stimuli1.length / 10)); // one left - 290-330 10% 3
+    let smallbin3_3 = generateTestSizes(midline - 100, midline - 60, (fish_stimuli1.length / 10)); // two left - 250-290 10% 1
+    let smallbin3_4 = generateTestSizes(midline - 140, midline - 100, (fish_stimuli1.length / 10)); // three left - 210-290 10% 1
+    let smallbin3_5 = generateTestSizes(midline - 180, midline - 140, (fish_stimuli1.length / 10)); // four left - 170-210 10% 0
+    let smallbin3_6 = generateTestSizes(midline - 340, midline - 180, (fish_stimuli1.length / 20)); // more left - 10-170 5% 0
+    let small_test_fish3 = smallbin3_1.concat(smallbin3_2, smallbin3_3, smallbin3_4, smallbin3_5, smallbin3_6);
+    //big_size fish
+    let bigbin3_1 = generateTestSizes(midline - 20, midline + 20, (fish_stimuli1.length / 10) * .5); // mid-bracket - 330-370 10% 5
+    let bigbin3_7 = generateTestSizes(midline + 20, midline + 60, (fish_stimuli1.length / 10) ); // one right - 370 -410 10% 8
+    let bigbin3_8 = generateTestSizes(midline + 60, midline + 100, (fish_stimuli1.length / 10) ); // two left - 410-450 10% 9
+    let bigbin3_9 = generateTestSizes(midline + 100, midline + 140, (fish_stimuli1.length / 10) ); // three left = 450-490 10% 10
+    let bigbin3_10 = generateTestSizes(midline + 140, midline + 180, (fish_stimuli1.length / 10) ); // four left 490-530 10% 10
+    let bigbin3_11 = generateTestSizes(midline + 180, midline + 340, (fish_stimuli1.length / 20) ); // more right  530-790 5% 5
+    let big_test_fish3 = bigbin3_1.concat(bigbin3_7, bigbin3_8, bigbin3_9, bigbin3_10, bigbin3_11);
+
+    if(distribution3[narrowIndex3].value.name === "NATIVE"){
+        var invasive_fish_3 = shuffle(big_test_fish3);
+        var native_fish_3= shuffle(small_test_fish3);
+    } else {
+        var invasive_fish_3 = shuffle(small_test_fish3);
+        var native_fish_3= shuffle(big_test_fish3);
+    }
+
+    let fish3 = fish_stimuli3.map(s => {
+        let l
+        if (/native/i.test(s.name)) {
+            l= native_fish_3.pop();
+        } else {
+            l = invasive_fish_3.pop();
+        }
+        return{
+            stimulus: s,
+            size:l
+        }
+    });
+
+    fish3.forEach(s => {
+        block3_timeline.push({
+            type: "jspsych-experimentscreen",
+            trial_duration: 15000,
+            stimulus_duration: 10000,
+            choices: ['Catch', 'Return'],
+            size: s.size,
+            fish_class: s.stimulus.name,
+            fish_color: color3,
+            confidence_trial: true,
+            block: 3,
+            banner_text: null
+        })
+    });
+
+    //BLOCK 3 FEEDBACK//
+    let feedback3_timeline = [];
+    var feedback3 = {
+        type: "jspsych-feedback",
+        trial_type: 'third',
+        filter_fun: (x) =>
+            x.trial_type === "jspsych-experimentscreen" && x.block === 3
+    };
+
+    feedback3_timeline = [
+        feedback3
+    ];
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //INTERIM
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // TRAINING BLOCK 4//
+    const block4_train_timeline = [];
+
+    narrow_train_4 = generateTrainingSizes(distribution4[narrowIndex4].value.mean, distribution4[narrowIndex4].value.standardDeviation, train_number/2);
+    wide_train_4 = generateTrainingSizes(distribution4[wideIndex4].value.mean, distribution4[wideIndex4].value.standardDeviation, train_number/2);
+
+    let fish_train4 = fish_train_stimuli4.map(s => {
+        let l;
+        if (/wide/i.test(s.type)) {
+            l= wide_train_4.pop();
+        } else {
+            l = narrow_train_4.pop();
+        }
+        return{
+            stimulus: s,
+            size:l
+        }
+    });
+
+    fish_train4.forEach(s => {
+        block4_train_timeline.push({
+            type: "jspsych-experimentscreen",
+            trial_duration: 1500,
+            stimulus_duration: 1500,
+            choices: ['Catch', 'Return'],
+            size: s.size,
+            fish_class: s.stimulus.name,
+            fish_color: color4,
+            confidence_trial: false,
+            block: -3,
+            banner_text: s.stimulus.name
+        })
+    });
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // INTERIM 4 //
+    /*Next set of instructions and splash message while loading screen*/
+    var tutorial_5 = {
+        type: "jspsych-tutorial",
+        tutorial_count: 5
+    };
+
+    var tutorial_6 = {
+        type: "jspsych-tutorial",
+        tutorial_count: 6
+    };
+
+    var splash_2 = {
+        type: "jspsych-splashmessage",
+        trial_type: 'Next',
+        trial_duration: 3750,
+    };
+
+    const interim4_timeline = [
+        splash_1,
+        tutorial_5,
+        tutorial_6,
+        splash_2
+    ];
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //BLOCK4 TEST TRIALS//
+    const block4_timeline = [];
+
+    //small_size fish
+    let smallbin4_1 = generateTestSizes(midline - 20, midline + 20, (fish_stimuli1.length / 10) * .5); // mid-bracket - 330-370 10% 5
+    let smallbin4_2 = generateTestSizes(midline - 60, midline - 20, (fish_stimuli1.length / 10)); // one left - 290-330 10% 3
+    let smallbin4_3 = generateTestSizes(midline - 100, midline - 60, (fish_stimuli1.length / 10)); // two left - 250-290 10% 1
+    let smallbin4_4 = generateTestSizes(midline - 140, midline - 100, (fish_stimuli1.length / 10)); // three left - 210-290 10% 1
+    let smallbin4_5 = generateTestSizes(midline - 180, midline - 140, (fish_stimuli1.length / 10)); // four left - 170-210 10% 0
+    let smallbin4_6 = generateTestSizes(midline - 340, midline - 180, (fish_stimuli1.length / 20)); // more left - 10-170 5% 0
+    let small_test_fish4 = smallbin4_1.concat(smallbin4_2, smallbin4_3, smallbin4_4, smallbin4_5, smallbin4_6);
+    //big_size fish
+    let bigbin4_1 = generateTestSizes(midline - 20, midline + 20, (fish_stimuli1.length / 10) * .5); // mid-bracket - 330-370 10% 5
+    let bigbin4_7 = generateTestSizes(midline + 20, midline + 60, (fish_stimuli1.length / 10) ); // one right - 370 -410 10% 8
+    let bigbin4_8 = generateTestSizes(midline + 60, midline + 100, (fish_stimuli1.length / 10) ); // two left - 410-450 10% 9
+    let bigbin4_9 = generateTestSizes(midline + 100, midline + 140, (fish_stimuli1.length / 10) ); // three left = 450-490 10% 10
+    let bigbin4_10 = generateTestSizes(midline + 140, midline + 180, (fish_stimuli1.length / 10) ); // four left 490-530 10% 10
+    let bigbin4_11 = generateTestSizes(midline + 180, midline + 340, (fish_stimuli1.length / 20) ); // more right  530-790 5% 5
+    let big_test_fish4 = bigbin4_1.concat(bigbin4_7, bigbin4_8, bigbin4_9, bigbin4_10, bigbin4_11);
+
+    if(distribution4[narrowIndex4].value.name === "NATIVE"){
+        var invasive_fish_4 = shuffle(big_test_fish4);
+        var native_fish_4= shuffle(small_test_fish4);
+    } else {
+        var invasive_fish_4 = shuffle(small_test_fish4);
+        var native_fish_4= shuffle(big_test_fish4);
+    }
+
+    let fish4 = fish_stimuli4.map(s => {
+        let l
+        if (/native/i.test(s.name)) {
+            l= native_fish_4.pop();
+        } else {
+            l = invasive_fish_4.pop();
+        }
+        return{
+            stimulus: s,
+            size:l
+        }
+    });
+
+    fish1.forEach(s => {
+        block4_timeline.push({
+            type: "jspsych-experimentscreen",
+            trial_duration: 15000,
+            stimulus_duration: 10000,
+            choices: ['Catch', 'Return'],
+            size: s.size,
+            fish_class: s.stimulus.name,
+            fish_color: color4,
+            confidence_trial: true,
+            block: 4,
+            banner_text: null
+        })
+    });
+
+    //BLOCK 4 FEEDBACK//
+    let feedback4_timeline = [];
+    var feedback4 = {
+        type: "jspsych-feedback",
+        trial_type: 'last',
+        filter_fun: (x) =>
+            x.trial_type === "jspsych-experimentscreen" && x.block === 4
+    };
+
+    feedback4_timeline = [
+        feedback4
+    ];
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Set up timeline and launch experiment*/
 
@@ -362,7 +817,19 @@
         ...block1_train_timeline,
         ...interim1_timeline,
         ...block1_timeline,
-        ...feedback1_timeline
+        ...feedback1_timeline,
+        ...block2_train_timeline,
+        ...interim2_timeline,
+        ...block2_timeline,
+        ...feedback2_timeline,
+        ...block3_train_timeline,
+        ...interim3_timeline,
+        ...block3_timeline,
+        ...feedback3_timeline,
+        ...block4_train_timeline,
+        ...interim4_timeline,
+        ...block4_timeline,
+        ...feedback4_timeline,
     ];
 
     test_save()

@@ -7,7 +7,7 @@
 // * @param {int} total_circles - number of items (color circles)
 // */
 
-function generateTestLocations(min, max, nTrials) {
+function generateTestSizes(min, max, nTrials) {
     min = Math.ceil(min);
     max = Math.floor(max);
 

@@ -47,7 +47,7 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
         {var tutorial_text =
             '<p> Okay, let\'s start check that you have the basics. ' +
             'You will see an image of a fish appear on screen labeled as either "native" or "invasive". </p>' +
-            '<p> Press "catch" to catch the fish - press "return" the fish to return it to the water instead. </p>';
+            '<p> Press "catch" to catch the fish - press "return" to return it to the water instead. </p>';
             var header_text =
                 '<h1>Let\'s get started!</h1>';
 
