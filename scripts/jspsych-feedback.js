@@ -52,8 +52,8 @@ jsPsych.plugins['jspsych-feedback'] = (function () {
             In total you got <strong>${correct}</strong> right and <strong>${incorrect}</strong> wrong.
             You collected <strong>${coins}</strong> coins this round! Keep trying to improve your score each round!
         </p>
-        <p>Remember, a correct response  is either when you return a native fish (which gains you 3 coins) or correctly catch an invasive fish (which does not affect your coins). 
-        An incorrect response could be a caught native fish (which does not affect your coins) or a return invasive fish (which will lose you 3 coins). </p>
+        <p>Remember, a correct response  is either when you return a native fish or correctly catch an invasive fish. 
+        An incorrect response could be a caught native fish or a returned invasive fish. </p>
         `;
 
 

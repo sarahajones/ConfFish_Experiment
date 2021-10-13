@@ -46,7 +46,7 @@ jsPsych.plugins['jspsych-splashmessage'] = (function () {
                 '<p> L0Ading NEXT ROUND... </p>'
         } else if (trial.trial_type === "Last") {
             var splash_text =
-                '<p> FINISHING UP THE STUDY... </p>'
+                '<p> FiNiSHing Up THE STUDY... </p>'
         }
 
         // create page elements

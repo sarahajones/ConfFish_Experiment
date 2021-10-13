@@ -72,6 +72,7 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 default: undefined,
                 description: 'The block number'
             },
+
             choices: {
                 type: jsPsych.plugins.parameterType.STRING,
                 pretty_name: 'Choices',
@@ -113,6 +114,9 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         var experiment_screen = document.createElement("div");
         experiment_screen.id = "jspsych-experimentscreen";
         experiment_screen.classList.add('screen');
+        if (trial.confidence_trial == true){
+            experiment_screen.style.marginTop = `${3}vh`
+        }
         display_element.appendChild(experiment_screen);
 
         //draw "canvas" to screen
@@ -168,7 +172,8 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
             var banner = document.createElement("div");
             banner.classList.add('banner')
             banner.innerHTML = trial.banner_text;
-            experiment_screen.appendChild(banner);
+            fish.appendChild(banner);
+            banner.style.padding = `250px`
 
             fish.style.animationName = `stay`;
 
@@ -203,6 +208,9 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 element.msRequestFullscreen();
             }
 
+            // remove fish from screen
+            fish.style.animationName = `vanish`;
+
             // measure response information
             response.response_time = performance.now();
             response.delta_response_time = response.response_time - response.start_time;
@@ -214,17 +222,17 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 if (response.button_label === 'Return'){
                     response.correct = 1;
                     response.incorrect = 0;
-                    response.coins = 0;
+                    response.coins = 3;
                 } else {
                     response.correct = 0;
                     response.incorrect = 1;
-                    response.coins = 0;
+                    response.coins = -3;
                 }
             } else if(/INVASIVE/i.test(trial.fish_class)){
                 if (response.button_label === 'Catch'){
                     response.correct = 0;
                     response.incorrect = 1;
-                    response.coins = 0;
+                    response.coins = 3;
 
                 } else {
                     response.correct = 1;
@@ -253,7 +261,6 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
          * display a confidence slider to collect a confidence report on confidence trials
          */
         function getConfidence() {
-
             let sliderStart = Math.floor(Math.random() * 100) + 1;
 
             //clear buttons and realign button group to fit confidence question

@@ -77,7 +77,7 @@ function generateTrainingSizes(dist_mean,dist_sd,train_trials) {
     var newList = forceDescriptives(list, dist_mean, dist_sd);
 
     // display the transformed list and descriptive statistics (mean and sd)
-    console.log(descriptives(newList));
+    //console.log(descriptives(newList));
 
     return newList;
 }

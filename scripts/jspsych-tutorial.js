@@ -35,9 +35,9 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
                 '<p> Throughout the game you must decide whether to "catch" the fish you have found, or to "return" it to the water.  </p>' +
                 '<p> The scoring system works as follows: </p>' +
                 '<p> 1. If you correctly "return" a native fish, you will earn 3 points. </p>' +
-                '<p> 2. If you incorrectly "catch" a native fish, you will not get those points. </p>' +
-                '<p> 3. If you correctly "catch" an invasive fish you points will not change. </p>' +
-                '<p> 4. If you incorrectly "return" an invasive fish you will lose 3 points.  </p>' +
+                '<p> 2. If you incorrectly "catch" a native fish, you will lose 3 points. </p>' +
+                '<p> 3. If you correctly "catch" an invasive fish, you will earn 3 points. </p>' +
+                '<p> 4. If you incorrectly "return" an invasive fish, you will lose 3 points.  </p>' +
                 '<p> If you have no points to lose your points will stay at zero. ' +
                 'Your score will reset at each lake.</p>';
             var header_text =
@@ -56,7 +56,7 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
             '<p> Well done - please keep in mind what you have learned so far, it will be important soon. </p>' +
             '<p> Now it is time to head to our first lake and get to work. ' +
             'Please watch the next screen closely to see <strong>what each type of fish looks like in this lake</strong>. ' +
-            'The types of fish may sometimes look quite similar so watch carefully.'
+            'The types of fish may sometimes look quite similar so watch carefully.' +
             'You will not have to press any buttons, or respond in any way. </p>' +
             '<p> This information, combined with what you have just learned about native and invasive fish, will help you in the upcoming game!</p>';
             var header_text =
@@ -64,7 +64,7 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
         }
         else if(trial.tutorial_count === 5)
         { var tutorial_text =
-            '<p> Now that you\'ve seen what native and invasive fish look like in <strong>this</strong> lake  - it is time bring together. ' +
+            '<p> Now that you\'ve seen what native and invasive fish look like in <strong>this</strong> lake  - it is time to bring it all together. ' +
             'In the next set of trials, you will see fish swim into view one by one.' +
             'You will have to decide whether to catch or return each fish based on what they look like alone.' +
             'You will receive feedback on your choices at the end of the this round (not after each decision).  </p>' +
@@ -85,15 +85,15 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
                 '<h2>Read the following instructions to learn more about the next stage of the game.</h2>'
         }
 
+
         else if(trial.tutorial_count === 7)
         { var tutorial_text =
             '<p> Let\'s see if you can improve your score this time around! ' +
             'Watch the screen carefully again and then try to beat your last score! ' +
-            'Keep an eye on where the spaceships are dropping their parcels, the spaceships may have moved about but the parcels they drop will remain the same! Good luck!</p>'
+            'Keep an eye on what kind of fish are in the next lake, they may look different this time but the rules remain the same! Good luck!</p>'
             var header_text =
                 '<h1>Ready for the next round?</h1>'
         }
-
 
 
 

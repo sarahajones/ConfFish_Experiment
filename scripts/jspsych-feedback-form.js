@@ -1,6 +1,3 @@
-/*
- * Example plugin template
- */
 
 jsPsych.plugins['jspsych-feedback-form'] = (function () {
 
@@ -76,7 +73,7 @@ jsPsych.plugins['jspsych-feedback-form'] = (function () {
         'div',
         'question feedback-text',
         'feedbackQuestion-strategy',
-        'Please describe what strategy you were using to reach your decision about whether or not to retrieve a package.'
+        'Please describe what strategy you were using to reach your decision about whether or not to catch a fish.'
       );
 
       var strategyText = createGeneral(

@@ -61,7 +61,26 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                 description: 'If true, then trial will end when user responds.'
             },
 
+            filter_fun: {
+                type: jsPsych.plugins.parameterType.FUNCTION,
+                pretty_name: 'Filter Function',
+                default: undefined,
+                description: 'The filter function to pull data for feedback calc'
+            },
 
+            attention_check_number: {
+                type: jsPsych.plugins.parameterType.INT,
+                pretty_name: 'Attention check number',
+                default: null,
+                description: 'Which attention check are we on.'
+            },
+
+            block: {
+                type: jsPsych.plugins.parameterType.INT,
+                pretty_name: 'Block number',
+                default: undefined,
+                description: 'The block number'
+            },
 
         }
     };
@@ -75,15 +94,36 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             stimulus: trial.stimuli,
             label: trial.banner_text,
             number: trial.trial_number,
+            block: trial.block,
             start_time: performance.now(),
             response_time: null,
             end_time: null,
             delta_response_time: null,
             button: null,
-            button_label: trial.choices,
+            button_label: null
         };
 
-        showStimulus(trial.stimuli[0], trial.stimulus_duration);
+        if (trial.attention_check_number === 2) {
+            console.log(`run two`)
+            const data = JSON.parse(jsPsych.data.get().json()).filter(trial.filter_fun);
+
+            let correctLast = 0;
+            let incorrectLast = 0;
+
+            data.forEach((x) => {
+                if (x.correct === 1) {
+                    correctLast++;
+                } else if (x.incorrect === 1)
+                    incorrectLast++;
+            });
+
+            if (incorrectLast === 0) {
+                response.correct = 1;
+                response.incorrect = -1;
+               showBlankScreen(5, end_trial())
+            } else { showStimulus(trial.stimuli[0], trial.stimulus_duration)}
+        } else{
+        showStimulus(trial.stimuli[0], trial.stimulus_duration); }
 
         // Functions
 
@@ -117,7 +157,7 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
 
         // SHOW STIMULUS + BUTTON/s
         function showStimulus() {
-            displayImage(trial.stimuli[0], trial.stimulus_duration, null);
+            displayImage(trial.stimuli[0], trial.stimulus_duration);
 
             //display buttons
             var buttons = [];
@@ -158,7 +198,7 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                     }
 
                     var choice = e.currentTarget.getAttribute('data-choice');
-                    afterResponse(choice);
+                    afterResponse(choice, showBlankScreen);
                 });
 
             }
@@ -170,7 +210,6 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             }
         }
 
-
         // BUTTON RESPONSE
         // function to handle responses by the subject
         function afterResponse(choice) {
@@ -179,16 +218,15 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             response.delta_response_time = response.response_time - response.start_time;
             response.button = choice;
             response.button_label = trial.choices[choice];
+            jsPsych.pluginAPI.clearAllTimeouts();
 
             // disable all the buttons after a response
             var btns = document.querySelectorAll('#jspsych-quickfire-button-');
             for (var i = 0; i < btns.length; i++) {
                 btns[i].setAttribute('disabled', 'disabled');
             }
-            jsPsych.pluginAPI.clearAllTimeouts();
 
             // calculate score
-            console.log(trial.stimuli[0])
             if (trial.stimuli[0] === 'images/training_fish_invasive.png') {
                 if (response.button_label === 'Catch') {
                     response.correct = 1;
@@ -206,20 +244,25 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                     response.incorrect = 1;
                 }
             }
+
                 // end trial if time limit is set
                 if (trial.trial_duration !== null) {
+
                     jsPsych.pluginAPI.setTimeout(function () {
                         end_trial();
                     }, trial.trial_duration);
                 }
-
-            end_trial();
+            end_trial()
         }
 
 
         //END TRIAL
         // function to end trial when it is time
         function end_trial() {
+            if (response.button_label === null){
+                response.correct = 0;
+                response.incorrect = 1;
+            }
             // disable all the buttons after a response
             var btns = document.querySelectorAll('#jspsych-quickfire-button-');
             for (var i = 0; i < btns.length; i++) {
@@ -228,8 +271,8 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
 
             // clear the display
             display_element.innerHTML = '';
-            response.end_time = performance.now();
 
+            response.end_time = performance.now();
             // kill any remaining setTimeout handlers
             jsPsych.pluginAPI.clearAllTimeouts();
 

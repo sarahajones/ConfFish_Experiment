@@ -34,6 +34,8 @@
     <script src="scripts/jspsych-confidence.js"></script>
     <script src="scripts/jspsych-feedback.js"></script>
 
+    <script src="scripts/jspsych-feedback-form.js"></script>
+    <script src="scripts/jspsych-lastScreen.js"></script>
 
     <!--custom JS: helpers-->
     <script src="scripts/helper-functions.js"></script>
@@ -170,7 +172,6 @@
     const fish_stimuli4 = shuffle_shoe(distribution4, fish_deck_count4); // shuffle deck
 
 
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* EXPERIMENTAL PAGES */
     //splash loading screen
@@ -197,7 +198,6 @@
         date: consent_date
     };
 
-
     //DEMOGRAPHICS
     var demographics = {
         type: 'jspsych-demographics'
@@ -217,7 +217,7 @@
         tutorial_count: 3
     };
 
-    /* EXPERIMENT TIMELINE*/
+    /* INTRO TIMELINE*/
     const intro_timeline = [
         splash_1, //happy
         PIS, //saving?
@@ -233,7 +233,7 @@
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //!*PRE TRAINING*!//
-    const pretrain_timeline = [];
+    const pretrain_timeline_1 = [];
 
     let trial_contents = train1_stimuli.map(
         s => {
@@ -244,25 +244,66 @@
 
     for (let i = 1; i <= train_trial_number; i++) {
         const trial_details = trial_contents.pop();
-        pretrain_timeline.push({
+        pretrain_timeline_1.push({
             type: 'jspsych-quickfire',
             stimuli: [trial_details.stimulus],
             trial_number: i,
             choices: ['Catch', 'Return'],
-            stimulus_duration: 1500,
-            trial_duration: 4000,
+            stimulus_duration: 2500,
+            trial_duration: 2500,
             response_ends_trial: true,
+            attention_check_number: 1,
+            block: 11,
         });
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* attention check using pre training */
-    var attention_timeline = [];
+    var attention_timeline_1 = [];
 
-    var attention= {
+    var attention1 = {
         type: "jspsych-attention",
+        attention_check_number: 1,
         filter_fun: (x) =>
             x.trial_type === "jspsych-quickfire"
+    };
+
+    attention_timeline_1 = [
+        attention1
+    ]
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // run pretrain again (only if the attention check is failed)
+    const pretrain_timeline_2 = [];
+
+    let trial_contents2 = train1_stimuli.map(
+        s => {
+            return {
+                stimulus: s,
+            }
+        });
+
+    for (let i = 1; i <= train_trial_number; i++) {
+        const trial_details = trial_contents2.pop();
+        pretrain_timeline_2.push({
+            type: 'jspsych-quickfire',
+            stimuli: [trial_details.stimulus],
+            trial_number: i,
+            choices: ['Catch', 'Return'],
+            stimulus_duration: 2500,
+            trial_duration: 2500,
+            response_ends_trial: true,
+            attention_check_number: 2,
+            block: 22,
+            filter_fun: (x) =>
+                x.trial_type === "jspsych-quickfire" && x.block === 11
+        });
+    }
+
+    var attention_timeline_2 = [];
+    var attention2 = {
+        type: "jspsych-attention",
+        attention_check_number: 2,
+        filter_fun: (x) =>
+            x.trial_type === "jspsych-quickfire" && x.block === 22
     };
 
     var tutorial_4 = {
@@ -270,15 +311,10 @@
         tutorial_count: 4
     };
 
-    attention_timeline = [
-        attention,
-        tutorial_4,
-        splash_1
-    ];
-
-
-    //make it so that if they fail the training they get cycled back to the tutorials
-    // and they let them get one more shot before getting kicked out.
+    attention_timeline_2 = [
+        attention2,
+        tutorial_4
+    ]
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // TRAINING BLOCK 1 //
@@ -299,7 +335,7 @@
             size:l
         }
     });
-    console.log(fish_train1)
+
     fish_train1.forEach(s => {
         block1_train_timeline.push({
             type: "jspsych-experimentscreen",
@@ -386,8 +422,8 @@
     fish1.forEach(s => {
         block1_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 15000,
-            stimulus_duration: 10000,
+            trial_duration: 15000000,
+            stimulus_duration: 100000000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -407,8 +443,14 @@
             x.trial_type === "jspsych-experimentscreen" && x.block === 1
     };
 
+    var tutorial_7 = {
+        type: "jspsych-tutorial",
+        tutorial_count: 7
+    };
+
     feedback1_timeline = [
-        feedback1
+        feedback1,
+        tutorial_7
     ];
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //INTERIM
@@ -449,15 +491,6 @@
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // INTERIM 2 //
     /*Next set of instructions and splash message while loading screen*/
-    var tutorial_5 = {
-        type: "jspsych-tutorial",
-        tutorial_count: 5
-    };
-
-    var tutorial_6 = {
-        type: "jspsych-tutorial",
-        tutorial_count: 6
-    };
 
     var splash_2 = {
         type: "jspsych-splashmessage",
@@ -467,8 +500,6 @@
 
     const interim2_timeline = [
         splash_1,
-        tutorial_5,
-        tutorial_6,
         splash_2
     ];
 
@@ -539,7 +570,8 @@
     };
 
     feedback2_timeline = [
-        feedback2
+        feedback2,
+        tutorial_7
     ];
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //INTERIM
@@ -581,30 +613,11 @@
     // INTERIM 3 //
 
     /*Next set of instructions and splash message while loading screen*/
-    var tutorial_5 = {
-        type: "jspsych-tutorial",
-        tutorial_count: 5
-    };
-
-    var tutorial_6 = {
-        type: "jspsych-tutorial",
-        tutorial_count: 6
-    };
-
-    var splash_2 = {
-        type: "jspsych-splashmessage",
-        trial_type: 'Next',
-        trial_duration: 3750,
-    };
 
     const interim3_timeline = [
         splash_1,
-        tutorial_5,
-        tutorial_6,
         splash_2
     ];
-
-
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //BLOCK3 TEST TRIALS//
@@ -673,7 +686,8 @@
     };
 
     feedback3_timeline = [
-        feedback3
+        feedback3,
+        tutorial_7
     ];
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //INTERIM
@@ -715,26 +729,9 @@
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // INTERIM 4 //
     /*Next set of instructions and splash message while loading screen*/
-    var tutorial_5 = {
-        type: "jspsych-tutorial",
-        tutorial_count: 5
-    };
-
-    var tutorial_6 = {
-        type: "jspsych-tutorial",
-        tutorial_count: 6
-    };
-
-    var splash_2 = {
-        type: "jspsych-splashmessage",
-        trial_type: 'Next',
-        trial_duration: 3750,
-    };
 
     const interim4_timeline = [
         splash_1,
-        tutorial_5,
-        tutorial_6,
         splash_2
     ];
 
@@ -807,17 +804,44 @@
     feedback4_timeline = [
         feedback4
     ];
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /*sign off experiment*/
+    var end_timeline = [];
+
+    var splash_3 = {
+        type: "jspsych-splashmessage",
+        trial_type: 'Last',
+        trial_duration: 3000,
+    };
+
+    var feedbackForm = {
+        type: 'jspsych-feedback-form',
+    };
+
+    var end_experiment = {
+        type: "jspsych-lastScreen",
+    };
+
+    end_timeline = [
+        splash_3,
+        feedbackForm,
+        end_experiment
+    ];
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Set up timeline and launch experiment*/
 
     const timeline = [
-        ...intro_timeline,
-        ...pretrain_timeline,
-        ...attention_timeline,
-        ...block1_train_timeline,
-        ...interim1_timeline,
+        //...intro_timeline,
+        //...pretrain_timeline_1,
+        //...attention_timeline_1,
+        //...pretrain_timeline_2,
+        //...attention_timeline_2,
+        ///...block1_train_timeline,
+        //...interim1_timeline,
         ...block1_timeline,
-        ...feedback1_timeline,
+        //...feedback1_timeline,
         ...block2_train_timeline,
         ...interim2_timeline,
         ...block2_timeline,
@@ -830,6 +854,7 @@
         ...interim4_timeline,
         ...block4_timeline,
         ...feedback4_timeline,
+        ...end_timeline
     ];
 
     test_save()

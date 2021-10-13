@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="386839c7-c65c-4402-89cc-95dba29bfd1a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/helper-functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/helper-functions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/jspsych-tutorial.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/jspsych-tutorial.js" afterDir="false" />
-    </list>
+    <list default="true" id="386839c7-c65c-4402-89cc-95dba29bfd1a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,18 +42,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\saraha\Documents\GitHub\ConfFish_Experiment\ConfFish_Experiment\scripts" />
       <recent name="C:\Users\A-J\Documents\GitHub\ConfFish_Experiment\scripts" />
+      <recent name="C:\Users\A-J\Documents\GitHub\ConfFish_Experiment\scripts\external" />
+      <recent name="C:\Users\saraha\Documents\GitHub\ConfFish_Experiment\ConfFish_Experiment\scripts" />
       <recent name="C:\Users\saraha\Desktop\ConfFish\scripts" />
       <recent name="C:\Users\saraha\Desktop\ConfFish\images" />
-      <recent name="C:\Users\saraha\Desktop\ConfFish\CSS" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\saraha\Desktop\ConfFish" />
       <recent name="C:\Users\saraha\Desktop\ConfFish\images" />
     </key>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -74,11 +69,14 @@
       <workItem from="1629469028300" duration="4503000" />
       <workItem from="1629627844205" duration="14459000" />
       <workItem from="1630940001430" duration="41517000" />
+      <workItem from="1633442640297" duration="3240000" />
+      <workItem from="1633520449916" duration="3784000" />
+      <workItem from="1633680652723" duration="21302000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1060" y="455" key="FileChooserDialogImpl" timestamp="1631001339129">

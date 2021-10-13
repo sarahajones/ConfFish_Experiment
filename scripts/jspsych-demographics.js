@@ -137,7 +137,7 @@ jsPsych.plugins['jspsych-demographics'] = (function () {
         'button',
         'large-button',
         'demographics-proceed3',
-        'SUBMIT'
+        'SUBMIT and launch full screen'
     );
     button3.setAttribute('type', 'submit');
 
