@@ -100,11 +100,11 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             end_time: null,
             delta_response_time: null,
             button: null,
-            button_label: null
+            button_label: null,
+            last: 0
         };
 
         if (trial.attention_check_number === 2) {
-            console.log(`run two`)
             const data = JSON.parse(jsPsych.data.get().json()).filter(trial.filter_fun);
 
             let correctLast = 0;
@@ -118,11 +118,10 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             });
 
             if (incorrectLast === 0) {
-                response.correct = 1;
-                response.incorrect = -1;
-               showBlankScreen(5, end_trial())
+                response.last = 1;
+               end_trial()
             } else { showStimulus(trial.stimuli[0], trial.stimulus_duration)}
-        } else{
+        } else {
         showStimulus(trial.stimuli[0], trial.stimulus_duration); }
 
         // Functions
@@ -227,23 +226,29 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             }
 
             // calculate score
-            if (trial.stimuli[0] === 'images/training_fish_invasive.png') {
-                if (response.button_label === 'Catch') {
-                    response.correct = 1;
-                    response.incorrect = 0;
-                } else {
-                    response.correct = 0;
-                    response.incorrect = 1;
-                }
-            } else if (trial.stimuli[0] === 'images/training_fish_native.png') {
-                if (response.button_label === 'Return') {
-                    response.correct = 1;
-                    response.incorrect = 0;
-                } else {
-                    response.correct = 0;
-                    response.incorrect = 1;
+            if (response.last === 1){
+                response.correct = 1;
+                response.incorrect = -1;
+            } else {
+                if (trial.stimuli[0] === 'images/training_fish_invasive.png') {
+                    if (response.button_label === 'Catch') {
+                        response.correct = 1;
+                        response.incorrect = 0;
+                    } else {
+                        response.correct = 0;
+                        response.incorrect = 1;
+                    }
+                } else if (trial.stimuli[0] === 'images/training_fish_native.png') {
+                    if (response.button_label === 'Return') {
+                        response.correct = 1;
+                        response.incorrect = 0;
+                    } else {
+                        response.correct = 0;
+                        response.incorrect = 1;
+                    }
                 }
             }
+
 
                 // end trial if time limit is set
                 if (trial.trial_duration !== null) {
@@ -259,10 +264,16 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
         //END TRIAL
         // function to end trial when it is time
         function end_trial() {
-            if (response.button_label === null){
-                response.correct = 0;
-                response.incorrect = 1;
+            if (response.last === 1){
+                response.correct = 1;
+                response.incorrect = -1;
+            } else {
+                if (response.button_label === null) {
+                    response.correct = 0;
+                    response.incorrect = 1;
+                }
             }
+
             // disable all the buttons after a response
             var btns = document.querySelectorAll('#jspsych-quickfire-button-');
             for (var i = 0; i < btns.length; i++) {

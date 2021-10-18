@@ -46,9 +46,15 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
 
             distribution_info: {
                 type: jsPsych.plugins.parameterType.STRING,
-                pretty_name: 'info of distribution from which location was drawn',
+                pretty_name: 'info of distribution from which size was drawn',
                 default: undefined,
-                description: 'info of the distribution from which drop locations are drawn'
+                description: 'info of the distribution from which fish sizes are drawn'
+            },
+            distribution_name: {
+                type: jsPsych.plugins.parameterType.STRING,
+                pretty_name: 'name of distribution from which size was drawn',
+                default: undefined,
+                description: 'name of the distribution from which fish sizes are drawn'
             },
 
             banner_text: {
@@ -85,7 +91,7 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
 
     plugin.trial = function (display_element, trial) {
         display_element.innerHTML = '';
-
+ console.log(trial.distribution_info)
         //update the response variables
         const response = {
             stimulus: trial.fish_class,
@@ -124,6 +130,7 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         canvas.id = "jspsych-gameboard";
         canvas.classList.add('gameboard');
         experiment_screen.appendChild(canvas);
+
 
         //add fish and fish elements
         var fish = document.createElement("div");
@@ -171,13 +178,12 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         else {
             var banner = document.createElement("div");
             banner.classList.add('banner')
+            banner.id = 'banner';
             banner.innerHTML = trial.banner_text;
             fish.appendChild(banner);
-            banner.style.padding = `250px`
 
             fish.style.animationName = `stay`;
-
-            fish.style.left = `0`;
+            fish.style.left = ((trial.canvasSize - trial.size)/2).toString() + 'px';
 
         }
 

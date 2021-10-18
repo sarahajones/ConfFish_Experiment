@@ -339,15 +339,18 @@
     fish_train1.forEach(s => {
         block1_train_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 1500,
-            stimulus_duration: 1500,
+            trial_duration: 2000000,
+            stimulus_duration: 2000000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
             fish_color: color1,
+            distribution_info: s.stimulus.value,
+            distribution_name: s.stimulus.name,
             confidence_trial: false,
             block: 0,
-            banner_text: s.stimulus.name
+            banner_text: s.stimulus.name,
+            canvasSize: 1000
         })
     });
 
@@ -422,15 +425,18 @@
     fish1.forEach(s => {
         block1_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 15000000,
-            stimulus_duration: 100000000,
+            trial_duration: 3500,
+            stimulus_duration: 2000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
             fish_color: color1,
+            distribution_info: s.stimulus.value,
+            distribution_name: s.stimulus.name,
             confidence_trial: true,
             block: 1,
-            banner_text: null
+            banner_text: null,
+            canvasSize: 1000
         })
     });
 
@@ -477,15 +483,18 @@
     fish_train2.forEach(s => {
         block2_train_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 1500,
-            stimulus_duration: 1500,
+            trial_duration: 2000,
+            stimulus_duration: 2000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
             fish_color: color2,
+            distribution_info: s.stimulus.value,
+            distribution_name: s.stimulus.name,
             confidence_trial: false,
             block: -1,
-            banner_text: s.stimulus.name
+            banner_text: s.stimulus.name,
+            canvasSize: 1000
         })
     });
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -548,15 +557,18 @@
     fish2.forEach(s => {
         block2_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 15000,
-            stimulus_duration: 10000,
+            trial_duration: 3500,
+            stimulus_duration: 2000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
             fish_color: color2,
+            distribution_info: s.stimulus.value,
+            distribution_name: s.stimulus.name,
             confidence_trial: true,
             block: 2,
-            banner_text: null
+            banner_text: null,
+            canvasSize: 1000
         })
     });
 
@@ -598,15 +610,18 @@
     fish_train3.forEach(s => {
         block3_train_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 1500,
-            stimulus_duration: 1500,
+            trial_duration: 2000,
+            stimulus_duration: 2000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
             fish_color: color3,
+            distribution_info: s.stimulus.value,
+            distribution_name: s.stimulus.name,
             confidence_trial: false,
             block: -2,
-            banner_text: s.stimulus.name
+            banner_text: s.stimulus.name,
+            canvasSize: 1000
         })
     });
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -664,15 +679,18 @@
     fish3.forEach(s => {
         block3_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 15000,
-            stimulus_duration: 10000,
+            trial_duration: 3000,
+            stimulus_duration: 2000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
             fish_color: color3,
+            distribution_info: s.stimulus.value,
+            distribution_name: s.stimulus.name,
             confidence_trial: true,
             block: 3,
-            banner_text: null
+            banner_text: null,
+            canvasSize: 1000
         })
     });
 
@@ -714,15 +732,18 @@
     fish_train4.forEach(s => {
         block4_train_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 1500,
-            stimulus_duration: 1500,
+            trial_duration: 2000,
+            stimulus_duration: 2000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
             fish_color: color4,
+            distribution_info: s.stimulus.value,
+            distribution_name: s.stimulus.name,
             confidence_trial: false,
             block: -3,
-            banner_text: s.stimulus.name
+            banner_text: s.stimulus.name,
+            canvasSize: 1000
         })
     });
 
@@ -780,15 +801,18 @@
     fish1.forEach(s => {
         block4_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 15000,
-            stimulus_duration: 10000,
+            trial_duration: 3000,
+            stimulus_duration: 2500,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
             fish_color: color4,
+            distribution_info: s.stimulus.value,
+            distribution_name: s.stimulus.name,
             confidence_trial: true,
             block: 4,
-            banner_text: null
+            banner_text: null,
+            canvasSize: 1000
         })
     });
 
@@ -833,15 +857,15 @@
     /* Set up timeline and launch experiment*/
 
     const timeline = [
-        //...intro_timeline,
-        //...pretrain_timeline_1,
-        //...attention_timeline_1,
-        //...pretrain_timeline_2,
-        //...attention_timeline_2,
-        ///...block1_train_timeline,
-        //...interim1_timeline,
+        //...intro_timeline, //happy
+        //...pretrain_timeline_1, //sorted
+        //...attention_timeline_1, //working
+        //...pretrain_timeline_2, //sorted
+        //...attention_timeline_2, //working
+        ...block1_train_timeline,
+        ...interim1_timeline,
         ...block1_timeline,
-        //...feedback1_timeline,
+        ...feedback1_timeline,
         ...block2_train_timeline,
         ...interim2_timeline,
         ...block2_timeline,
