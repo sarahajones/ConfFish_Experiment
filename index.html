@@ -76,26 +76,26 @@
 
     /* EXPERIMENT VARIABLES */
     const train_trial_number = 4 ; //amount of attention check trials, 2 of each native and invasive
-    const train_number = 4; //amount of training trials before each test block
-    const catch_number = 4; //60//amount of catches in test blocks
+    const train_number = 60; //amount of training trials before each test block
+    const catch_number = 60; //60//amount of catches in test blocks
 
 
-    //setting up distributions, mid-line always 500px (half screen), SDs = 100 and 140, balance across 4 blocks.
+    //setting up distributions, mid-line always 500px (half screen with buffer of 100 each side), SDs = 100 and 175, balance across 4 blocks.
     const distribution1_1 = [
-        {name: 'NATIVE', value: gaussian(325, 10000), type: 'narrow'}, //left native narrow
-        {name: 'INVASIVE', value: gaussian(725, 19600), type: 'wide'} //right invasive wide
+        {name: 'NATIVE', value: gaussian(384, 10000), type: 'narrow'}, //left native narrow
+        {name: 'INVASIVE', value: gaussian(584, 30625), type: 'wide'} //right invasive wide
     ];
     const distribution2_1 = [
-        {name: 'NATIVE', value: gaussian(675, 10000), type: 'narrow'}, // right native narrow
-        {name: 'INVASIVE', value: gaussian(275, 19600), type: 'wide'} // left invasive wide
+        {name: 'NATIVE', value: gaussian(616, 10000), type: 'narrow'}, // right native narrow
+        {name: 'INVASIVE', value: gaussian(416, 30625), type: 'wide'} // left invasive wide
     ];
     const distribution3_1 = [
-        {name: 'NATIVE', value: gaussian(275, 19600), type: 'wide'}, //left native wide
-        {name: 'INVASIVE', value: gaussian(675, 10000), type: 'narrow'} //right invasive narrow
+        {name: 'NATIVE', value: gaussian(416, 30625), type: 'wide'}, //left native wide
+        {name: 'INVASIVE', value: gaussian(616, 10000), type: 'narrow'} //right invasive narrow
     ];
     const distribution4_1 = [
-        {name: 'NATIVE', value: gaussian(725, 19600), type: 'wide'}, //right native wide
-        {name: 'INVASIVE', value: gaussian(325, 10000), type: 'narrow'} //left invasive narrow
+        {name: 'NATIVE', value: gaussian(584, 30625), type: 'wide'}, //right native wide
+        {name: 'INVASIVE', value: gaussian(384, 10000), type: 'narrow'} //left invasive narrow
     ];
     distributions = [distribution1_1, distribution2_1, distribution3_1, distribution4_1];
 
@@ -138,10 +138,10 @@
     const stds2 = [distribution2[0].value.standardDeviation, distribution2[1].value.standardDeviation];
     const narrowIndex2 = stds2.indexOf(Math.min(...stds2));
     const wideIndex2 = stds2.indexOf(Math.max(...stds2));
-    //BLOCK 1 TRAINING TRIALS
+    //BLOCK 2 TRAINING TRIALS
     const fish_train_count2 = catch_number / distribution2.length; // create deck count for fish catches
     const fish_train_stimuli2 = shuffle_shoe(distribution2, fish_train_count2); // shuffle deck
-    //BLOCK 1 TEST TRIALS
+    //BLOCK 2 TEST TRIALS
     const fish_deck_count2 = catch_number / distribution2.length; // create deck count for fish catches
     const fish_stimuli2 = shuffle_shoe(distribution2, fish_deck_count2); // shuffle deck
 
@@ -151,10 +151,10 @@
     const stds3 = [distribution3[0].value.standardDeviation, distribution3[1].value.standardDeviation];
     const narrowIndex3 = stds3.indexOf(Math.min(...stds3));
     const wideIndex3 = stds3.indexOf(Math.max(...stds3));
-    //BLOCK 1 TRAINING TRIALS
+    //BLOCK 3 TRAINING TRIALS
     const fish_train_count3 = catch_number / distribution3.length; // create deck count for fish catches
     const fish_train_stimuli3 = shuffle_shoe(distribution3, fish_train_count3); // shuffle deck
-    //BLOCK 1 TEST TRIALS
+    //BLOCK 3 TEST TRIALS
     const fish_deck_count3 = catch_number / distribution3.length; // create deck count for fish catches
     const fish_stimuli3 = shuffle_shoe(distribution3, fish_deck_count3); // shuffle deck
 
@@ -164,10 +164,10 @@
     const stds4 = [distribution4[0].value.standardDeviation, distribution4[1].value.standardDeviation];
     const narrowIndex4 = stds4.indexOf(Math.min(...stds4));
     const wideIndex4 = stds4.indexOf(Math.max(...stds4));
-    //BLOCK 1 TRAINING TRIALS
+    //BLOCK 4 TRAINING TRIALS
     const fish_train_count4 = catch_number / distribution4.length; // create deck count for fish catches
     const fish_train_stimuli4 = shuffle_shoe(distribution4, fish_train_count4); // shuffle deck
-    //BLOCK 1 TEST TRIALS
+    //BLOCK 4 TEST TRIALS
     const fish_deck_count4 = catch_number / distribution4.length; // create deck count for fish catches
     const fish_stimuli4 = shuffle_shoe(distribution4, fish_deck_count4); // shuffle deck
 
@@ -339,8 +339,8 @@
     fish_train1.forEach(s => {
         block1_train_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 2000000,
-            stimulus_duration: 2000000,
+            trial_duration: 1750,
+            stimulus_duration: 1750,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -425,8 +425,8 @@
     fish1.forEach(s => {
         block1_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 3500,
-            stimulus_duration: 2000,
+            trial_duration: 4500,
+            stimulus_duration: 2500,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -456,7 +456,8 @@
 
     feedback1_timeline = [
         feedback1,
-        tutorial_7
+        tutorial_7,
+        splash_1
     ];
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //INTERIM
@@ -483,8 +484,8 @@
     fish_train2.forEach(s => {
         block2_train_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 2000,
-            stimulus_duration: 2000,
+            trial_duration: 1750,
+            stimulus_duration: 1750,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -557,8 +558,8 @@
     fish2.forEach(s => {
         block2_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 3500,
-            stimulus_duration: 2000,
+            trial_duration: 4500,
+            stimulus_duration: 2500,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -583,7 +584,8 @@
 
     feedback2_timeline = [
         feedback2,
-        tutorial_7
+        tutorial_7,
+        splash_1
     ];
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //INTERIM
@@ -610,8 +612,8 @@
     fish_train3.forEach(s => {
         block3_train_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 2000,
-            stimulus_duration: 2000,
+            trial_duration: 1750,
+            stimulus_duration: 1750,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -679,8 +681,8 @@
     fish3.forEach(s => {
         block3_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 3000,
-            stimulus_duration: 2000,
+            trial_duration: 4500,
+            stimulus_duration: 2500,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -705,7 +707,8 @@
 
     feedback3_timeline = [
         feedback3,
-        tutorial_7
+        tutorial_7,
+        splash_1
     ];
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //INTERIM
@@ -732,8 +735,8 @@
     fish_train4.forEach(s => {
         block4_train_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 2000,
-            stimulus_duration: 2000,
+            trial_duration: 1750,
+            stimulus_duration: 1750,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -801,7 +804,7 @@
     fish1.forEach(s => {
         block4_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 3000,
+            trial_duration: 4500,
             stimulus_duration: 2500,
             choices: ['Catch', 'Return'],
             size: s.size,
@@ -826,7 +829,8 @@
     };
 
     feedback4_timeline = [
-        feedback4
+        feedback4,
+        splash_1
     ];
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -857,11 +861,11 @@
     /* Set up timeline and launch experiment*/
 
     const timeline = [
-        //...intro_timeline, //happy
-        //...pretrain_timeline_1, //sorted
-        //...attention_timeline_1, //working
-        //...pretrain_timeline_2, //sorted
-        //...attention_timeline_2, //working
+        ...intro_timeline, //happy
+        ...pretrain_timeline_1, //sorted
+        ...attention_timeline_1, //working
+        ...pretrain_timeline_2, //sorted
+        ...attention_timeline_2, //working
         ...block1_train_timeline,
         ...interim1_timeline,
         ...block1_timeline,

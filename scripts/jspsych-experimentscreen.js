@@ -236,13 +236,13 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 }
             } else if(/INVASIVE/i.test(trial.fish_class)){
                 if (response.button_label === 'Catch'){
-                    response.correct = 0;
-                    response.incorrect = 1;
+                    response.correct = 1;
+                    response.incorrect = 0;
                     response.coins = 3;
 
                 } else {
-                    response.correct = 1;
-                    response.incorrect = 0;
+                    response.correct = 0;
+                    response.incorrect = 1;
                     response.coins = -3;
                 }
             }

@@ -21,7 +21,7 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
         if (trial.tutorial_count === 1) {
             var tutorial_text =
                 '<p> During this study, you will play a game where you will be a marine biologist. You will be exploring lakes where invasive species of fish live alongside native species. ' +
-                'The invasive species are taking over the lakes - they need to be caught and removed.' +
+                'The invasive species are taking over the lakes - they need to be caught and removed. ' +
                 'Your goal is to find fish and check if they are from a native species or an invasive species. </p>' +
                 '<p> The native species should be returned to the water, the invasive species should be caught and removed. ' +
                 'These species will be slightly different in each lake, you will learn about the species of fish in each lake as you arrive. ' +

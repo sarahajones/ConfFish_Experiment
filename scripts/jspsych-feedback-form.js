@@ -25,7 +25,7 @@ jsPsych.plugins['jspsych-feedback-form'] = (function () {
     display_element.innerHTML = '';
     $('body')
       .css('height', 'auto')
-      .css('background-color', 'black')
+      .css('background-color', 'rgba(17,75,95,1)')
       .css('overflow', 'auto');
     $.scrollify.destroy();
 
