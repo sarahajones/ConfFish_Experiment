@@ -90,8 +90,9 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
     };
 
     plugin.trial = function (display_element, trial) {
+
         display_element.innerHTML = '';
- console.log(trial.distribution_info)
+
         //update the response variables
         const response = {
             stimulus: trial.fish_class,
@@ -139,6 +140,7 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         fish.style.width = `${trial.size}px`; //this is the key experimental variable
         fish.style.backgroundColor = `${trial.fish_color}`;//this is a blockwise color change to make the blocks more distinct.
         fish.style.left = ((trial.canvasSize - trial.size)/2).toString() + 'px';
+        fish.style.opacity = `100`;
         canvas.appendChild(fish);
 
         var eye = document.createElement("div");
@@ -178,17 +180,21 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         }// if fast learning trial display banner underneath screen.
         else {
             var banner = document.createElement("div");
-            banner.classList.add('banner')
+            banner.classList.add('banner');
             banner.id = 'banner';
             banner.innerHTML = trial.banner_text;
+            banner.style.opacity = `100`;
             fish.appendChild(banner);
 
             fish.style.left = ((trial.canvasSize - trial.size)/2).toString() + 'px';
 
-            if(trial.time_elapsed > 2000){
-                fish.style.opacity = `0`;
-                banner.style.opacity =`0`;
-            }
+          /*  if (trial.trial_duration !== null) {
+                jsPsych.pluginAPI.setTimeout(function () {
+                    fish.style.opacity = `0`;
+                    banner.style.opacity =`0`;
+                }, trial.stimulus_duration);
+
+            }*/
 
         }
 
@@ -221,8 +227,6 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
             } else if (element.msRequestFullscreen) {
                 element.msRequestFullscreen();
             }
-
-
 
             // measure response information
             response.response_time = performance.now();

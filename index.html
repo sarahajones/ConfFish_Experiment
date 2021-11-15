@@ -249,8 +249,9 @@
             stimuli: [trial_details.stimulus],
             trial_number: i,
             choices: ['Catch', 'Return'],
-            stimulus_duration: 50000,
-            trial_duration: 50000,
+            stimulus_duration: 5000,
+            trial_duration: 25000,
+            gap_duration: 10,
             response_ends_trial: true,
             attention_check_number: 1,
             block: 11,
@@ -427,8 +428,8 @@
     fish1.forEach(s => {
         block1_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 450000,
-            stimulus_duration: 450000,
+            trial_duration: 4500,
+            stimulus_duration: 4000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,

@@ -34,10 +34,10 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
             var tutorial_text =
                 '<p> Throughout the game you must decide whether to "catch" the fish you have found, or to "return" it to the water.  </p>' +
                 '<p> The scoring system works as follows: </p>' +
-                '<p> 1. If you correctly "return" a native fish, you will earn 3 points. </p>' +
+                '<p> 1. If you correctly "catch" an invasive fish, you will earn 3 points. </p>' +
                 '<p> 2. If you incorrectly "catch" a native fish, you will lose 3 points. </p>' +
-                '<p> 3. If you correctly "catch" an invasive fish, you will earn 3 points. </p>' +
-                '<p> 4. If you incorrectly "return" an invasive fish, you will lose 3 points.  </p>' +
+                '<p> 3. If you incorrectly "return" an invasive fish, you will lose 3 points. </p>' +
+                '<p> 4. If you correctly "return" a native fish, you will earn 3 points. </p>' +
                 '<p> If you have no points to lose your points will stay at zero. ' +
                 'Your score will reset at each lake.</p>';
             var header_text =

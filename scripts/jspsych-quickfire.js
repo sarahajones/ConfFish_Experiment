@@ -54,6 +54,13 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                 description: 'How long to show the trial.'
             },
 
+            gap_duration: {
+                type: jsPsych.plugins.parameterType.INT,
+                pretty_name: 'Gap duration',
+                default: null,
+                description: 'How long to show a blank screen in between the two stimuli.'
+            },
+
             response_ends_trial: {
                 type: jsPsych.plugins.parameterType.BOOL,
                 pretty_name: 'Response ends trial',
@@ -87,7 +94,6 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
 
     /* ----- Start trial then showing stimulus  -----*/
     plugin.trial = function (display_element, trial) {
-
         display_element.innerHTML = '';
 
         const response = {
@@ -120,9 +126,9 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             if (incorrectLast === 0) {
                 response.last = 1;
                end_trial()
-            } else { showStimulus(trial.stimuli[0], trial.stimulus_duration)}
-        } else {
-        showStimulus(trial.stimuli[0], trial.stimulus_duration); }
+            } else {showStimulus(trial.stimuli[0], trial.stimulus_duration)
+                }
+        } else {showStimulus(trial.stimuli[0], trial.stimulus_duration)}
 
         // Functions
 
@@ -146,17 +152,18 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
 
         //SHOW BLANK SCREEN
         function showBlankScreen(duration, callback) {
-            var img = document.getElementsByClassName('jspsych-quickfire-stimulus');
-            img[0].style.opacity = `0`;
+            // Blank out the screen
+            display_element.innerHTML = '';
             // Callback after delay
             if(typeof callback === 'function')
                 setTimeout(callback, duration);
         }
-        // SHOW STIMULUS (set by procedural code below)
+
+        // SHOW STIMULUS (set by procedural code above)
 
         // SHOW STIMULUS + BUTTON/s
         function showStimulus() {
-            displayImage(trial.stimuli[0], trial.stimulus_duration);
+            displayImage(trial.stimuli[0], trial.stimulus_duration,null);
 
             //display buttons
             var buttons = [];
@@ -179,7 +186,8 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             }
             display_element.innerHTML += '</div>';
 
-            awaitResponse();
+            awaitResponse()
+
         }
 
         function awaitResponse() {
@@ -212,21 +220,16 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
         // function to handle responses by the subject
         function afterResponse(choice) {
 
-
+           document.innerHTML = '';
             // measure response information
             response.response_time = performance.now();
             response.delta_response_time = response.response_time - response.start_time;
             response.button = choice;
-            response.button_label = trial.choices[choice];
+            response.button_label = trial.choices[choice];// calculate score
+
+            // kill any remaining setTimeout handlers
             jsPsych.pluginAPI.clearAllTimeouts();
 
-            // disable all the buttons after a response
-            var btns = document.querySelectorAll('#jspsych-quickfire-button-');
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].setAttribute('disabled', 'disabled');
-            }
-
-            // calculate score
             if (response.last === 1){
                 response.correct = 1;
                 response.incorrect = -1;
@@ -249,16 +252,11 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                     }
                 }
             }
+            showBlankScreen(trial.gap_duration, end_trial())
+            //end_trial()
 
-            // end trial if time limit is set
-            if (trial.trial_duration !== null) {
-                jsPsych.pluginAPI.setTimeout(function() {
-                     end_trial();
-                }, trial.trial_duration);
-            }
-            //showBlankScreen(5, end_trial())
-            end_trial()
         }
+
 
 
         //END TRIAL
@@ -281,9 +279,13 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                 btns[i].setAttribute('disabled', 'disabled');
             }
 
+            // clear the display
+            display_element.innerHTML = '';
             response.end_time = performance.now();
+
             // kill any remaining setTimeout handlers
             jsPsych.pluginAPI.clearAllTimeouts();
+
 
             // move on to the next trial
             jsPsych.finishTrial(response);
