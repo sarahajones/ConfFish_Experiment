@@ -30,8 +30,8 @@ function generateTrainingSizes(dist_mean,dist_sd,train_trials) {
         }
         return list;
     }
-    // create a list of locations within the confines of the screen (0-800)
-    var list = randomList(train_trials, 15, 785);
+    // create a list of sizes within the confines of the screen (100-900)
+    var list = randomList(train_trials, 101, 899);
 
     function descriptives(list) {
         // compute mean, sd and the interval range: [min, max]
@@ -73,7 +73,7 @@ function generateTrainingSizes(dist_mean,dist_sd,train_trials) {
         return newList;
     }
 
-    // transform the list to have an exact mean of 5 and sd of 2
+    // transform the list to have an exact mean and sd
     var newList = forceDescriptives(list, dist_mean, dist_sd);
 
     // display the transformed list and descriptive statistics (mean and sd)

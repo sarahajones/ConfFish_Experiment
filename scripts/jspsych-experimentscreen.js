@@ -122,7 +122,7 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         experiment_screen.id = "jspsych-experimentscreen";
         experiment_screen.classList.add('screen');
         if (trial.confidence_trial == true){
-            experiment_screen.style.marginTop = `${3}vh`
+            experiment_screen.style.marginTop = `${2}vh`
         }
         display_element.appendChild(experiment_screen);
 
@@ -159,6 +159,15 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         fish.appendChild(tail);
 
 
+        //SHOW BLANK SCREEN
+        function showBlankStimulus(duration, callback) {
+            // Blank out the screen
+            fish.style.opacity = '0';
+            // Callback after delay
+            if(typeof callback === 'function')
+                setTimeout(callback, duration)
+        }
+
         //draw buttons to screen
         if (trial.banner_text === null) {
             var buttons = document.createElement("div")
@@ -177,6 +186,12 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 );
             });
             experiment_screen.appendChild(buttons);
+
+            if (trial.trial_duration !== null) {
+                jsPsych.pluginAPI.setTimeout(function() {
+                    end_trial();
+                }, trial.trial_duration);
+            }
         }// if fast learning trial display banner underneath screen.
         else {
             var banner = document.createElement("div");
@@ -188,31 +203,16 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
 
             fish.style.left = ((trial.canvasSize - trial.size)/2).toString() + 'px';
 
-          /*  if (trial.trial_duration !== null) {
-                jsPsych.pluginAPI.setTimeout(function () {
-                    fish.style.opacity = `0`;
-                    banner.style.opacity =`0`;
-                }, trial.stimulus_duration);
 
-            }*/
+            if (trial.trial_duration !== null) {
+                jsPsych.pluginAPI.setTimeout(function() {
+                    showBlankStimulus(100, end_trial);
+                }, trial.trial_duration);
+            }
 
         }
 
-        // timeout: end trial if time limit is set
-        if (trial.trial_duration !== null) {
-            response.coins = 0;
-            response.correct = 0;
-            response.incorrect = 1;
 
-            jsPsych.pluginAPI.setTimeout(function () {
-                end_trial();
-            }, trial.trial_duration);
-        }
-
-        /**
-         * do stuff after button press
-         * @param choice {int} tells us which button was pressed
-         */
         function afterResponse(choice) {
             // remove fish from screen
             fish.style.animationName = `vanish`;

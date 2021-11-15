@@ -94,6 +94,7 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
 
     /* ----- Start trial then showing stimulus  -----*/
     plugin.trial = function (display_element, trial) {
+
         display_element.innerHTML = '';
 
         const response = {
@@ -131,7 +132,6 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
         } else {showStimulus(trial.stimuli[0], trial.stimulus_duration)}
 
         // Functions
-
         // SHOW IMAGE:  generalised function for use and reuse
         function displayImage(imgSrc, duration, callback) {
             const img = display_element.appendChild(document.createElement('img'));
@@ -154,9 +154,10 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
         function showBlankScreen(duration, callback) {
             // Blank out the screen
             display_element.innerHTML = '';
+
             // Callback after delay
             if(typeof callback === 'function')
-                setTimeout(callback, duration);
+                setTimeout(callback, duration)
         }
 
         // SHOW STIMULUS (set by procedural code above)
@@ -187,7 +188,6 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             display_element.innerHTML += '</div>';
 
             awaitResponse()
-
         }
 
         function awaitResponse() {
@@ -219,8 +219,6 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
         // BUTTON RESPONSE
         // function to handle responses by the subject
         function afterResponse(choice) {
-
-           document.innerHTML = '';
             // measure response information
             response.response_time = performance.now();
             response.delta_response_time = response.response_time - response.start_time;
@@ -252,7 +250,7 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                     }
                 }
             }
-            showBlankScreen(trial.gap_duration, end_trial())
+            showBlankScreen(trial.gap_duration, end_trial)
             //end_trial()
 
         }
@@ -262,7 +260,11 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
         //END TRIAL
         // function to end trial when it is time
         function end_trial() {
-
+            var checkRect = document.getElementById("curtain");
+            if (checkRect !== null)
+            {
+                checkRect.remove();
+            }
             if (response.last === 1){
                 response.correct = 1;
                 response.incorrect = -1;
@@ -279,13 +281,9 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                 btns[i].setAttribute('disabled', 'disabled');
             }
 
-            // clear the display
-            display_element.innerHTML = '';
             response.end_time = performance.now();
-
             // kill any remaining setTimeout handlers
             jsPsych.pluginAPI.clearAllTimeouts();
-
 
             // move on to the next trial
             jsPsych.finishTrial(response);
