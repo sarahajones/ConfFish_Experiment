@@ -31,8 +31,8 @@
     left: 100%;
     margin-right:auto;
     border-radius: 50%;
-    animation: swim 3s,
-               hides 7s ease-in-out 2s forwards;
+    animation: stay
+
 }
 
 .fish .eye{

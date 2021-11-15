@@ -68,7 +68,7 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
             'In the next set of trials, you will see fish swim into view one by one.' +
             'You will have to decide whether to catch or return each fish based on what they look like alone.' +
             'You will receive feedback on your choices at the end of the this round (not after each decision).  </p>' +
-            '<p>Remember - you are trying to catch the invasive fish and return the native fish to earn as many coins as possible!</p>';
+            '<p>Remember - you are trying to catch the invasive fish and return the native fish to earn as many points as possible!</p>';
             var header_text =
                 '<h2>Read the following instructions to learn more about the next stage of the game.</h2>'
 

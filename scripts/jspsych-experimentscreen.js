@@ -138,6 +138,7 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
         fish.classList.add('fish');
         fish.style.width = `${trial.size}px`; //this is the key experimental variable
         fish.style.backgroundColor = `${trial.fish_color}`;//this is a blockwise color change to make the blocks more distinct.
+        fish.style.left = ((trial.canvasSize - trial.size)/2).toString() + 'px';
         canvas.appendChild(fish);
 
         var eye = document.createElement("div");
@@ -182,8 +183,12 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
             banner.innerHTML = trial.banner_text;
             fish.appendChild(banner);
 
-            fish.style.animationName = `stay`;
             fish.style.left = ((trial.canvasSize - trial.size)/2).toString() + 'px';
+
+            if(trial.time_elapsed > 2000){
+                fish.style.opacity = `0`;
+                banner.style.opacity =`0`;
+            }
 
         }
 
@@ -203,6 +208,9 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
          * @param choice {int} tells us which button was pressed
          */
         function afterResponse(choice) {
+            // remove fish from screen
+            fish.style.animationName = `vanish`;
+            fish.style.opacity = `0`;
             var element = document.documentElement;
             if (element.requestFullscreen) {
                 element.requestFullscreen();
@@ -214,8 +222,7 @@ jsPsych.plugins['jspsych-experimentscreen'] = function () {
                 element.msRequestFullscreen();
             }
 
-            // remove fish from screen
-            fish.style.animationName = `vanish`;
+
 
             // measure response information
             response.response_time = performance.now();

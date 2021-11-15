@@ -132,6 +132,7 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             img.src = imgSrc;
             img.className = 'jspsych-quickfire-stimulus';
             img.style = display_element;
+            img.style.opacity = `100`;
             if(typeof callback === 'function')
                 setTimeout(callback, duration);
 
@@ -145,13 +146,12 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
 
         //SHOW BLANK SCREEN
         function showBlankScreen(duration, callback) {
-            // Blank out the screen
-            display_element.innerHTML = '';
+            var img = document.getElementsByClassName('jspsych-quickfire-stimulus');
+            img[0].style.opacity = `0`;
             // Callback after delay
             if(typeof callback === 'function')
                 setTimeout(callback, duration);
         }
-
         // SHOW STIMULUS (set by procedural code below)
 
         // SHOW STIMULUS + BUTTON/s
@@ -184,34 +184,35 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
 
         function awaitResponse() {
             for (var i = 0; i < trial.choices.length; i++) {
-                display_element.querySelector('#jspsych-quickfire-button-' + i).addEventListener('click', function (e) {
-                    var element = document.documentElement;
-                    if (element.requestFullscreen) {
-                        element.requestFullscreen();
-                    } else if (element.mozRequestFullScreen) {
-                        element.mozRequestFullScreen();
-                    } else if (element.webkitRequestFullscreen) {
-                        element.webkitRequestFullscreen();
-                    } else if (element.msRequestFullscreen) {
-                        element.msRequestFullscreen();
-                    }
+                    display_element.querySelector('#jspsych-quickfire-button-' + i).addEventListener('click', function (e) {
+                        var element = document.documentElement;
+                        if (element.requestFullscreen) {
+                            element.requestFullscreen();
+                        } else if (element.mozRequestFullScreen) {
+                            element.mozRequestFullScreen();
+                        } else if (element.webkitRequestFullscreen) {
+                            element.webkitRequestFullscreen();
+                        } else if (element.msRequestFullscreen) {
+                            element.msRequestFullscreen();
+                        }
 
-                    var choice = e.currentTarget.getAttribute('data-choice');
-                    afterResponse(choice, showBlankScreen);
-                });
-
-            }
-            // end trial if time limit is set
-            if (trial.trial_duration !== null) {
-                jsPsych.pluginAPI.setTimeout(function() {
-                    end_trial();
-                }, trial.trial_duration);
-            }
+                        var choice = e.currentTarget.getAttribute('data-choice');
+                        afterResponse(choice);
+                    });
+                }
+                // end trial if time limit is set
+                if (trial.trial_duration !== null) {
+                    jsPsych.pluginAPI.setTimeout(function() {
+                        end_trial();
+                    }, trial.trial_duration);
+                }
         }
 
         // BUTTON RESPONSE
         // function to handle responses by the subject
         function afterResponse(choice) {
+
+
             // measure response information
             response.response_time = performance.now();
             response.delta_response_time = response.response_time - response.start_time;
@@ -249,14 +250,13 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                 }
             }
 
-
-                // end trial if time limit is set
-                if (trial.trial_duration !== null) {
-
-                    jsPsych.pluginAPI.setTimeout(function () {
-                        end_trial();
-                    }, trial.trial_duration);
-                }
+            // end trial if time limit is set
+            if (trial.trial_duration !== null) {
+                jsPsych.pluginAPI.setTimeout(function() {
+                     end_trial();
+                }, trial.trial_duration);
+            }
+            //showBlankScreen(5, end_trial())
             end_trial()
         }
 
@@ -264,6 +264,7 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
         //END TRIAL
         // function to end trial when it is time
         function end_trial() {
+
             if (response.last === 1){
                 response.correct = 1;
                 response.incorrect = -1;
@@ -280,9 +281,6 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
                 btns[i].setAttribute('disabled', 'disabled');
             }
 
-            // clear the display
-            display_element.innerHTML = '';
-
             response.end_time = performance.now();
             // kill any remaining setTimeout handlers
             jsPsych.pluginAPI.clearAllTimeouts();
@@ -290,7 +288,6 @@ jsPsych.plugins['jspsych-quickfire'] = (function () {
             // move on to the next trial
             jsPsych.finishTrial(response);
         }
-
 
     };
 

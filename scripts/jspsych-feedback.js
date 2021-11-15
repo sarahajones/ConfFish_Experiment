@@ -47,10 +47,11 @@ jsPsych.plugins['jspsych-feedback'] = (function () {
         };
 
 
+
         let tutorial_text = `
         <p>Well done on completing this round.
             In total you got <strong>${correct}</strong> right and <strong>${incorrect}</strong> wrong.
-            You collected <strong>${coins}</strong> coins this round! Keep trying to improve your score each round!
+            You collected <strong>${coins}</strong> points this round! Keep trying to improve your score each round!
         </p>
         <p>Remember, a correct response  is either when you return a native fish or correctly catch an invasive fish. 
         An incorrect response could be a caught native fish or a returned invasive fish. </p>

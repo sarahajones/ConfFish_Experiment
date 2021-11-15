@@ -249,11 +249,13 @@
             stimuli: [trial_details.stimulus],
             trial_number: i,
             choices: ['Catch', 'Return'],
-            stimulus_duration: 2500,
-            trial_duration: 2500,
+            stimulus_duration: 50000,
+            trial_duration: 50000,
             response_ends_trial: true,
             attention_check_number: 1,
             block: 11,
+            filter_fun: (x) =>
+                x.trial_type === "jspsych-quickfire" && x.block === 22
         });
     }
 
@@ -288,8 +290,8 @@
             stimuli: [trial_details.stimulus],
             trial_number: i,
             choices: ['Catch', 'Return'],
-            stimulus_duration: 2500,
-            trial_duration: 2500,
+            stimulus_duration: 50000,
+            trial_duration: 50000,
             response_ends_trial: true,
             attention_check_number: 2,
             block: 22,
@@ -339,8 +341,8 @@
     fish_train1.forEach(s => {
         block1_train_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 1750,
-            stimulus_duration: 1750,
+            trial_duration: 2750,
+            stimulus_duration: 2750,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -425,8 +427,8 @@
     fish1.forEach(s => {
         block1_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 4500,
-            stimulus_duration: 2500,
+            trial_duration: 450000,
+            stimulus_duration: 450000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -484,8 +486,8 @@
     fish_train2.forEach(s => {
         block2_train_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 1750,
-            stimulus_duration: 1750,
+            trial_duration: 2750,
+            stimulus_duration: 2750,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -558,8 +560,8 @@
     fish2.forEach(s => {
         block2_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 4500,
-            stimulus_duration: 2500,
+            trial_duration: 450000,
+            stimulus_duration: 45000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -612,8 +614,8 @@
     fish_train3.forEach(s => {
         block3_train_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 1750,
-            stimulus_duration: 1750,
+            trial_duration: 2750,
+            stimulus_duration: 2750,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -681,8 +683,8 @@
     fish3.forEach(s => {
         block3_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 4500,
-            stimulus_duration: 2500,
+            trial_duration: 450000,
+            stimulus_duration: 450000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -735,8 +737,8 @@
     fish_train4.forEach(s => {
         block4_train_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 1750,
-            stimulus_duration: 1750,
+            trial_duration: 2750,
+            stimulus_duration: 2750,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -801,11 +803,11 @@
         }
     });
 
-    fish1.forEach(s => {
+    fish4.forEach(s => {
         block4_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 4500,
-            stimulus_duration: 2500,
+            trial_duration: 450000,
+            stimulus_duration: 450000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -861,11 +863,11 @@
     /* Set up timeline and launch experiment*/
 
     const timeline = [
-        ...intro_timeline, //happy
-        ...pretrain_timeline_1, //sorted
-        ...attention_timeline_1, //working
-        ...pretrain_timeline_2, //sorted
-        ...attention_timeline_2, //working
+        //...intro_timeline, //happy
+        //...pretrain_timeline_1, //sorted
+        //...attention_timeline_1, //working
+        //...pretrain_timeline_2, //sorted
+        //...attention_timeline_2, //working
         ...block1_train_timeline,
         ...interim1_timeline,
         ...block1_timeline,
