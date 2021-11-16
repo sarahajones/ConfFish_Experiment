@@ -65,7 +65,7 @@ jsPsych.plugins['jspsych-tutorial'] = (function () {
         else if(trial.tutorial_count === 5)
         { var tutorial_text =
             '<p> Now that you\'ve seen what native and invasive fish look like in <strong>this</strong> lake  - it is time to bring it all together. ' +
-            'In the next set of trials, you will see fish swim into view one by one.' +
+            'In the next set of trials, you will see fish appear in view one by one.' +
             'You will have to decide whether to catch or return each fish based on what they look like alone.' +
             'You will receive feedback on your choices at the end of the this round (not after each decision).  </p>' +
             '<p>Remember - you are trying to catch the invasive fish and return the native fish to earn as many points as possible!</p>';

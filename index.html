@@ -75,7 +75,7 @@
     ];
 
     /* EXPERIMENT VARIABLES */
-    const train_trial_number = 4 ; //amount of attention check trials, 2 of each native and invasive
+    const train_trial_number = 4 ; //4//amount of attention check trials, 2 of each native and invasive
     const train_number = 60; //60//amount of training trials before each test block
     const catch_number = 60; //60//amount of catches in test blocks
 
@@ -125,6 +125,8 @@
     const stds1 = [distribution1[0].value.standardDeviation, distribution1[1].value.standardDeviation];
     const narrowIndex1 = stds1.indexOf(Math.min(...stds1));
     const wideIndex1 = stds1.indexOf(Math.max(...stds1));
+    const means1 = [distribution1[0].value.mean, distribution1[1].value.mean];
+    const bigMean1 = means1.indexOf(Math.max(...means1));
     //BLOCK 1 TRAINING TRIALS
     const fish_train_count1 = catch_number / distribution1.length; // create deck count for fish catches
     const fish_train_stimuli1 = shuffle_shoe(distribution1, fish_train_count1); // shuffle deck
@@ -138,6 +140,8 @@
     const stds2 = [distribution2[0].value.standardDeviation, distribution2[1].value.standardDeviation];
     const narrowIndex2 = stds2.indexOf(Math.min(...stds2));
     const wideIndex2 = stds2.indexOf(Math.max(...stds2));
+    const means2 = [distribution2[0].value.mean, distribution2[1].value.mean];
+    const bigMean2 = means2.indexOf(Math.max(...means2));
     //BLOCK 2 TRAINING TRIALS
     const fish_train_count2 = catch_number / distribution2.length; // create deck count for fish catches
     const fish_train_stimuli2 = shuffle_shoe(distribution2, fish_train_count2); // shuffle deck
@@ -151,6 +155,8 @@
     const stds3 = [distribution3[0].value.standardDeviation, distribution3[1].value.standardDeviation];
     const narrowIndex3 = stds3.indexOf(Math.min(...stds3));
     const wideIndex3 = stds3.indexOf(Math.max(...stds3));
+    const means3 = [distribution3[0].value.mean, distribution3[1].value.mean];
+    const bigMean3 = means3.indexOf(Math.max(...means3));
     //BLOCK 3 TRAINING TRIALS
     const fish_train_count3 = catch_number / distribution3.length; // create deck count for fish catches
     const fish_train_stimuli3 = shuffle_shoe(distribution3, fish_train_count3); // shuffle deck
@@ -164,6 +170,8 @@
     const stds4 = [distribution4[0].value.standardDeviation, distribution4[1].value.standardDeviation];
     const narrowIndex4 = stds4.indexOf(Math.min(...stds4));
     const wideIndex4 = stds4.indexOf(Math.max(...stds4));
+    const means4 = [distribution4[0].value.mean, distribution4[1].value.mean];
+    const bigMean4 = means4.indexOf(Math.max(...means4));
     //BLOCK 4 TRAINING TRIALS
     const fish_train_count4 = catch_number / distribution4.length; // create deck count for fish catches
     const fish_train_stimuli4 = shuffle_shoe(distribution4, fish_train_count4); // shuffle deck
@@ -241,7 +249,7 @@
                 stimulus: s,
             }
         });
-    console.log(trial_contents)
+
     for (let i = 1; i <= train_trial_number; i++) {
         const trial_details = trial_contents.pop();
         pretrain_timeline_1.push({
@@ -405,17 +413,17 @@
     let bigbin1_11 = generateTestSizes(midline + 180, midline + 400, (fish_stimuli1.length / 20) ); // more right  530-790 5% 5
     let big_test_fish1 = bigbin1_1.concat(bigbin1_7, bigbin1_8, bigbin1_9, bigbin1_10, bigbin1_11);
 
-    if(distribution1[narrowIndex1].value.name === "NATIVE"){
-        var invasive_fish_1 = shuffle(big_test_fish1);
-        var native_fish_1= shuffle(small_test_fish1);
-    } else {
+    if(distribution1[bigMean1].name === "NATIVE"){
         var invasive_fish_1 = shuffle(small_test_fish1);
         var native_fish_1= shuffle(big_test_fish1);
+    } else {
+        var invasive_fish_1 = shuffle(big_test_fish1);
+        var native_fish_1= shuffle(small_test_fish1);
     }
 
     let fish1 = fish_stimuli1.map(s => {
         let l
-        if (/native/i.test(s.name)) {
+        if (/NATIVE/i.test(s.name)) {
             l= native_fish_1.pop();
         } else {
             l = invasive_fish_1.pop();
@@ -429,8 +437,8 @@
     fish1.forEach(s => {
         block1_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 4500,
-            stimulus_duration: 4000,
+            trial_duration: 10000,
+            stimulus_duration: 3000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -538,17 +546,17 @@
     let bigbin2_11 = generateTestSizes(midline + 180, midline + 400, (fish_stimuli1.length / 20) ); // more right  530-790 5% 5
     let big_test_fish2 = bigbin2_1.concat(bigbin2_7, bigbin2_8, bigbin2_9, bigbin2_10, bigbin2_11);
 
-    if(distribution2[narrowIndex2].value.name === "NATIVE"){
-        var invasive_fish_2 = shuffle(big_test_fish2);
-        var native_fish_2= shuffle(small_test_fish2);
-    } else {
+    if(distribution2[bigMean2].name === "NATIVE"){
         var invasive_fish_2 = shuffle(small_test_fish2);
         var native_fish_2= shuffle(big_test_fish2);
+    } else {
+        var invasive_fish_2 = shuffle(big_test_fish2);
+        var native_fish_2= shuffle(small_test_fish2);
     }
 
     let fish2 = fish_stimuli2.map(s => {
         let l
-        if (/native/i.test(s.name)) {
+        if (/NATIVE/i.test(s.name)) {
             l= native_fish_2.pop();
         } else {
             l = invasive_fish_2.pop();
@@ -562,8 +570,8 @@
     fish2.forEach(s => {
         block2_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 450000,
-            stimulus_duration: 45000,
+            trial_duration: 10000,
+            stimulus_duration: 3000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -661,17 +669,17 @@
     let bigbin3_11 = generateTestSizes(midline + 180, midline + 400, (fish_stimuli1.length / 20) ); // more right  530-790 5% 5
     let big_test_fish3 = bigbin3_1.concat(bigbin3_7, bigbin3_8, bigbin3_9, bigbin3_10, bigbin3_11);
 
-    if(distribution3[narrowIndex3].value.name === "NATIVE"){
-        var invasive_fish_3 = shuffle(big_test_fish3);
-        var native_fish_3= shuffle(small_test_fish3);
-    } else {
+    if(distribution3[bigMean3].name === "NATIVE"){
         var invasive_fish_3 = shuffle(small_test_fish3);
         var native_fish_3= shuffle(big_test_fish3);
+    } else {
+        var invasive_fish_3 = shuffle(big_test_fish3);
+        var native_fish_3= shuffle(small_test_fish3);
     }
 
     let fish3 = fish_stimuli3.map(s => {
         let l
-        if (/native/i.test(s.name)) {
+        if (/NATIVE/i.test(s.name)) {
             l= native_fish_3.pop();
         } else {
             l = invasive_fish_3.pop();
@@ -685,8 +693,8 @@
     fish3.forEach(s => {
         block3_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 450000,
-            stimulus_duration: 450000,
+            trial_duration: 10000,
+            stimulus_duration: 3000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -784,17 +792,17 @@
     let bigbin4_11 = generateTestSizes(midline + 180, midline + 400, (fish_stimuli1.length / 20) ); // more right  530-790 5% 5
     let big_test_fish4 = bigbin4_1.concat(bigbin4_7, bigbin4_8, bigbin4_9, bigbin4_10, bigbin4_11);
 
-    if(distribution4[narrowIndex4].value.name === "NATIVE"){
-        var invasive_fish_4 = shuffle(big_test_fish4);
-        var native_fish_4= shuffle(small_test_fish4);
-    } else {
+    if(distribution4[bigMean4].name === "NATIVE"){
         var invasive_fish_4 = shuffle(small_test_fish4);
         var native_fish_4= shuffle(big_test_fish4);
+    } else {
+        var invasive_fish_4 = shuffle(big_test_fish4);
+        var native_fish_4= shuffle(small_test_fish4);
     }
 
     let fish4 = fish_stimuli4.map(s => {
         let l
-        if (/native/i.test(s.name)) {
+        if (/NATIVE/i.test(s.name)) {
             l= native_fish_4.pop();
         } else {
             l = invasive_fish_4.pop();
@@ -808,8 +816,8 @@
     fish4.forEach(s => {
         block4_timeline.push({
             type: "jspsych-experimentscreen",
-            trial_duration: 450000,
-            stimulus_duration: 450000,
+            trial_duration: 10000,
+            stimulus_duration: 3000,
             choices: ['Catch', 'Return'],
             size: s.size,
             fish_class: s.stimulus.name,
@@ -865,11 +873,11 @@
     /* Set up timeline and launch experiment*/
 
     const timeline = [
-        //...intro_timeline, //happy
-        //...pretrain_timeline_1, //sorted
-        //...attention_timeline_1, //working
-        //...pretrain_timeline_2, //sorted
-        //...attention_timeline_2, //working
+        ...intro_timeline, //happy
+        ...pretrain_timeline_1, //sorted
+        ...attention_timeline_1, //working
+        ...pretrain_timeline_2, //sorted
+        ...attention_timeline_2, //working
         ...block1_train_timeline,
         ...interim1_timeline,
         ...block1_timeline,

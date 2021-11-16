@@ -44,7 +44,7 @@ jsPsych.plugins['jspsych-feedback'] = (function () {
 
         if (coins < 0){
             coins = 0
-        };
+        }
 
 
 
@@ -64,18 +64,13 @@ jsPsych.plugins['jspsych-feedback'] = (function () {
         if (trial.trial_type === 'first') {
             var header_text =
                 '<h1>Round 1 of 4 complete - take a short break. </h1>'
-
-
-            var imageID = 'demo_instruction';
         } else if(trial.trial_type ==='second')
         {var header_text =
                 '<h1>Round 2 of 4 complete - take a short break.</h1>'
-
         }
         else if(trial.trial_type === 'third')
         {var header_text =
                 '<h1>Round 3 of 4 complete - take a short break.</h1>'
-
         }
         else if(trial.trial_type === 'last')
         {var header_text =
