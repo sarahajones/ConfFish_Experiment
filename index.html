@@ -109,6 +109,7 @@
     indices = [0, 1, 2, 3];
     index = shuffle(indices);
 
+    /*BLOCK BY BLOCK DEFINITIONS*/
     //PRE-TRAINING BLOCK
     train1_stimuli = [
         'images/training_fish_native.png',
@@ -117,8 +118,7 @@
 
     const deck_count = train_trial_number / train1_stimuli.length;
     train1_stimuli = shuffle_shoe(train1_stimuli, deck_count); //shuffle deck
-
-
+    
     //GAME BLOCK 1
     const distribution1 = distributions[index[0]]; // value of size variable IV
     const color1 = color_options[index[0]]; //color of fish for that block
@@ -178,7 +178,6 @@
     //BLOCK 4 TEST TRIALS
     const fish_deck_count4 = catch_number / distribution4.length; // create deck count for fish catches
     const fish_stimuli4 = shuffle_shoe(distribution4, fish_deck_count4); // shuffle deck
-
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* EXPERIMENTAL PAGES */
@@ -280,7 +279,7 @@
 
     attention_timeline_1 = [
         attention1
-    ]
+    ];
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // run pretrain again (only if the attention check is failed)
     const pretrain_timeline_2 = [];
@@ -326,7 +325,7 @@
     attention_timeline_2 = [
         attention2,
         tutorial_4
-    ]
+    ];
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // TRAINING BLOCK 1 //
@@ -395,7 +394,6 @@
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //BLOCK1 TEST TRIALS//
     const block1_timeline = [];
-
     //small_size fish
     let smallbin1_1 = generateTestSizes(midline - 20, midline + 20, (fish_stimuli1.length / 10) * .5); // mid-bracket - 330-370 10% 5
     let smallbin1_2 = generateTestSizes(midline - 60, midline - 20, (fish_stimuli1.length / 10)); // one left - 290-330 10% 3
@@ -433,6 +431,7 @@
             size:l
         }
     });
+
 
     fish1.forEach(s => {
         block1_timeline.push({
