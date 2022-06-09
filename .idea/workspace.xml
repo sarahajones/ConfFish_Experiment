@@ -34,7 +34,15 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< Updated upstream
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ConfGrid_Experiment" />
+=======
+<<<<<<< HEAD
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ConfGrid_Experiment" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ConfGrid_Experiment" />
+>>>>>>> 74e6e6b39ffc14cf5107ab965d31ad9637aa5850
+>>>>>>> Stashed changes
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -81,8 +89,18 @@
       <workItem from="1635505397119" duration="1429000" />
       <workItem from="1636971031688" duration="9684000" />
       <workItem from="1636985476726" duration="8333000" />
+<<<<<<< HEAD
+      <workItem from="1637062473677" duration="9721000" />
+      <workItem from="1637591500948" duration="1611000" />
+      <workItem from="1652882136410" duration="102000" />
+      <workItem from="1652882815080" duration="2201000" />
+=======
       <workItem from="1637062473677" duration="7092000" />
       <workItem from="1652865544347" duration="6810000" />
+<<<<<<< Updated upstream
+=======
+>>>>>>> 74e6e6b39ffc14cf5107ab965d31ad9637aa5850
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
